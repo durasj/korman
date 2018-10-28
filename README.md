@@ -1,11 +1,7 @@
-# Korman
-
 <p align="center">
   <a href="https://korman.duras.me/">
     <img src="./res/logo.svg" alt="Korman logo" width=384 height=128>
   </a>
-
-  <h3 align="center">Korman</h3>
 </p>
 
 Get an email notification when selected website adds item according to your requirements.
