@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 public class App extends Application {
     Database db;
@@ -35,6 +36,9 @@ public class App extends Application {
         Scene scene = new Scene(rootPane);
         primaryStage.setTitle("Korman Launcher");
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(
+            getClass().getResource("icon.png").toString()
+        ));
         primaryStage.show();
     }
 
