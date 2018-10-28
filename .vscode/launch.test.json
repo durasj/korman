@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "korman",
+                "projectName": "korman",
+                "workingDirectory": "c:\\Users\\Jakub\\eclipse-workspace\\korman",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "korman",
+                "projectName": "korman",
+                "workingDirectory": "c:\\Users\\Jakub\\eclipse-workspace\\korman",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
