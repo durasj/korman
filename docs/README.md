@@ -1,0 +1,1 @@
+This directory contains public website of the project.
