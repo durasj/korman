@@ -1,3 +1,6 @@
+# Downloadable .exe
+!docs/Korman.exe
+
 # Compiled files
 *.class
 target/
