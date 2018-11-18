@@ -1,0 +1,15 @@
+.button{     
+  -fx-background-color: #EFF0F5;
+  -fx-font: Roboto-Regular;
+  -fx-text-fill:#4d4d4d;
+  -fx-font-size:14; 
+}
+
+.button:hover{     
+  -fx-background-color:#e6e6e6;
+  -fx-font: Roboto-Regular;
+  -fx-text-fill:#000000;
+  -fx-font-size:14; 
+}
+
+

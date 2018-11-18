@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -11,96 +12,78 @@
    <children>
       <AnchorPane id="Menu" prefHeight="600.0" prefWidth="192.0" style="-fx-background-color: #EFF0F5;">
          <children>
-            <AnchorPane id="Dashboard" layoutX="24.0" layoutY="24.0" prefHeight="30.0" prefWidth="160.0">
+            <AnchorPane id="anchorButton" layoutX="24.0" layoutY="24.0" prefHeight="30.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@dashboard.png" />
                      </image>
                   </ImageView>
-                  <Button id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showDashboard" prefHeight="24.0" prefWidth="138.0" style="-fx-background-color: #EFF0F5;" text="Dashboard">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showDashboard" prefHeight="24.0" prefWidth="138.0" text="Dashboard">
+                    </Button>
                </children>
             </AnchorPane>
-            <AnchorPane id="Bicycles" layoutX="24.0" layoutY="60.0" prefHeight="30.0" prefWidth="160.0">
+            <AnchorPane id="anchorButton" layoutX="24.0" layoutY="64.0" prefHeight="30.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@bicycle.png" />
+                        <Image url="@bicycles.png" />
                      </image>
                   </ImageView>
-                  <Button id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showBicycles" prefHeight="24.0" prefWidth="138.0" style="-fx-background-color: #EFF0F5;" text="Bicycles">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showBicycles" prefHeight="24.0" prefWidth="138.0" text="Bicycles">
+                    </Button>
                </children>
             </AnchorPane>
-            <AnchorPane id="Notifications" layoutX="24.0" layoutY="96.0" prefHeight="30.0" prefWidth="160.0">
+            <AnchorPane id="anchorButton" layoutX="24.0" layoutY="104.0" prefHeight="30.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@notifications.png" />
                      </image>
                   </ImageView>
-                  <Button id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showNotifications" prefHeight="24.0" prefWidth="118.0" style="-fx-background-color: #EFF0F5;" text="Notifications">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showNotifications" prefHeight="24.0" prefWidth="138.0" text="Notifications">
+                      </Button>
                   <Label id="NotificationsNumberView" layoutX="132.0" layoutY="5.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: EFF0F5;" />
                </children>
             </AnchorPane>
-            <AnchorPane id="Agents" layoutX="24.0" layoutY="132.0" prefHeight="30.0" prefWidth="160.0">
+            <AnchorPane id="anchorButton" layoutX="24.0" layoutY="144.0" prefHeight="30.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@agents.png" />
                      </image>
                   </ImageView>
-                  <Button id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showAgents" prefHeight="24.0" prefWidth="138.0" style="-fx-background-color: #EFF0F5;" text="Agents">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showAgents" prefHeight="24.0" prefWidth="138.0" text="Agents">
+                     </Button>
                </children>
             </AnchorPane>
-            <AnchorPane id="Requirements" layoutX="24.0" layoutY="166.0" prefHeight="30.0" prefWidth="160.0">
+            <AnchorPane id="anchorButton" layoutX="24.0" layoutY="184.0" prefHeight="30.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@agents.png" />
+                        <Image url="@requirements.png" />
                      </image>
                   </ImageView>
-                  <Button id="RequiementsButton" fx:id="requirementsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showRequirements" prefHeight="24.0" prefWidth="138.0" style="-fx-background-color: #EFF0F5;" text="Requirements">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button id="RequiementsButton" fx:id="requirementsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showRequirements" prefHeight="24.0" prefWidth="138.0" text="Requirements">
+                                     </Button>
                </children>
             </AnchorPane>
-            <AnchorPane id="Settings" layoutX="24.0" layoutY="202.0" prefHeight="30.0" prefWidth="160.0">
+            <AnchorPane id="anchorButton" layoutX="24.0" layoutY="224.0" prefHeight="30.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@settings.jpg" />
+                        <Image url="@settings.png" />
                      </image>
                   </ImageView>
-                  <Button id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="24.0" prefWidth="138.0" style="-fx-background-color: #EFF0F5;" text="Settings">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="24.0" prefWidth="138.0" text="Settings">
+                                      </Button>
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane id="DataTableCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
          <children>
-            <AnchorPane id="DataTableCardBackground" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" />
+            <AnchorPane id="DataTableCardBackground" fx:id="dataTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" />
          </children>
       </AnchorPane>
    </children>

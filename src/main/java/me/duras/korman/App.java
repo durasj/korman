@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
 public class App extends Application {
-    //Database db;
+    Database db;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -28,23 +28,26 @@ public class App extends Application {
             }
         }
 
-     //   this.db = new Database();
-     //   this.db.connect();
+       this.db = new Database();
+        this.db.connect();
 
         System.out.println( "Hello, JAVAFX!" );
 
         Scene scene = new Scene(rootPane);
         primaryStage.setTitle("Korman Launcher");
         primaryStage.setScene(scene);
+        
         primaryStage.getIcons().add(new Image(
             getClass().getResource("icon.png").toString()
         ));
+        scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
         primaryStage.show();
+        
     }
 
     @Override
     public void stop() throws Exception {
-       // this.db.close();
+       this.db.close();
 
         super.stop();
     }
