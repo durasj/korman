@@ -28,7 +28,7 @@ public class App extends Application {
             }
         }
 
-       this.db = new Database();
+        this.db = new Database();
         this.db.connect();
 
         System.out.println( "Hello, JAVAFX!" );
@@ -47,7 +47,7 @@ public class App extends Application {
 
     @Override
     public void stop() throws Exception {
-       this.db.close();
+        this.db.close();
 
         super.stop();
     }
