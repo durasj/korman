@@ -3,6 +3,7 @@
   -fx-font: Roboto-Regular;
   -fx-text-fill:#4d4d4d;
   -fx-font-size:14; 
+  -fx-padding: 5 0 5 50;
 }
 
 .button:hover{     
@@ -10,6 +11,8 @@
   -fx-font: Roboto-Regular;
   -fx-text-fill:#000000;
   -fx-font-size:14; 
+  -fx-border-color:#000000;
+  -fx-border-width: 0 2 0 0;
 }
 
 
