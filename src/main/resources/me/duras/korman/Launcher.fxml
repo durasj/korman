@@ -8,85 +8,90 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainLaout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane id="Menu" prefHeight="600.0" prefWidth="192.0" style="-fx-background-color: #EFF0F5;">
-         <children>
-            <AnchorPane id="anchorButton" layoutY="24.0" prefHeight="30.0" prefWidth="192.0">
-               <children>
-                  <Button id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showDashboard" prefHeight="24.0" prefWidth="192.0" text="Dashboard">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets></Button>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@dashboard.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="anchorButton" layoutY="64.0" prefHeight="30.0" prefWidth="192.0">
-               <children>
-                  <Button id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showBicycles" prefHeight="24.0" prefWidth="192.0" text="Bicycles">
-                    </Button>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@bicycles.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="anchorButton" layoutY="104.0" prefHeight="30.0" prefWidth="192.0">
-               <children>
-                  <Button id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showNotifications" prefHeight="24.0" prefWidth="192.0" text="Notifications">
-                      </Button>
-                  <Label id="NotificationsNumberView" layoutX="152.0" layoutY="5.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: EFF0F5;" visible="false" />
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@notifications.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="anchorButton" layoutY="144.0" prefHeight="30.0" prefWidth="192.0">
-               <children>
-                  <Button id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showAgents" prefHeight="24.0" prefWidth="192.0" text="Agents">
-                     </Button>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@agents.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="anchorButton" layoutY="184.0" prefHeight="30.0" prefWidth="192.0">
-               <children>
-                  <Button id="RequiementsButton" fx:id="requirementsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRequirements" prefHeight="24.0" prefWidth="192.0" text="Requirements">
-                                     </Button>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@requirements.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="anchorButton" layoutY="224.0" prefHeight="30.0" prefWidth="192.0">
-               <children>
-                  <Button id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showSettings" prefHeight="24.0" prefWidth="192.0" text="Settings">
-                                      </Button>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@settings.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane id="DataTableCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
-         <children>
-            <AnchorPane id="DataTableCardBackground" fx:id="dataTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" />
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane id="MainLaout" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane id="Menu" prefHeight="600.0" prefWidth="192.0" style="-fx-background-color: #EFF0F5;">
+            <children>
+                <AnchorPane id="anchorButton" layoutY="24.0" prefHeight="30.0" prefWidth="192.0">
+                    <children>
+                        <Button id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showDashboard" prefHeight="24.0" prefWidth="192.0" text="Dashboard">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Button>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@dashboard.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="anchorButton" layoutY="64.0" prefHeight="30.0" prefWidth="192.0">
+                    <children>
+                        <Button id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showBicycles" prefHeight="24.0" prefWidth="192.0" text="Bicycles">
+                        </Button>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@bicycles.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="anchorButton" layoutY="104.0" prefHeight="30.0" prefWidth="192.0">
+                    <children>
+                        <Button id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showNotifications" prefHeight="24.0" prefWidth="192.0" text="Notifications">
+                        </Button>
+                        <Label id="NotificationsNumberView" layoutX="152.0" layoutY="5.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: EFF0F5;" visible="false" />
+                        <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@notifications.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="anchorButton" layoutY="144.0" prefHeight="30.0" prefWidth="192.0">
+                    <children>
+                        <Button id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showAgents" prefHeight="24.0" prefWidth="192.0" text="Agents">
+                        </Button>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@agents.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="anchorButton" layoutY="184.0" prefHeight="30.0" prefWidth="192.0">
+                    <children>
+                        <Button id="RequiementsButton" fx:id="requirementsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRequirements" prefHeight="24.0" prefWidth="192.0" text="Requirements">
+                        </Button>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@requirements.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="anchorButton" layoutY="224.0" prefHeight="30.0" prefWidth="192.0">
+                    <children>
+                        <Button id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showSettings" prefHeight="24.0" prefWidth="192.0" text="Settings">
+                        </Button>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@settings.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane id="DataTableCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+            <children>
+                <AnchorPane id="DefaultLayout" fx:id="defaultTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;">
+                    <children>
+                        <fx:include source="dashTable.fxml" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

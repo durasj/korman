@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="DashLayout" fx:id="dashTable" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+    <children>
+        <Label fx:id="Lab1" layoutX="24.0" layoutY="16.0" text="Dashboard">
+        </Label>
+        <AnchorPane layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
+    </children>
+</AnchorPane> 

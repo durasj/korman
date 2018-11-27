@@ -15,4 +15,10 @@
   -fx-border-width: 0 2 0 0;
 }
 
+#Lab1{
+    -fx-font: Roboto-Regular;
+  -fx-text-fill:#000000;
+  -fx-font-size:20;   
+}
+
 
