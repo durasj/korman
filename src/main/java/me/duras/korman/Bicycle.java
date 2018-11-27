@@ -8,7 +8,7 @@ public class Bicycle {
     private String url;
     private String category;
     private String series;
-    private String Size;
+    private String size;
     private int id;
     private int wmn;
     private int price;
@@ -21,7 +21,7 @@ public class Bicycle {
         this.url = url;
         this.category = category;
         this.series = series;
-        this.Size = Size;
+        this.size = Size;
         this.id = id;
         this.wmn = wmn;
         this.price = price;
