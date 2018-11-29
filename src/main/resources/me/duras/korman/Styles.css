@@ -2,7 +2,7 @@
     -fx-background-color: #EFF0F5;
     -fx-font: Roboto-Regular;
     -fx-text-fill:#4d4d4d;
-    -fx-font-size:14; 
+    -fx-font-size:16; 
     -fx-padding: 5 0 5 50;
 }
 
@@ -17,10 +17,23 @@
     -fx-border-width: 0 2 0 0;
 }
 
-#Lab1{
+.label{
     -fx-font: Roboto-Regular;
     -fx-text-fill:#000000;
     -fx-font-size:20;   
+}
+
+#newAgentButton{
+    -fx-background-color: #EFF0F5;
+    -fx-font: Roboto-Regular;
+    -fx-text-fill:#4d4d4d;
+    -fx-font-size:16; 
+    -fx-padding: 5 0 5 0;
+}
+
+#newAgentButton:hover{     
+    -fx-background-color:#e3e5ed;
+    -fx-text-fill:#000000;
 }
 
 

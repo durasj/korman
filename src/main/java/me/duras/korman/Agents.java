@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.duras.korman;
 
-/**
- *
- * @author mmiskov
- */
 public class Agents {
-    
+
+    public static void showAgent() {
+        AgentsDao dao = new AgentsDao();
+
+        for (Agent agent : dao.getAllAgents()) {
+            System.out.println("Agent maxPrice: " + agent.getMaxPrice() + ", Size: " + agent.getSize());
+        }
+    }
 }

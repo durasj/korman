@@ -7,9 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 /**
  *
@@ -17,90 +20,42 @@ import javafx.scene.layout.*;
  */
 public class LauncherController implements Initializable {
 
-    @FXML
-    private Button dashboardButton;
+    Agents agents = new Agents();
 
     @FXML
-    private Button bicyclesButton;
+    private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton, newAgentButton;
 
     @FXML
-    private Button notificationsButton;
+    private AnchorPane bicyclesTable, notiffTable, agentsTable, settingsTable, dashboardTable;
 
     @FXML
-    private Button agentsButton;
+    private void handleButtonAction(ActionEvent event) {
 
-    @FXML
-    private Button requirementsButton;
+        if (event.getSource() == dashboardButton) {
+            dashboardTable.toFront();
+        } else if (event.getSource() == bicyclesButton) {
+            bicyclesTable.toFront();
+        } else if (event.getSource() == notificationsButton) {
+            notiffTable.toFront();
+        } else if (event.getSource() == agentsButton) {
+            agentsTable.toFront();
+            agents.showAgent();
+        } else if (event.getSource() == settingsButton) {
+            settingsTable.toFront();
+        } else if (event.getSource() == newAgentButton) {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("newAgent.fxml"));
 
-    @FXML
-    private Button settingsButton;
-
-    @FXML
-    private AnchorPane defaultTable;
-
-    @FXML
-    private void showDashboard(ActionEvent event) {
-        System.out.println("You clicked Dashboard!");
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("dashTable.fxml"));
-            defaultTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void showBicycles(ActionEvent event) {
-        System.out.println("You clicked Bike!");
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("bikeTable.fxml"));
-            defaultTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void showNotifications(ActionEvent event) {
-        System.out.println("You clicked Notifications!");
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("notifTable.fxml"));
-            defaultTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void showAgents(ActionEvent event) {
-        System.out.println("You clicked agents!");
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("agentsTable.fxml"));
-            defaultTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void showRequirements(ActionEvent event) {
-        System.out.println("You clicked Requirements!");
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("reqTable.fxml"));
-            defaultTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void showSettings(ActionEvent event) {
-        System.out.println("You clicked Settings!");
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("settTable.fxml"));
-            defaultTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(loader.load()));
+                stage.setTitle("Korman - New Agent");
+                stage.getIcons().add(new Image(
+                        getClass().getResource("icon.png").toString()
+                ));
+                stage.show();
+            } catch (IOException e) {
+            }
         }
     }
 

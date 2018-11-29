@@ -12,7 +12,7 @@
     <left>
         <AnchorPane id="Menu" prefHeight="600.0" prefWidth="192.0" style="-fx-background-color: #EFF0F5;">
             <children>
-                <AnchorPane id="anchorButton" layoutY="38.0" prefHeight="30.0" prefWidth="192.0">
+                <AnchorPane id="anchorButton" layoutY="24.0" prefHeight="30.0" prefWidth="192.0">
                     <children>
                         <Button id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Dashboard">
                             <opaqueInsets>
@@ -26,7 +26,7 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
-                <AnchorPane id="anchorButton" layoutY="88.0" prefHeight="30.0" prefWidth="192.0">
+                <AnchorPane id="anchorButton" layoutY="74.0" prefHeight="30.0" prefWidth="192.0">
                     <children>
                         <Button id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Bicycles">
                         </Button>
@@ -37,7 +37,7 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
-                <AnchorPane id="anchorButton" layoutY="138.0" prefHeight="30.0" prefWidth="192.0">
+                <AnchorPane id="anchorButton" layoutY="124.0" prefHeight="30.0" prefWidth="192.0">
                     <children>
                         <Button id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Notifications">
                         </Button>
@@ -49,7 +49,7 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
-                <AnchorPane id="anchorButton" layoutY="188.0" prefHeight="30.0" prefWidth="192.0">
+                <AnchorPane id="anchorButton" layoutY="174.0" prefHeight="30.0" prefWidth="192.0">
                     <children>
                         <Button id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Agents">
                         </Button>
@@ -60,7 +60,7 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
-                <AnchorPane id="anchorButton" layoutY="238.0" prefHeight="30.0" prefWidth="192.0">
+                <AnchorPane id="anchorButton" layoutY="224.0" prefHeight="30.0" prefWidth="192.0">
                     <children>
                         <Button id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Settings">
                         </Button>
