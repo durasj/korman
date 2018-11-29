@@ -89,7 +89,6 @@ public class NewAgentController {
         }
 
         agentsDao.createAgent(category, series, size, wmn, minPrice, maxPrice, difference, year);
-        agents.showAgent();
 
         Stage stage = (Stage) createAgentButton.getScene().getWindow();
         stage.close();

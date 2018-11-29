@@ -3,12 +3,15 @@ package me.duras.korman;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -21,7 +24,17 @@ import javafx.stage.Stage;
 public class LauncherController implements Initializable {
 
     Agents agents = new Agents();
+    ObservableList<Agent> agenti = FXCollections.observableArrayList();
+    AgentsDao dao = new AgentsDao();
 
+    @FXML
+    private Pagination agentPagin;
+
+    @FXML
+    private TableView<Agent> agentTablePagin;
+
+    @FXML
+    private TableColumn<Agent, String> agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
     @FXML
     private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton, newAgentButton;
 
@@ -39,7 +52,8 @@ public class LauncherController implements Initializable {
             notiffTable.toFront();
         } else if (event.getSource() == agentsButton) {
             agentsTable.toFront();
-            agents.showAgent();
+            showAgents();
+
         } else if (event.getSource() == settingsButton) {
             settingsTable.toFront();
         } else if (event.getSource() == newAgentButton) {
@@ -61,7 +75,25 @@ public class LauncherController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+    }
+
+    public void showAgents() {
+        for (Agent agent : dao.getAllAgents()) {
+            agenti.add(agent);
+            System.out.println("Agent maxPrice: " + agent.getMaxPrice() + ", Size: " + agent.getSize());
+        }
+
+        agentCategory.setCellValueFactory(new PropertyValueFactory<Agent, String>("category"));
+        agentSeries.setCellValueFactory(new PropertyValueFactory<Agent, String>("series"));
+        agentSize.setCellValueFactory(new PropertyValueFactory<Agent, String>("size"));
+        agentWmn.setCellValueFactory(new PropertyValueFactory<Agent, String>("wmn"));
+        agentMinPrice.setCellValueFactory(new PropertyValueFactory<Agent, String>("minPrice"));
+        agentMaxPrice.setCellValueFactory(new PropertyValueFactory<Agent, String>("maxPrice"));
+        agentDiff.setCellValueFactory(new PropertyValueFactory<Agent, String>("difference"));
+        agentYear.setCellValueFactory(new PropertyValueFactory<Agent, String>("year"));
+
+        agentTablePagin.setItems(agenti);
     }
 
 }
