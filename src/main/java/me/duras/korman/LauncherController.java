@@ -23,53 +23,25 @@ import javafx.stage.Stage;
  */
 public class LauncherController implements Initializable {
 
-    Agents agents = new Agents();
-    ObservableList<Agent> agenti = FXCollections.observableArrayList();
-    AgentsDao dao = new AgentsDao();
+    @FXML
+    private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
 
     @FXML
-    private Pagination agentPagin;
-
-    @FXML
-    private TableView<Agent> agentTablePagin;
-
-    @FXML
-    private TableColumn<Agent, String> agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
-    @FXML
-    private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton, newAgentButton;
-
-    @FXML
-    private AnchorPane bicyclesTable, notiffTable, agentsTable, settingsTable, dashboardTable;
+    private AnchorPane defaultTable;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
         if (event.getSource() == dashboardButton) {
-            dashboardTable.toFront();
+
         } else if (event.getSource() == bicyclesButton) {
-            bicyclesTable.toFront();
+            showWindow("BikeTable.fxml");
         } else if (event.getSource() == notificationsButton) {
-            notiffTable.toFront();
+
         } else if (event.getSource() == agentsButton) {
-            agentsTable.toFront();
-            showAgents();
-
+            showWindow("AgentsTable.fxml");
         } else if (event.getSource() == settingsButton) {
-            settingsTable.toFront();
-        } else if (event.getSource() == newAgentButton) {
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("newAgent.fxml"));
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(loader.load()));
-                stage.setTitle("Korman - New Agent");
-                stage.getIcons().add(new Image(
-                        getClass().getResource("icon.png").toString()
-                ));
-                stage.show();
-            } catch (IOException e) {
-            }
         }
     }
 
@@ -78,22 +50,14 @@ public class LauncherController implements Initializable {
 
     }
 
-    public void showAgents() {
-        for (Agent agent : dao.getAllAgents()) {
-            agenti.add(agent);
-            System.out.println("Agent maxPrice: " + agent.getMaxPrice() + ", Size: " + agent.getSize());
+    public void showWindow(String window) {
+        String newWindow = window;
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(newWindow));
+            defaultTable.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        agentCategory.setCellValueFactory(new PropertyValueFactory<Agent, String>("category"));
-        agentSeries.setCellValueFactory(new PropertyValueFactory<Agent, String>("series"));
-        agentSize.setCellValueFactory(new PropertyValueFactory<Agent, String>("size"));
-        agentWmn.setCellValueFactory(new PropertyValueFactory<Agent, String>("wmn"));
-        agentMinPrice.setCellValueFactory(new PropertyValueFactory<Agent, String>("minPrice"));
-        agentMaxPrice.setCellValueFactory(new PropertyValueFactory<Agent, String>("maxPrice"));
-        agentDiff.setCellValueFactory(new PropertyValueFactory<Agent, String>("difference"));
-        agentYear.setCellValueFactory(new PropertyValueFactory<Agent, String>("year"));
-
-        agentTablePagin.setItems(agenti);
     }
 
 }

@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.LauncherController">
     <left>
         <AnchorPane id="Menu" prefHeight="600.0" prefWidth="192.0" style="-fx-background-color: #EFF0F5;">
             <children>
@@ -75,76 +75,10 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane id="DataTableCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+        <AnchorPane id="DataTableCard" fx:id="defaultTable" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
             <children>
-                <AnchorPane id="bicyclesTable" fx:id="bicyclesTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;">
-                    <children>
-                        <Pagination fx:id="bikePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-                        <Label layoutX="24.0" layoutY="16.0" text="Bicycles">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="notiffTable" fx:id="notiffTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;">
-                    <children>
-                        <Pagination fx:id="notiPagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-                        <Label layoutX="24.0" layoutY="16.0" text="Notifications">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="agentsTable" fx:id="agentsTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;">
-                    <children>
-                        <Pagination fx:id="agentPagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-                        <TableView fx:id="agentTablePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" tableMenuButtonVisible="true">
-                            <columns>
-                                <TableColumn fx:id="agentId" prefWidth="100.0" text="ID" />
-                                <TableColumn fx:id="agentCategory" prefWidth="100.0" text="Category" />
-                                <TableColumn fx:id="agentSeries" prefWidth="100.0" text="Series" />
-                                <TableColumn fx:id="agentSize" prefWidth="75.0" text="Size" />
-                                <TableColumn fx:id="agentWmn" prefWidth="75.0" text="Woman" />
-                                <TableColumn fx:id="agentMinPrice" prefWidth="120.0" text="Min Price" />
-                                <TableColumn fx:id="agentMaxPrice" prefWidth="120.0" text="Max Price" />
-                                <TableColumn fx:id="agentDiff" prefWidth="120.0" text="Dfference" />
-                                <TableColumn fx:id="agentYear" prefWidth="100.0" text="Year" />
-                            </columns>
-                            <columnResizePolicy>
-                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                            </columnResizePolicy>
-                        </TableView>
-                        <Label layoutX="24.0" layoutY="16.0" text="Agents">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                        <Button fx:id="newAgentButton" layoutX="816.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #EFF0F5" text="New Agent">
-                        </Button>
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="settingsTable" fx:id="settingsTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;">
-                    <children>
-                        <AnchorPane layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-                        <Label layoutX="24.0" layoutY="16.0" text="Settings">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="dashboardTable" fx:id="dashboardTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;">
-                    <children>
-                        <Label layoutX="24.0" layoutY="16.0" text="Dashboard">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                        <AnchorPane layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-                    </children>
-                </AnchorPane>
+                <fx:include source="BikeTable.fxml" />
+                <fx:include source="AgentsTable.fxml" />
             </children>
         </AnchorPane>
     </center>

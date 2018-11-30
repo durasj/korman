@@ -1,14 +1,17 @@
 package me.duras.korman;
 
+import java.io.IOException;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -28,7 +31,7 @@ public class NewAgentController {
 
     //after click button Create Agent >> 
     AgentsDao agentsDao = new AgentsDao();
-    Agents agents = new Agents();
+    AgentsController agentsController = new AgentsController();
 
     @FXML
     private TextField setMinPrice, setMaxPrice, setDiff, setYear, setSeries;
@@ -38,6 +41,9 @@ public class NewAgentController {
 
     @FXML
     private Button createAgentButton;
+
+    @FXML
+    private AnchorPane newAgent;
 
     @FXML
     private void addAgent(ActionEvent event) {
@@ -90,8 +96,14 @@ public class NewAgentController {
 
         agentsDao.createAgent(category, series, size, wmn, minPrice, maxPrice, difference, year);
 
-        Stage stage = (Stage) createAgentButton.getScene().getWindow();
-        stage.close();
+        try {
+            agentsController.showAgents();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("AgentsTable.fxml"));
+            newAgent.getChildren().setAll(pane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

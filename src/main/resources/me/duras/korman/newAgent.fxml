@@ -8,95 +8,99 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:controller="me.duras.korman.NewAgentController" prefHeight="600.0" prefWidth="480.0" style="-fx-background-color: #F6F7FB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="newAgent" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #F6F7FB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.NewAgentController">
     <children>
-        <AnchorPane layoutX="20.0" layoutY="60.0" prefHeight="462.0" prefWidth="440.0" style="-fx-background-color: #FFFFFF;">
+        <AnchorPane id="newAgentIN" fx:id="newAgentIN" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;"> 
             <children>
-                <Label layoutX="265.0" layoutY="31.0" text="to:">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="setMaxPrice" layoutX="294.0" layoutY="29.0" prefWidth="120.0">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="setMinPrice" layoutX="118.0" layoutY="29.0" prefWidth="120.0">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </TextField>
-                <Label layoutX="95.0" layoutY="112.0" text="Category:">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <ComboBox fx:id="setCategory" layoutX="225.0" layoutY="109.0" prefWidth="120.0" />
-                <Label layoutX="95.0" layoutY="392.0" text="Series:">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="setSeries" layoutX="225.0" layoutY="389.0" prefWidth="120.0"/>
-                <Label layoutX="95.0" layoutY="168.0" text="Size:">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
+                <AnchorPane layoutX="20.0" layoutY="60.0" prefHeight="410.0" prefWidth="920.0" style="-fx-background-color: #FFFFFF;">
+                    <children>
+                        <Label layoutX="266.0" layoutY="17.0" text="to:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="setMaxPrice" layoutX="295.0" layoutY="15.0" prefWidth="120.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="setMinPrice" layoutX="119.0" layoutY="15.0" prefWidth="120.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="96.0" layoutY="88.0" text="Category:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="setCategory" layoutX="226.0" layoutY="85.0" prefWidth="120.0" />
+                        <Label layoutX="96.0" layoutY="368.0" text="Series:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="setSeries" layoutX="226.0" layoutY="365.0" prefWidth="120.0" />
+                        <Label layoutX="96.0" layoutY="144.0" text="Size:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
                 
-                <Label layoutX="95.0" layoutY="224.0" text="For woman:">
+                        <Label layoutX="96.0" layoutY="200.0" text="For woman:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="27.0" layoutY="17.0" text="Price from:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="96.0" layoutY="256.0" text="Difference:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="96.0" layoutY="312.0" text="Year:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="forWoman" layoutX="226.0" layoutY="197.0" prefWidth="120.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Yes" />
+                                    <String fx:value="No" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <ComboBox fx:id="setSize" layoutX="226.0" layoutY="141.0" prefWidth="120.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="XS" />
+                                    <String fx:value="S" />
+                                    <String fx:value="M" />
+                                    <String fx:value="L" />
+                                    <String fx:value="XL" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <TextField fx:id="setDiff" layoutX="226.0" layoutY="253.0" prefWidth="120.0" />
+                        <TextField fx:id="setYear" layoutX="226.0" layoutY="309.0" prefWidth="120.0" />
+                    </children>
+                </AnchorPane>
+                <Label layoutX="24.0" layoutY="16.0" text="New Agent">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="26.0" layoutY="31.0" text="Price from:">
+                <Button fx:id="createAgentButton" layoutX="190.0" layoutY="496.0" mnemonicParsing="false" onAction="#addAgent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #EFF0F5;" text="Create">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                     </font>
-                </Label>
-                <Label layoutX="95.0" layoutY="280.0" text="Difference:">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <Label layoutX="95.0" layoutY="336.0" text="Year:">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <ComboBox fx:id="forWoman" layoutX="225.0" layoutY="221.0" prefWidth="120.0">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Yes" />
-                            <String fx:value="No" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-                <ComboBox fx:id="setSize" layoutX="225.0" layoutY="165.0" prefWidth="120.0">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="XS" />
-                            <String fx:value="S" />
-                            <String fx:value="M" />
-                            <String fx:value="L" />
-                            <String fx:value="XL" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-                <TextField fx:id="setDiff" layoutX="225.0" layoutY="277.0" prefWidth="120.0"/>
-                <TextField fx:id="setYear" layoutX="225.0" layoutY="333.0" prefWidth="120.0"/>
+                </Button>
             </children>
-        </AnchorPane>
-        <Label layoutX="20.0" layoutY="16.0" text="New Agent">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Button fx:id="createAgentButton" layoutX="190.0" layoutY="542.0" mnemonicParsing="false" onAction="#addAgent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #EFF0F5;" text="Create">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
+        </AnchorPane>  
     </children>
 </AnchorPane>

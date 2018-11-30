@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package me.duras.korman;
+
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
@@ -23,30 +29,22 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class Agents implements Initializable {
+/**
+ *
+ * @author martin
+ */
+public class BikeController implements Initializable {
 
     @FXML
-    private Pagination agentPagin;
+        Button bicykel;
 
     @FXML
-    private TableView<Agent> agentTablePagin;
-
-    @FXML
-    private TableColumn<Agent, String> agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
-
-   
+    void vypis() {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
 
     }
-
-    private void setCellTable() {
-
-    }
-
-    private void loadData() {
-    }
-
 }
