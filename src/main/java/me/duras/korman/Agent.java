@@ -14,16 +14,18 @@ public class Agent {
     private String category;
     private String series;
     private String size;
-    private int wmn;
+    private int idAgenta;
+    private String wmn;
     private int minPrice;
     private int maxPrice;
     private int difference;
     private int year;
 
-    public Agent(String category, String series, String size, int wmn, int minPrice, int maxPrice, int difference, int year) {
+    public Agent(String category, String series, String size, int idAgenta, String wmn, int minPrice, int maxPrice, int difference, int year) {
         this.category = category;
         this.series = series;
         this.size = size;
+        this.idAgenta = idAgenta;
         this.wmn = wmn;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
@@ -55,11 +57,19 @@ public class Agent {
         this.size = size;
     }
 
-    public int getWmn() {
+    public int getIdAgenta() {
+        return idAgenta;
+    }
+
+    public void setIdAgenta(int idAgenta) {
+        this.idAgenta = idAgenta;
+    }
+
+    public String getWmn() {
         return wmn;
     }
 
-    public void setWmn(int wmn) {
+    public void setWmn(String wmn) {
         this.wmn = wmn;
     }
 

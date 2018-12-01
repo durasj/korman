@@ -5,7 +5,6 @@
  */
 package me.duras.korman;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import java.io.IOException;
@@ -34,17 +33,21 @@ import javafx.stage.Stage;
  * @author martin
  */
 public class BikeController implements Initializable {
-
+    
     @FXML
-        Button bicykel;
-
+    private Label label1;
+    
+    @FXML
+    private Button bicykel;
+    
     @FXML
     void vypis() {
+        label1.setText("Ahoj");
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
-
+        
     }
 }

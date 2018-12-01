@@ -17,7 +17,7 @@
     <children>  
         <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;"> 
             <children>
-                <Pagination fx:id="agentPagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
+              
                 <TableView fx:id="agentTablePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" tableMenuButtonVisible="true">
                     <columns>
                         <TableColumn fx:id="agentId" prefWidth="100.0" text="ID" />

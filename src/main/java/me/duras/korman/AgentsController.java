@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -21,27 +22,25 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class AgentsController implements Initializable {
 
-    ObservableList<Agent> agenti = FXCollections.observableArrayList();
+    static ObservableList<Agent> agenti = FXCollections.observableArrayList();
     AgentsDao dao = new AgentsDao();
 
     @FXML
     private Button newAgentButton;
 
     @FXML
-    private AnchorPane agentsTable;
-
-    @FXML
-    private Pagination agentPagin;
+    private AnchorPane agentsTable, agentsTableIn;
 
     @FXML
     private TableView<Agent> agentTablePagin;
 
     @FXML
-    private TableColumn<?,?> agentId, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
+    private TableColumn<Agent, String> agentId, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
 
     @FXML
     private void agentsButtonAction(ActionEvent event) {
@@ -62,35 +61,30 @@ public class AgentsController implements Initializable {
         }
     }
 
-    public void showAgents() {
-        for (Agent agent : dao.getAllAgents()) {
-            agenti.add(agent);
-            System.out.println("Agent maxPrice: " + agent.getMaxPrice() + ", Size: " + agent.getSize());
-        }
-        System.out.println();
-        /*agentId.setText("Ahoj");
-        agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
-        agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
-        agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
-        agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
-        agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
-        agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
-        agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-
-        agentTablePagin.setItems(agenti);*/
-        
-      //  agentTablePagin.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
+        if (dao.getAllAgents().size() > 0) {
+            agenti.clear();
+            for (Agent agent : dao.getAllAgents()) {
+                agenti.add(agent);
+            }
 
-    }
+            if (agenti.size() > 0) {
+                agentId.setCellValueFactory(new PropertyValueFactory<>("idAgenta"));
+                agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+                agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
+                agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
+                agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
+                agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
+                agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
+                agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
+                agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
 
-    private void setCellTable() {
+                agentTablePagin.setItems(agenti);
 
+            }
+        }
     }
 
     private void loadData() {

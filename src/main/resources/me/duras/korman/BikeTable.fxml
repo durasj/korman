@@ -16,7 +16,7 @@
 <AnchorPane id="bicyclesTable" fx:id="bicyclesTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.BikeController">
     <children>
         <Pagination fx:id="bikePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-        <Label layoutX="24.0" layoutY="16.0" text="Bicycles">
+        <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Bicycles">
             <font>
                 <Font size="20.0" />
             </font>

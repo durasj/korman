@@ -16,9 +16,9 @@ public class AgentsDao {
 
     static List<Agent> zoznam = new ArrayList<Agent>();
 
-    public void createAgent(String category, String series, String size, int wmn, int minPrice, int maxPrice, int difference, int year) {
+    public void createAgent(String category, String series, String size, int idAgenta, String wmn, int minPrice, int maxPrice, int difference, int year) {
         //vytvori Agenta
-        Agent agent = new Agent(category, series, size, wmn, minPrice, maxPrice, difference, year);
+        Agent agent = new Agent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year);
         //potom prida do DB
         zoznam.add(agent);
     }

@@ -23,7 +23,8 @@ public class NewAgentController {
     private String category;
     private String series;
     private String size;
-    private int wmn;
+    private int idAgenta;
+    private String wmn;
     private int minPrice;
     private int maxPrice;
     private int difference;
@@ -31,7 +32,6 @@ public class NewAgentController {
 
     //after click button Create Agent >> 
     AgentsDao agentsDao = new AgentsDao();
-    AgentsController agentsController = new AgentsController();
 
     @FXML
     private TextField setMinPrice, setMaxPrice, setDiff, setYear, setSeries;
@@ -79,6 +79,8 @@ public class NewAgentController {
         String outputSetSeries = setSeries.getText();
         if (outputSetSeries.equals("")) {
             series = null;
+        } else {
+            this.series = outputSetSeries;
         }
 
         String outputSetCategory = setCategory.getSelectionModel().getSelectedItem();
@@ -88,16 +90,18 @@ public class NewAgentController {
 
         String outputForWoman = forWoman.getSelectionModel().getSelectedItem();
 
+        this.wmn = outputForWoman;
+        /*  
         if (outputForWoman != null && outputForWoman.equals("Yes")) {
             this.wmn = 1;
         } else {
             this.wmn = 0;
         }
-
-        agentsDao.createAgent(category, series, size, wmn, minPrice, maxPrice, difference, year);
+         */
+        agentsDao.createAgent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year);
 
         try {
-            agentsController.showAgents();
+
             AnchorPane pane = FXMLLoader.load(getClass().getResource("AgentsTable.fxml"));
             newAgent.getChildren().setAll(pane);
 
