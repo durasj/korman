@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -53,13 +55,24 @@ public class AgentsController implements Initializable {
         }
     }
 
-    public void showWindow(String window) {
-        String newWindow = window;
+    public void showWindow(String windowFxml) {
+        BorderPane windowResource;
         try {
-            AnchorPane pane = FXMLLoader.load(App.class.getResource(newWindow));
-            agentsTable.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
+            windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
+
+            Stage primaryStage = (Stage) newAgentButton.getScene().getWindow();
+
+            Scene scene = new Scene(windowResource);
+            primaryStage.setTitle("Korman Launcher");
+            primaryStage.setScene(scene);
+
+            primaryStage.getIcons().add(new Image(
+                    App.class.getResource("icon.png").toString()
+            ));
+            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AgentsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
