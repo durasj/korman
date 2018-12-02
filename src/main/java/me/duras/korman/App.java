@@ -26,6 +26,7 @@ public class App extends Application implements Initializable {
         if (Utils.isFirstRun()) {
             try {
                 Utils.initUserDataDir();
+                Database.copyInitial();
             } catch (IOException e) {
                 System.out.println("Unable to initialize user data directory.");
                 e.printStackTrace();
@@ -34,8 +35,6 @@ public class App extends Application implements Initializable {
 
         this.db = new Database();
         this.db.connect();
-
-        System.out.println("Hello, JAVAFX!");
 
         Scene scene = new Scene(rootPane);
         primaryStage.setTitle("Korman Launcher");

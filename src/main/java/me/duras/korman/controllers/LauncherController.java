@@ -1,4 +1,4 @@
-package me.duras.korman;
+package me.duras.korman.controllers;
 
 import java.io.IOException;
 import java.net.URL;
