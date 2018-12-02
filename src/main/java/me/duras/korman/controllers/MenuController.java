@@ -15,7 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import me.duras.korman.App;
 
@@ -25,27 +25,43 @@ import me.duras.korman.App;
  */
 public class MenuController implements Initializable {
 
-    DashboardController dc = new DashboardController();
-
     @FXML
     private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
-
-    @FXML
-    private AnchorPane defaultTable;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
         if (event.getSource() == dashboardButton) {
-            dc.showWindow("Dashnoard.fxml");
+            this.showWindow("Dashnoard.fxml");
         } else if (event.getSource() == bicyclesButton) {
-            dc.showWindow("BikeTable.fxml");
+            this.showWindow("BikeTable.fxml");
         } else if (event.getSource() == notificationsButton) {
 
         } else if (event.getSource() == agentsButton) {
-            dc.showWindow("AgentsTable.fxml");
+            this.showWindow("AgentsTable.fxml");
         } else if (event.getSource() == settingsButton) {
 
+        }
+    }
+
+    private void showWindow(String windowFxml) {
+        try {
+            BorderPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
+
+            Stage primaryStage = (Stage) dashboardButton.getScene().getWindow();
+
+            Scene scene = new Scene(windowResource);
+            primaryStage.setTitle("Korman Launcher");
+            primaryStage.setScene(scene);
+
+            primaryStage.getIcons().add(new Image(
+                App.class.getResource("icon.png").toString()
+            ));
+            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -33,25 +33,4 @@ public class DashboardController implements Initializable {
 
     }
 
-    public void showWindow(String windowFxml) {
-        try {
-            AnchorPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
-
-            Stage primaryStage = (Stage) defaultTable.getScene().getWindow();
-
-            Scene scene = new Scene(windowResource);
-            primaryStage.setTitle("Korman Launcher");
-            primaryStage.setScene(scene);
-
-            primaryStage.getIcons().add(new Image(
-                    getClass().getResource("icon.png").toString()
-            ));
-            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
