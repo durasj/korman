@@ -1,33 +1,34 @@
 package me.duras.korman.models;
 
 import java.util.Date;
-import javafx.scene.image.Image;
 
 public class Bicycle {
 
-    private String url;
-    private String category;
+    private int id;
+    private int externalId;
+    private BicycleCategory category;
     private String series;
     private String size;
-    private int id;
-    private int wmn;
-    private int price;
-    private int diff;
-    private int year;
-    private Date date;
-    private Image photo;
+    private boolean wmn;
 
-    public Bicycle(String url, String category, String series, String Size, int id, int wmn, int price, int diff, int year, Date date, Image photo) {
-        this.url = url;
-        this.category = category;
-        this.series = series;
-        this.size = Size;
-        this.id = id;
-        this.wmn = wmn;
-        this.price = price;
-        this.diff = diff;
-        this.year = year;
-        this.date = date;
-        this.photo = photo;
+    /**
+     * Price in cents
+     */
+    private int price;
+
+    /**
+     * Price difference in cents
+     */
+    private int diff;
+
+    private int modelYear;
+    private String url;
+    private String photoUrl;
+
+    private Date createdAt;
+    private Date importedAt;
+
+    public Bicycle() {
+
     }
 }

@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
 /**
  * Database abstraction
  */
@@ -16,6 +19,7 @@ public class Database {
     public final static String DB_FILE_NAME = "db.sqlite";
 
     private Connection connection = null;
+    private JdbcTemplate jdbcTemplate = null;
 
     /**
      * Copy initial database
@@ -43,12 +47,21 @@ public class Database {
         try {
             String connectionUrl =
                 "jdbc:sqlite:" + Utils.getUserDataPath() + File.separator + Database.DB_FILE_NAME;
-            connection = DriverManager.getConnection(connectionUrl);
+
+                DriverManagerDataSource dataSource = new DriverManagerDataSource();
+                dataSource.setDriverClassName("org.sqlite.JDBC");
+                dataSource.setUrl(connectionUrl);
+                connection = dataSource.getConnection();
+                jdbcTemplate = new JdbcTemplate(dataSource);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return this.connection;
+    }
+
+    public JdbcTemplate getTemplate() {
+        return this.jdbcTemplate;
     }
 
     /**

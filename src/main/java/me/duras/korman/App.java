@@ -35,17 +35,19 @@ public class App extends Application implements Initializable {
 
         this.db = new Database();
         this.db.connect();
+        DaoFactory.INSTANCE.setJdbcTemplate(this.db.getTemplate());
 
         Scene scene = new Scene(rootPane);
         primaryStage.setTitle("Korman Launcher");
         primaryStage.setScene(scene);
 
         primaryStage.getIcons().add(new Image(
-                getClass().getResource("icon.png").toString()
+            App.class.getResource("icon.png").toString()
         ));
         scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
         primaryStage.show();
 
+        System.out.println("DAO FTW");
     }
 
     @Override
