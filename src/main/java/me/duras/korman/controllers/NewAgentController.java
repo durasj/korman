@@ -7,11 +7,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import me.duras.korman.App;
 import me.duras.korman.models.*;
@@ -113,10 +116,21 @@ public class NewAgentController {
 
         createAgentButton.setText("Create");
         onEdit = false;
-        try {
 
-            AnchorPane pane = FXMLLoader.load(App.class.getResource("AgentsTable.fxml"));
-            newAgent.getChildren().setAll(pane);
+        try {
+            BorderPane windowResource = FXMLLoader.load(App.class.getResource("AgentsTable.fxml"));
+
+            Stage primaryStage = (Stage) createAgentButton.getScene().getWindow();
+
+            Scene scene = new Scene(windowResource);
+            primaryStage.setTitle("Korman Launcher");
+            primaryStage.setScene(scene);
+
+            primaryStage.getIcons().add(new Image(
+                    App.class.getResource("icon.png").toString()
+            ));
+            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+            primaryStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
