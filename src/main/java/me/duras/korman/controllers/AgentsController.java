@@ -24,7 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+import me.duras.korman.App;
 import me.duras.korman.models.*;
 
 public class AgentsController implements Initializable {
@@ -56,7 +56,7 @@ public class AgentsController implements Initializable {
     public void showWindow(String window) {
         String newWindow = window;
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource(newWindow));
+            AnchorPane pane = FXMLLoader.load(App.class.getResource(newWindow));
             agentsTable.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();

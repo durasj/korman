@@ -13,7 +13,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="agentsTable" fx:id="agentsTable" prefHeight="600" prefWidth="1008" style="-fx-background-color: #F6F7FB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.AgentsController">
+<AnchorPane id="agentsTable" fx:id="agentsTable" prefHeight="600" prefWidth="1008" style="-fx-background-color: #F6F7FB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.controllers.AgentsController">
     <children>  
         <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;"> 
             <children>

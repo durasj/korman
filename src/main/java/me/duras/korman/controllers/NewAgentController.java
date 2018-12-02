@@ -13,7 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+import me.duras.korman.App;
 import me.duras.korman.models.*;
 
 /**
@@ -115,7 +115,7 @@ public class NewAgentController {
         onEdit = false;
         try {
             
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("AgentsTable.fxml"));
+            AnchorPane pane = FXMLLoader.load(App.class.getResource("AgentsTable.fxml"));
             newAgent.getChildren().setAll(pane);
             
         } catch (IOException e) {

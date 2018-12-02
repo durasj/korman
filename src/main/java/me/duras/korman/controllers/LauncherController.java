@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import me.duras.korman.App;
 
 /**
  *
@@ -51,9 +52,8 @@ public class LauncherController implements Initializable {
     }
 
     public void showWindow(String window) {
-        String newWindow = window;
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource(newWindow));
+            AnchorPane pane = FXMLLoader.load(App.class.getResource(window));
             defaultTable.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();
