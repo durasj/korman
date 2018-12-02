@@ -20,8 +20,10 @@ public class Agent {
     private int maxPrice;
     private int difference;
     private int year;
+    private String name;
+    private String timeStamp;
 
-    public Agent(String category, String series, String size, int idAgenta, String wmn, int minPrice, int maxPrice, int difference, int year) {
+    public Agent(String category, String series, String size, int idAgenta, String wmn, int minPrice, int maxPrice, int difference, int year, String name, String timeStamp) {
         this.category = category;
         this.series = series;
         this.size = size;
@@ -31,6 +33,8 @@ public class Agent {
         this.maxPrice = maxPrice;
         this.difference = difference;
         this.year = year;
+        this.name = name;
+        this.timeStamp = timeStamp;
     }
 
     public String getCategory() {
@@ -103,6 +107,22 @@ public class Agent {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
 }

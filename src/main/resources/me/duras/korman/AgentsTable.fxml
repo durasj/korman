@@ -20,15 +20,15 @@
               
                 <TableView fx:id="agentTablePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" tableMenuButtonVisible="true">
                     <columns>
-                        <TableColumn fx:id="agentId" prefWidth="100.0" text="ID" />
+                        <TableColumn fx:id="agentName" prefWidth="90.0" text="Name" />
                         <TableColumn fx:id="agentCategory" prefWidth="100.0" text="Category" />
-                        <TableColumn fx:id="agentSeries" prefWidth="100.0" text="Series" />
-                        <TableColumn fx:id="agentSize" prefWidth="75.0" text="Size" />
-                        <TableColumn fx:id="agentWmn" prefWidth="75.0" text="Woman" />
-                        <TableColumn fx:id="agentMinPrice" prefWidth="120.0" text="Min Price" />
-                        <TableColumn fx:id="agentMaxPrice" prefWidth="120.0" text="Max Price" />
-                        <TableColumn fx:id="agentDiff" prefWidth="120.0" text="Dfference" />
-                        <TableColumn fx:id="agentYear" prefWidth="100.0" text="Year" />
+                        <TableColumn fx:id="agentSeries" prefWidth="80" text="Series" />
+                        <TableColumn fx:id="agentSize" prefWidth="60.0" text="Size" />
+                        <TableColumn fx:id="agentWmn" prefWidth="120.0" text="For Woman" />
+                        <TableColumn fx:id="agentMinPrice" prefWidth="110.0" text="Min Price" />
+                        <TableColumn fx:id="agentMaxPrice" prefWidth="110.0" text="Max Price" />
+                        <TableColumn fx:id="agentDiff" prefWidth="120.0" text="Min Dfference" />
+                        <TableColumn fx:id="agentYear" prefWidth="110.0" text="Model Year" />
                     </columns>
             
                 </TableView>
@@ -37,7 +37,7 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <Button fx:id="newAgentButton" layoutX="816.0" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #EFF0F5" text="New Agent">
+                <Button fx:id="newAgentButton" layoutX="816.0" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" text="New Agent">
                 </Button>
             </children>
         </AnchorPane>

@@ -40,7 +40,7 @@ public class AgentsController implements Initializable {
     private TableView<Agent> agentTablePagin;
 
     @FXML
-    private TableColumn<Agent, String> agentId, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
+    private TableColumn<Agent, String> agentName, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
 
     @FXML
     private void agentsButtonAction(ActionEvent event) {
@@ -64,6 +64,10 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
+        agentTablePagin.setOnMouseClicked((MouseEvent event) -> {
+            onEdit();
+        });
+
         if (dao.getAllAgents().size() > 0) {
             agenti.clear();
             for (Agent agent : dao.getAllAgents()) {
@@ -71,7 +75,7 @@ public class AgentsController implements Initializable {
             }
 
             if (agenti.size() > 0) {
-                agentId.setCellValueFactory(new PropertyValueFactory<>("idAgenta"));
+                agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
                 agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
                 agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
                 agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
@@ -84,6 +88,38 @@ public class AgentsController implements Initializable {
                 agentTablePagin.setItems(agenti);
 
             }
+        }
+    }
+
+    public void onEdit() {
+
+        if (agentTablePagin.getSelectionModel().getSelectedItem() != null) {
+            Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
+
+            NewAgentController newAgentController = new NewAgentController();
+            newAgentController.onEdit(true);
+
+            String name = String.valueOf(selectedAgent.getName());
+            String minPrice = String.valueOf(selectedAgent.getMinPrice());
+            String maxPrice = String.valueOf(selectedAgent.getMaxPrice());
+            String minDiff = String.valueOf(selectedAgent.getDifference());
+            String modelYear = String.valueOf(selectedAgent.getYear());
+            String series = String.valueOf(selectedAgent.getSeries());
+            String category = String.valueOf(selectedAgent.getCategory());
+            String size = String.valueOf(selectedAgent.getSize());
+            String forWomen = String.valueOf(selectedAgent.getWmn());
+
+            newAgentController.setName(name);
+            newAgentController.setSer(series);
+            newAgentController.setYr(modelYear);
+            newAgentController.setDiff(minDiff);
+            newAgentController.setMin(minPrice);
+            newAgentController.setMax(maxPrice);
+            newAgentController.setCat(category);
+            newAgentController.setSz(size);
+            newAgentController.setWm(forWomen);
+            showWindow("newAgent.fxml");
+
         }
     }
 

@@ -35,6 +35,31 @@
     -fx-text-fill:#000000;
 }
 
+#newAgentButton:focused{     
+    -fx-text-fill:#000000;
+    -fx-border-color:#000000;
+    -fx-border-width: 0 0 0 0;
+}
+
+#createAgentButton{
+    -fx-background-color: #EFF0F5;
+    -fx-font: Roboto-Regular;
+    -fx-text-fill:#4d4d4d;
+    -fx-font-size:16; 
+    -fx-padding: 5 0 5 0;
+}
+
+#createAgentButton:hover{     
+    -fx-background-color:#e3e5ed;
+    -fx-text-fill:#000000;
+}
+
+#createAgentButton:focused{     
+    -fx-text-fill:#000000;
+    -fx-border-color:#000000;
+    -fx-border-width: 0 0 0 0;
+}
+
 .table-view{
     -fx-font: Roboto-Regular;
     -fx-text-fill:#4d4d4d;

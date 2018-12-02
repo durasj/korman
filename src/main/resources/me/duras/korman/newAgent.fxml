@@ -57,12 +57,12 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="96.0" layoutY="256.0" text="Difference:">
+                        <Label layoutX="96.0" layoutY="256.0" text="Min difference:">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="96.0" layoutY="312.0" text="Year:">
+                        <Label layoutX="96.0" layoutY="312.0" text="Model Year:">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -95,11 +95,16 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Button fx:id="createAgentButton" layoutX="190.0" layoutY="496.0" mnemonicParsing="false" onAction="#addAgent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #EFF0F5;" text="Create">
+                <Button fx:id="createAgentButton" layoutX="190.0" layoutY="496.0" mnemonicParsing="false" onAction="#addAgent" prefHeight="30.0" prefWidth="100.0" text="Create">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Button>
+            <TextField fx:id="nameAgent" layoutX="139.0" layoutY="17.0" prefWidth="296.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
             </children>
         </AnchorPane>  
     </children>
