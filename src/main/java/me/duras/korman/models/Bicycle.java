@@ -28,19 +28,15 @@ public class Bicycle {
     private Date createdAt;
     private Date importedAt;
 
-    public Bicycle(int id, int externalId, BicycleCategory category, String series, String size, boolean wmn, int price, int diff, int modelYear, String url, String photoUrl, Date createdAt, Date importedAt) {
-        this.id = id;
+    public Bicycle(int externalId, BicycleCategory category, String series, String size, boolean wmn, int price, int modelYear, String url, String photoUrl, Date importedAt) {
         this.externalId = externalId;
         this.category = category;
         this.series = series;
         this.size = size;
         this.wmn = wmn;
         this.price = price;
-        this.diff = diff;
         this.modelYear = modelYear;
         this.url = url;
-        this.photoUrl = photoUrl;
-        this.createdAt = createdAt;
         this.importedAt = importedAt;
     }
 
@@ -147,6 +143,4 @@ public class Bicycle {
     public void setImportedAt(Date importedAt) {
         this.importedAt = importedAt;
     }
-
-    
 }

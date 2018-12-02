@@ -25,8 +25,8 @@ public class SqliteSettingDao implements SettingDao {
 
             @Override
             public Setting mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Setting workShop = new Setting(rs.getInt("id"), rs.getString("key"), rs.getString("value"));
-                return workShop;
+                Setting setting = new Setting(rs.getInt("id"), rs.getString("key"), rs.getString("value"));
+                return setting;
             }
 
         });

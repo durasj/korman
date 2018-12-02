@@ -9,7 +9,7 @@ public interface BicycleDao {
 
     Bicycle getById(int id);
 
-    int save(Bicycle bicycle);
+    Bicycle save(Bicycle bicycle);
 
     int delete(Bicycle bicycle);
 }
