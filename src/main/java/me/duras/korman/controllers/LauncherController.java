@@ -1,5 +1,6 @@
 package me.duras.korman.controllers;
 
+import javafx.stage.Window;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,10 +52,22 @@ public class LauncherController implements Initializable {
 
     }
 
-    public void showWindow(String window) {
+    public void showWindow(String windowFxml) {
         try {
-            AnchorPane pane = FXMLLoader.load(App.class.getResource(window));
-            defaultTable.getChildren().setAll(pane);
+            AnchorPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
+
+            Stage primaryStage = (Stage) dashboardButton.getScene().getWindow();
+
+            Scene scene = new Scene(windowResource);
+            primaryStage.setTitle("Korman Launcher");
+            primaryStage.setScene(scene);
+    
+            primaryStage.getIcons().add(new Image(
+                    getClass().getResource("icon.png").toString()
+            ));
+            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+            primaryStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
