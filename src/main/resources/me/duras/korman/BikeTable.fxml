@@ -13,14 +13,21 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="bicyclesTable" fx:id="bicyclesTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.controllers.BikeController">
-    <children>
-        <Pagination fx:id="bikePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-        <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Bicycles">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
-        <Button fx:id="bicykel" layoutX="795.0" layoutY="16.0" mnemonicParsing="false" onAction="#vypis" text="Button" />
-    </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.controllers.BikeController">
+    <left> 
+        <fx:include source="Menu.fxml" />
+    </left>
+    <center>
+        <AnchorPane id="bicyclesTable" fx:id="bicyclesTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" >
+            <children>
+                <Pagination fx:id="bikePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
+                <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Bicycles">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Button fx:id="bicykel" layoutX="795.0" layoutY="16.0" mnemonicParsing="false" onAction="#vypis" text="Button" />
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

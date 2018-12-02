@@ -23,29 +23,10 @@ import me.duras.korman.App;
  *
  * @author martin
  */
-public class LauncherController implements Initializable {
-
-    @FXML
-    private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
+public class DashboardController implements Initializable {
 
     @FXML
     private AnchorPane defaultTable;
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-
-        if (event.getSource() == dashboardButton) {
-
-        } else if (event.getSource() == bicyclesButton) {
-            showWindow("BikeTable.fxml");
-        } else if (event.getSource() == notificationsButton) {
-
-        } else if (event.getSource() == agentsButton) {
-            showWindow("AgentsTable.fxml");
-        } else if (event.getSource() == settingsButton) {
-
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,12 +37,12 @@ public class LauncherController implements Initializable {
         try {
             AnchorPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
 
-            Stage primaryStage = (Stage) dashboardButton.getScene().getWindow();
+            Stage primaryStage = (Stage) defaultTable.getScene().getWindow();
 
             Scene scene = new Scene(windowResource);
             primaryStage.setTitle("Korman Launcher");
             primaryStage.setScene(scene);
-    
+
             primaryStage.getIcons().add(new Image(
                     getClass().getResource("icon.png").toString()
             ));

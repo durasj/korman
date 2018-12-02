@@ -21,7 +21,7 @@ public class App extends Application implements Initializable {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent rootPane = FXMLLoader.load(getClass().getResource("Launcher.fxml"));
+        Parent rootPane = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
 
         if (Utils.isFirstRun()) {
             try {
