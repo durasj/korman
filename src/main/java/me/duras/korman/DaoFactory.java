@@ -2,8 +2,10 @@ package me.duras.korman;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import me.duras.korman.dao.BicycleCategoryDao;
 import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.dao.SettingDao;
+import me.duras.korman.dao.SqliteBicycleCategoryDao;
 import me.duras.korman.dao.SqliteBicycleDao;
 import me.duras.korman.dao.SqliteSettingDao;
 
@@ -14,6 +16,7 @@ public enum DaoFactory {
 
     private SettingDao settingDao;
     private BicycleDao bicycleDao;
+    private BicycleCategoryDao bicycleCategoryDao;
 
     public SettingDao getParticipantDao() {
         if (settingDao == null) {
@@ -29,6 +32,14 @@ public enum DaoFactory {
         }
 
         return bicycleDao;
+    }
+
+    public BicycleCategoryDao getBicycleCategoryDao() {
+        if (bicycleCategoryDao == null) {
+            bicycleCategoryDao = new SqliteBicycleCategoryDao(getJdbcTemplate());
+        }
+
+        return bicycleCategoryDao;
     }
 
     public void setJdbcTemplate(JdbcTemplate template) {

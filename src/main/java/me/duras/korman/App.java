@@ -5,14 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.fxml.Initializable;
 
 public class App extends Application implements Initializable {
 
@@ -46,8 +44,6 @@ public class App extends Application implements Initializable {
         ));
         scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
         primaryStage.show();
-
-        System.out.println("DAO FTW");
     }
 
     @Override
@@ -63,6 +59,6 @@ public class App extends Application implements Initializable {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args); 
     }
 }

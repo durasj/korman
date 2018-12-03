@@ -26,7 +26,7 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <Button fx:id="bicykel" layoutX="795.0" layoutY="16.0" mnemonicParsing="false" onAction="#vypis" text="Button" />
+                <Button fx:id="fetchBicyclesButton" layoutX="795.0" layoutY="16.0" mnemonicParsing="false" onAction="#fetchBicycles" text="Button" />
             </children>
         </AnchorPane>
     </center>

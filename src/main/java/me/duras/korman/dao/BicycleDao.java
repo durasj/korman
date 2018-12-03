@@ -11,5 +11,7 @@ public interface BicycleDao {
 
     Bicycle save(Bicycle bicycle);
 
+    void saveMany(List<Bicycle> bicycles);
+
     int delete(Bicycle bicycle);
 }

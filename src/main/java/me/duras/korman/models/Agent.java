@@ -16,6 +16,7 @@ public class Agent {
     private int year;
     private String name;
     private String timeStamp;
+    private boolean active;
 
     public Agent(String category, String series, String size, int idAgenta, String wmn, int minPrice, int maxPrice, int difference, int year, String name, String timeStamp) {
         this.category = category;
@@ -119,4 +120,11 @@ public class Agent {
         this.timeStamp = timeStamp;
     }
 
+    public boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
