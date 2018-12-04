@@ -9,7 +9,7 @@ public class Agent {
     private String series;
     private String size;
     private int idAgenta;
-    private String wmn;
+    private boolean wmn;
     private int minPrice;
     private int maxPrice;
     private int difference;
@@ -18,7 +18,7 @@ public class Agent {
     private String timeStamp;
     private boolean active;
 
-    public Agent(String category, String series, String size, int idAgenta, String wmn, int minPrice, int maxPrice, int difference, int year, String name, String timeStamp) {
+    public Agent(String category, String series, String size, int idAgenta, boolean wmn, int minPrice, int maxPrice, int difference, int year, String name, String timeStamp) {
         this.category = category;
         this.series = series;
         this.size = size;
@@ -64,11 +64,11 @@ public class Agent {
         this.idAgenta = idAgenta;
     }
 
-    public String getWmn() {
+    public boolean getWmn() {
         return wmn;
     }
 
-    public void setWmn(String wmn) {
+    public void setWmn(boolean wmn) {
         this.wmn = wmn;
     }
 

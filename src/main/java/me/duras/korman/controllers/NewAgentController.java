@@ -1,15 +1,11 @@
 package me.duras.korman.controllers;
 
 import java.io.IOException;
-import javafx.beans.value.ChangeListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -19,17 +15,13 @@ import javafx.stage.Stage;
 import me.duras.korman.App;
 import me.duras.korman.models.*;
 
-/**
- *
- * @author mmiskov
- */
 public class NewAgentController {
 
     private String category;
     private String series;
     private String size;
     private int idAgenta;
-    private String wmn;
+    private boolean wmn;
     private int minPrice;
     private int maxPrice;
     private int difference;
@@ -40,7 +32,6 @@ public class NewAgentController {
 
     private static String cat, ser, sz, wm, min, max, diff, yr, nm;
 
-    //after click button Create Agent >> 
     AgentsDao agentsDao = new AgentsDao();
 
     @FXML
@@ -106,7 +97,12 @@ public class NewAgentController {
         this.size = outputSetSize;
 
         String outputForWoman = forWoman.getSelectionModel().getSelectedItem();
-        this.wmn = outputForWoman;
+        System.out.println(outputForWoman);
+        if (outputForWoman == null || outputForWoman.equals("No")) {
+            this.wmn = false;
+        } else {
+            this.wmn = true;
+        }
 
         if (!onEdit) {
             agentsDao.createAgent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year, name, timeStamp);
@@ -189,10 +185,10 @@ public class NewAgentController {
     }
 
     public void setWm(String wm) {
-        if (!wm.equals("null")) {
-            this.wm = wm;
+        if (wm.equals("false")) {
+            this.wm = "No";
         } else {
-            this.wm = "";
+            this.wm = "Yes";
         }
     }
 

@@ -1,30 +1,22 @@
 package me.duras.korman.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Pagination;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import me.duras.korman.App;
 import me.duras.korman.models.*;
@@ -33,6 +25,18 @@ public class AgentsController implements Initializable {
 
     static ObservableList<Agent> agenti = FXCollections.observableArrayList();
     AgentsDao dao = new AgentsDao();
+
+    int pocet = dao.getAllAgents().size();
+
+    int pocetPoloziek = 14;
+    int from = 0, to;
+
+    private void toSize(){
+        to = pocet/pocetPoloziek;
+    }
+    
+    @FXML
+    private Pagination agentPagination;
 
     @FXML
     private Button newAgentButton;
@@ -63,7 +67,7 @@ public class AgentsController implements Initializable {
             Stage primaryStage = (Stage) newAgentButton.getScene().getWindow();
 
             Scene scene = new Scene(windowResource);
-            primaryStage.setTitle("Korman Launcher");
+            primaryStage.setTitle("Korman");
             primaryStage.setScene(scene);
 
             primaryStage.getIcons().add(new Image(
@@ -79,11 +83,13 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
+        agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         agentTablePagin.setOnMouseClicked((MouseEvent event) -> {
             onEdit();
         });
 
-        if (dao.getAllAgents().size() > 0) {
+        if (pocet > 0) {
             agenti.clear();
             for (Agent agent : dao.getAllAgents()) {
                 agenti.add(agent);

@@ -11,7 +11,7 @@ public class AgentsDao {
     static List<Agent> list = new ArrayList<Agent>();
 
     // Create a new Agent in the DB
-    public void createAgent(String category, String series, String size, int idAgenta, String wmn, int minPrice,
+    public void createAgent(String category, String series, String size, int idAgenta, boolean wmn, int minPrice,
             int maxPrice, int difference, int year, String name, String timeStamp) {
 
         Agent agent = new Agent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year, name, timeStamp);
@@ -19,7 +19,7 @@ public class AgentsDao {
     }
 
     // Edit an Agent in the DB
-    public void editAgent(String category, String series, String size, int idAgenta, String wmn, int minPrice,
+    public void editAgent(String category, String series, String size, int idAgenta, boolean wmn, int minPrice,
             int maxPrice, int difference, int year, String name, String timeStamp) {
         for (Agent agent : list) {
             if (agent.getIdAgenta() == idAgenta) {

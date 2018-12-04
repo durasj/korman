@@ -23,17 +23,17 @@
                 <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
               
-                        <TableView fx:id="agentTablePagin" prefHeight="464.0" prefWidth="912.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0">
+                        <TableView fx:id="agentTablePagin" prefHeight="400.0" prefWidth="912.0" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
                             <columns>
-                                <TableColumn fx:id="agentName" prefWidth="90.0" text="Name" />
-                                <TableColumn fx:id="agentCategory" prefWidth="100.0" text="Category" />
-                                <TableColumn fx:id="agentSeries" prefWidth="80" text="Series" />
-                                <TableColumn fx:id="agentSize" prefWidth="60.0" text="Size" />
-                                <TableColumn fx:id="agentWmn" prefWidth="120.0" text="For Woman" />
-                                <TableColumn fx:id="agentMinPrice" prefWidth="110.0" text="Min Price" />
-                                <TableColumn fx:id="agentMaxPrice" prefWidth="110.0" text="Max Price" />
-                                <TableColumn fx:id="agentDiff" prefWidth="120.0" text="Min Dfference" />
-                                <TableColumn fx:id="agentYear" prefWidth="110.0" text="Model Year" />
+                                <TableColumn fx:id="agentName" minWidth="90.0" prefWidth="90.0" text="Name" />
+                                <TableColumn fx:id="agentCategory" minWidth="100.0" prefWidth="100.0" text="Category" />
+                                <TableColumn fx:id="agentSeries" minWidth="80.0" prefWidth="80" text="Series" />
+                                <TableColumn fx:id="agentSize" minWidth="60.0" prefWidth="60.0" text="Size" />
+                                <TableColumn fx:id="agentWmn" minWidth="120.0" prefWidth="120.0" text="For Woman" />
+                                <TableColumn fx:id="agentMinPrice" minWidth="110.0" prefWidth="110.0" text="Min Price" />
+                                <TableColumn fx:id="agentMaxPrice" minWidth="110.0" prefWidth="110.0" text="Max Price" />
+                                <TableColumn fx:id="agentDiff" minWidth="120.0" prefWidth="120.0" text="Min Dfference" />
+                                <TableColumn fx:id="agentYear" minWidth="122.0" prefWidth="122.0" text="Model Year" />
                             </columns>
             
                         </TableView>
@@ -44,6 +44,7 @@
                         </Label>
                         <Button fx:id="newAgentButton" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" text="New Agent" AnchorPane.rightAnchor="24.0">
                         </Button>
+                        <Pagination fx:id="agentPagination" prefHeight="484.0" prefWidth="912.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
                     </children>
                 </AnchorPane>
             </children>

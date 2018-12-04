@@ -26,6 +26,10 @@ import me.duras.korman.models.BicycleCategory;
  */
 public class BikeController implements Initializable {
 
+    private String list_Url;
+    private String view_Url;
+    private String refresh_Time;
+
     @FXML
     private Label label1;
 
@@ -55,20 +59,20 @@ public class BikeController implements Initializable {
         for (BicycleCategory category : categories) {
             Supplier<List<Bicycle>> fetch = () -> {
                 Fetching fetching = new Fetching(
-                    // TODO Implement dynamic loading of the URL and cssSelector
-                    "https://www.canyon.com/en-sk/factory-outlet/ajax" + category.getExternalUrl()
+                        // TODO Implement dynamic loading of the URL and cssSelector
+                        list_Url + category.getExternalUrl()
                 );
-    
+
                 List<Bicycle> list = new ArrayList<Bicycle>();
                 try {
                     // TODO: Fix detail URL
                     list.addAll(
-                        fetching.fetchItems("div article", Bicycle.fetchMap,
-                            "https://www.canyon.com/en-sk/factory-outlet/category.html#category=fitness-bikes&id=")
-                            .stream().map((Bicycle b) -> {
-                                b.setCategory(category);
-                                return b;
-                            }).collect(Collectors.toList())
+                            fetching.fetchItems("div article", Bicycle.fetchMap,
+                                    view_Url)
+                                    .stream().map((Bicycle b) -> {
+                                        b.setCategory(category);
+                                        return b;
+                                    }).collect(Collectors.toList())
                     );
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
@@ -86,6 +90,18 @@ public class BikeController implements Initializable {
                 }
             });
         }
+    }
+
+    public void setList_Url(String list_Url) {
+        this.list_Url = list_Url;
+    }
+
+    public void setView_Url(String view_Url) {
+        this.view_Url = view_Url;
+    }
+
+    public void setRefresh_Time(String refresh_Time) {
+        this.refresh_Time = refresh_Time;
     }
 
     @Override
