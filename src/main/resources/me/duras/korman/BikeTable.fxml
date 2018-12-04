@@ -18,15 +18,19 @@
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <AnchorPane id="bicyclesTable" fx:id="bicyclesTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" >
+        <AnchorPane id="DataTableCard" fx:id="defaultTableB" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
             <children>
-                <Pagination fx:id="bikePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" />
-                <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Bicycles">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-                <Button fx:id="fetchBicyclesButton" layoutX="795.0" layoutY="16.0" mnemonicParsing="false" onAction="#fetchBicycles" text="Button" />
+                <AnchorPane id="bicyclesTable" fx:id="bicyclesTable" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="24.0">
+                    <children>
+                        <Pagination fx:id="bikePagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
+                        <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Bicycles">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="fetchBicyclesButton" layoutX="795.0" layoutY="16.0" mnemonicParsing="false" onAction="#fetchBicycles" text="Button" />
+                    </children>
+                </AnchorPane>
             </children>
         </AnchorPane>
     </center>

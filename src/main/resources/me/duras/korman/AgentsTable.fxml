@@ -13,18 +13,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.controllers.AgentsController">
     <left>
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <AnchorPane id="DataTableCard" fx:id="defaultTable" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+        <AnchorPane id="DataTableCard" fx:id="defaultTableA" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
             <children>
-                <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;"> 
+                <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
               
-                        <TableView fx:id="agentTablePagin" layoutX="24.0" layoutY="64.0" prefHeight="464.0" prefWidth="912.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="agentTablePagin" prefHeight="464.0" prefWidth="912.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0">
                             <columns>
                                 <TableColumn fx:id="agentName" prefWidth="90.0" text="Name" />
                                 <TableColumn fx:id="agentCategory" prefWidth="100.0" text="Category" />
@@ -43,7 +42,7 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Button fx:id="newAgentButton" layoutX="816.0" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" text="New Agent">
+                        <Button fx:id="newAgentButton" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" text="New Agent" AnchorPane.rightAnchor="24.0">
                         </Button>
                     </children>
                 </AnchorPane>
