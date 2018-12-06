@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.application.Application.launch;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import me.duras.korman.App;
 import me.duras.korman.models.*;
 
@@ -27,14 +30,9 @@ public class AgentsController implements Initializable {
     AgentsDao dao = new AgentsDao();
 
     int pocet = dao.getAllAgents().size();
+    int zvysok = pocet % rowsPerPage();
+    int mnozstvo = pocet / rowsPerPage();
 
-    int pocetPoloziek = 14;
-    int from = 0, to;
-
-    private void toSize(){
-        to = pocet/pocetPoloziek;
-    }
-    
     @FXML
     private Pagination agentPagination;
 
@@ -66,9 +64,11 @@ public class AgentsController implements Initializable {
 
             Stage primaryStage = (Stage) newAgentButton.getScene().getWindow();
 
-            Scene scene = new Scene(windowResource);
+            Scene scene = new Scene(windowResource, primaryStage.getWidth() - 18, primaryStage.getHeight() - 47);
             primaryStage.setTitle("Korman");
             primaryStage.setScene(scene);
+            primaryStage.setMinWidth(1218);
+            primaryStage.setMinHeight(600);
 
             primaryStage.getIcons().add(new Image(
                     App.class.getResource("icon.png").toString()
@@ -83,6 +83,7 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
+
         agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         agentTablePagin.setOnMouseClicked((MouseEvent event) -> {
@@ -96,18 +97,15 @@ public class AgentsController implements Initializable {
             }
 
             if (agenti.size() > 0) {
-                agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
-                agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-                agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
-                agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
-                agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
-                agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
-                agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
-                agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
-                agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
 
-                agentTablePagin.setItems(agenti);
+                agentPagination.setPageCount(mnozstvo);
 
+                agentPagination.setPageFactory(new Callback<Integer, Node>() {
+                    @Override
+                    public Node call(Integer pageIndex) {
+                        return createPage(pageIndex);
+                    }
+                });
             }
         }
     }
@@ -144,7 +142,37 @@ public class AgentsController implements Initializable {
         }
     }
 
-    private void loadData() {
+    public int itemsPerPage() {
+        return 1;
+    }
+
+    public int rowsPerPage() {
+        return 2;
+    }
+
+    public VBox createPage(int pageIndex) {
+        VBox box = new VBox(5);
+
+        agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
+        agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
+        agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
+        agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
+        agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
+        agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
+        agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        System.out.println("Prvykoniec: " + (pageIndex * rowsPerPage() + zvysok) + ", druhykoniec: " + (pageIndex * rowsPerPage() + rowsPerPage()));
+
+        if (zvysok > 0) {
+            agentTablePagin.setItems(FXCollections.observableArrayList(agenti.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + zvysok)));
+        } else {
+            agentTablePagin.setItems(FXCollections.observableArrayList(agenti.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
+        }
+        box.getChildren().add(agentTablePagin);
+
+        return box;
     }
 
 }

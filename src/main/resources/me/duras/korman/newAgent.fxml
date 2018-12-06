@@ -12,7 +12,6 @@
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -26,9 +25,9 @@
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <AnchorPane id="AnchorPane" fx:id="newAgent" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #F6F7FB;" >
+        <AnchorPane id="AnchorPane" fx:id="newAgent" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #F6F7FB;">
             <children>
-                <AnchorPane id="newAgentIN" fx:id="newAgentIN" layoutX="24.0" layoutY="24.0" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;"> 
+                <AnchorPane id="newAgentIN" fx:id="newAgentIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
                         <AnchorPane layoutX="20.0" layoutY="60.0" prefHeight="410.0" prefWidth="920.0" style="-fx-background-color: #FFFFFF;">
                             <children>

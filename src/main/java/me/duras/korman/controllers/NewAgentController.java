@@ -118,9 +118,11 @@ public class NewAgentController {
 
             Stage primaryStage = (Stage) createAgentButton.getScene().getWindow();
 
-            Scene scene = new Scene(windowResource);
+            Scene scene = new Scene(windowResource, primaryStage.getWidth() - 18, primaryStage.getHeight() - 47);
             primaryStage.setTitle("Korman Launcher");
             primaryStage.setScene(scene);
+            primaryStage.setMinWidth(1218);
+            primaryStage.setMinHeight(600);
 
             primaryStage.getIcons().add(new Image(
                     App.class.getResource("icon.png").toString()
