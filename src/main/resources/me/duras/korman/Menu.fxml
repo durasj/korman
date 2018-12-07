@@ -13,11 +13,8 @@
     <children>
         <AnchorPane id="anchorButton" layoutY="38.0" prefHeight="30.0" prefWidth="192.0">
             <children>
-                <Button id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Dashboard">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </Button>
+                <ToggleButton id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Dashboard">
+                </ToggleButton>
                 <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@dashboard.png" />
@@ -27,8 +24,8 @@
         </AnchorPane>
         <AnchorPane id="anchorButton" layoutY="88.0" prefHeight="30.0" prefWidth="192.0">
             <children>
-                <Button id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Bicycles">
-                </Button>
+                <ToggleButton id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Bicycles">
+                </ToggleButton>
                 <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@bicycles.png" />
@@ -38,8 +35,8 @@
         </AnchorPane>
         <AnchorPane id="anchorButton" layoutY="138.0" prefHeight="30.0" prefWidth="192.0">
             <children>
-                <Button id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Notifications">
-                </Button>
+                <ToggleButton id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Notifications">
+                </ToggleButton>
                 <Label id="NotificationsNumberView" layoutX="152.0" layoutY="5.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: EFF0F5;" visible="false" />
                 <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -50,8 +47,8 @@
         </AnchorPane>
         <AnchorPane id="anchorButton" layoutY="188.0" prefHeight="30.0" prefWidth="192.0">
             <children>
-                <Button id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Agents">
-                </Button>
+                <ToggleButton id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Agents">
+                </ToggleButton>
                 <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@agents.png" />
@@ -61,8 +58,8 @@
         </AnchorPane>
         <AnchorPane id="anchorButton" layoutY="238.0" prefHeight="30.0" prefWidth="192.0">
             <children>
-                <Button id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Settings">
-                </Button>
+                <ToggleButton id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Settings">
+                </ToggleButton>
                 <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@settings.png" />

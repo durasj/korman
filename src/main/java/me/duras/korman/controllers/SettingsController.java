@@ -47,7 +47,6 @@ public class SettingsController implements Initializable {
             if (setting.getKey().equals("listUrl")) {
                 listUrlSetting = setting;
                 listUrl.setText(setting.getValue());
-                System.out.println(setting.getValue());
             }
 
             if (setting.getKey().equals("viewUrl")) {

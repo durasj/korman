@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -14,7 +14,7 @@ import me.duras.korman.App;
 public class MenuController {
 
     @FXML
-    private Button dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
+    private ToggleButton dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -36,20 +36,16 @@ public class MenuController {
         try {
             BorderPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
 
-            Stage primaryStage = (Stage) dashboardButton.getScene().getWindow();
+            Scene currentScene = dashboardButton.getScene();
+            Stage primaryStage = (Stage) currentScene.getWindow();
 
-            Scene scene = new Scene(windowResource, primaryStage.getWidth() - 18, primaryStage.getHeight() - 47);
-            primaryStage.setTitle("Korman");
-            primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1218);
-            primaryStage.setMinHeight(600);
-
-            primaryStage.getIcons().add(new Image(
-                    App.class.getResource("icon.png").toString()
-            ));
+            Scene scene = new Scene(
+                windowResource,
+                currentScene.getWidth(),
+                currentScene.getHeight()
+            );
             scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
-            primaryStage.show();
-
+            primaryStage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
