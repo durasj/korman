@@ -42,7 +42,7 @@
     -fx-text-fill:#000000; 
 }
 
-#newAgentButton{
+.jfx-button{
     -fx-background-color: #F7B538;
     -fx-font-family: Roboto-Regular;
     -fx-text-fill:#FFFFFF;
@@ -50,50 +50,13 @@
     -fx-padding: 5 0 5 0;
 }
 
-#newAgentButton:hover{     
+.jfx-button:hover{     
     -fx-background-color:#f6ac23;
     -fx-text-fill:#FFFFFF;
 }
 
-#newAgentButton:focused{     
-    -fx-text-fill:#FFFFFF;
-    -fx-border-color:#000000;
-    -fx-border-width: 0 0 0 0;
-}
-
-#createAgentButton{
+.jfx-button:focused{     
     -fx-background-color: #F7B538;
-    -fx-font-family: Roboto-Regular;
-    -fx-text-fill:#FFFFFF;
-    -fx-font-size:16; 
-    -fx-padding: 5 0 5 0;
-}
-
-#createAgentButton:hover{     
-    -fx-background-color:#f6ac23;
-    -fx-text-fill:#FFFFFF;
-}
-
-#createAgentButton:focused{     
-    -fx-text-fill:#FFFFFF;
-    -fx-border-color:#000000;
-    -fx-border-width: 0 0 0 0;
-}
-
-#addSettings{
-    -fx-background-color: #F7B538;
-    -fx-font-family: Roboto-Regular;
-    -fx-text-fill:#FFFFFF;
-    -fx-font-size:16; 
-    -fx-padding: 5 0 5 0;
-}
-
-#addSettings:hover{     
-    -fx-background-color:#f6ac23;
-    -fx-text-fill:#FFFFFF;
-}
-
-#addSettings:focused{     
     -fx-text-fill:#FFFFFF;
     -fx-border-color:#000000;
     -fx-border-width: 0 0 0 0;
@@ -142,19 +105,3 @@
     -fx-fill: white;
     -fx-stroke: white;
 }
-
-/*Flat button example */
-.jfx-button {
-    -jfx-button-type: FLAT;
-    -fx-background-color: #F7B538;
-    -fx-text-fill: black;
-}
-
-/*Raised button example */
-.jfx-button {
-    -jfx-button-type: RAISED;
-    -fx-background-color: #F7B538;
-    -fx-text-fill: white;
-}
-
-

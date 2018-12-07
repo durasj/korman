@@ -161,4 +161,8 @@ public class AgentsController implements Initializable {
 
         }
     }
+
+    @FXML
+    public void deleteAgent(ActionEvent event) {
+    }
 }
