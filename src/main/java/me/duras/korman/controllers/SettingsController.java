@@ -43,20 +43,19 @@ public class SettingsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         List<Setting> list = dao.getAll();
 
-        System.out.println(list.toArray());
-
         for (Setting setting : list) {
-            if (setting.getKey() == "listUrl") {
+            if (setting.getKey().equals("listUrl")) {
                 listUrlSetting = setting;
                 listUrl.setText(setting.getValue());
+                System.out.println(setting.getValue());
             }
 
-            if (setting.getKey() == "viewUrl") {
+            if (setting.getKey().equals("viewUrl")) {
                 viewUrlSetting = setting;
                 viewUrl.setText(setting.getValue());
             }
 
-            if (setting.getKey() == "refreshTime") {
+            if (setting.getKey().equals("refreshTime")) {
                 refreshTimeSetting = setting;
                 refreshTime.setValue(Double.parseDouble(setting.getValue()));
             }
