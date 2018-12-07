@@ -4,18 +4,20 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import me.duras.korman.DaoFactory;
+import me.duras.korman.dao.SettingDao;
+import me.duras.korman.models.Setting;
 
 public class SettingsController implements Initializable {
 
-    BikeController bc = new BikeController();
+    SettingDao dao = DaoFactory.INSTANCE.getSettingDao();
 
-    private String list_Url;
-    private String view_Url;
-    private int refresh_Time;
+    private Setting listUrlSetting, viewUrlSetting, refreshTimeSetting;
 
     @FXML
     private JFXTextField listUrl, viewUrl;
@@ -28,29 +30,36 @@ public class SettingsController implements Initializable {
 
     @FXML
     private void addSettings(ActionEvent event) {
+        listUrlSetting.setValue(listUrl.getText());
+        viewUrlSetting.setValue(viewUrl.getText());
+        refreshTimeSetting.setValue(String.valueOf(refreshTime.getValue()));
 
-        String list_Url = listUrl.getText();
-        this.list_Url = list_Url;
-
-        String view_Url = viewUrl.getText();
-        this.view_Url = view_Url;
-
-        int rTime = (int) refreshTime.getValue();
-        if (refresh_Time > 0) {
-            this.refresh_Time = refresh_Time * 60000;
-        } else {
-            this.refresh_Time = 0;
-        }
-
-        bc.setList_Url(list_Url);
-        bc.setView_Url(view_Url);
-        bc.setRefresh_Time(refresh_Time);
+        dao.save(listUrlSetting);
+        dao.save(viewUrlSetting);
+        dao.save(refreshTimeSetting);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listUrl.setText("https://www.canyon.com/en-sk/factory-outlet/ajax");
-        viewUrl.setText("https://www.canyon.com/en-sk/factory-outlet/category.html#category=fitness-bikes&amp;id=");
-        refreshTime.setValue(-1);
+        List<Setting> list = dao.getAll();
+
+        System.out.println(list.toArray());
+
+        for (Setting setting : list) {
+            if (setting.getKey() == "listUrl") {
+                listUrlSetting = setting;
+                listUrl.setText(setting.getValue());
+            }
+
+            if (setting.getKey() == "viewUrl") {
+                viewUrlSetting = setting;
+                viewUrl.setText(setting.getValue());
+            }
+
+            if (setting.getKey() == "refreshTime") {
+                refreshTimeSetting = setting;
+                refreshTime.setValue(Double.parseDouble(setting.getValue()));
+            }
+        }
     }
 }

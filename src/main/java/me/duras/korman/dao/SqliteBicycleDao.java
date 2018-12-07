@@ -1,7 +1,6 @@
 package me.duras.korman.dao;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import me.duras.korman.models.Bicycle;

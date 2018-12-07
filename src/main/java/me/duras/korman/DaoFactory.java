@@ -18,7 +18,7 @@ public enum DaoFactory {
     private BicycleDao bicycleDao;
     private BicycleCategoryDao bicycleCategoryDao;
 
-    public SettingDao getParticipantDao() {
+    public SettingDao getSettingDao() {
         if (settingDao == null) {
             settingDao = new SqliteSettingDao(getJdbcTemplate());
         }
