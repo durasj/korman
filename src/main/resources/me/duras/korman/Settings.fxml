@@ -23,19 +23,24 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Label layoutX="70.0" layoutY="140.0" text="URL of list">
+                        <Label layoutX="40.0" layoutY="140.0" text="URL of list">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="70.0" layoutY="200.0" text="URL of view">
+                        <Label layoutX="40.0" layoutY="200.0" text="URL of view">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="70.0" layoutY="300.0" text="Refresh time in minutes">
+                        <Label layoutX="40.0" layoutY="300.0" text="Refresh time in minutes">
                             <font>
                                 <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="40.0" layoutY="320.0" text="Fetch new items in the background, 0 to disable">
+                            <font>
+                                <Font size="12.0" />
                             </font>
                         </Label>
                         <JFXTextField fx:id="listUrl" layoutX="320.0" layoutY="137.0" prefWidth="500.0" />

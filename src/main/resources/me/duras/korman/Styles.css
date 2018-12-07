@@ -1,4 +1,4 @@
-.button{     
+.toggle-button {
     -fx-background-color: #EFF0F5;
     -fx-font-family: Roboto-Regular;
     -fx-text-fill:#4d4d4d;
@@ -6,15 +6,35 @@
     -fx-padding: 5 0 5 50;
 }
 
-.button:hover{     
+.toggle-button:hover {
     -fx-background-color:#e3e5ed;
     -fx-text-fill:#000000;
+    -fx-cursor: hand;
 }
 
-.button:focused{     
+.toggle-button:selected {
     -fx-text-fill:#000000;
     -fx-border-color:#000000;
     -fx-border-width: 0 2 0 0;
+}
+
+.button {
+    -fx-background-color: #EFF0F5;
+    -fx-font-family: Roboto-Regular;
+    -fx-text-fill: #4d4d4d;
+    -fx-font-size: 16;
+    -fx-padding: 8 8 8 8;
+}
+
+.button:hover {
+    -fx-background-color:#e3e5ed;
+    -fx-text-fill:#000000;
+    -fx-cursor: hand;
+}
+
+.button:focused {
+    -fx-text-fill:#FFFFFF;
+    -fx-background-color: #31263E;
 }
 
 .label{
