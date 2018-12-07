@@ -61,20 +61,20 @@
 }
 
 #addSettings{
-    -fx-background-color: #EFF0F5;
+    -fx-background-color: #F7B538;
     -fx-font-family: Roboto-Regular;
-    -fx-text-fill:#4d4d4d;
+    -fx-text-fill:#FFFFFF;
     -fx-font-size:16; 
     -fx-padding: 5 0 5 0;
 }
 
 #addSettings:hover{     
-    -fx-background-color:#e3e5ed;
-    -fx-text-fill:#000000;
+    -fx-background-color:#F7B538;
+    -fx-text-fill:#FFFFFF;
 }
 
 #addSettings:focused{     
-    -fx-text-fill:#000000;
+    -fx-text-fill:#FFFFFF;
     -fx-border-color:#000000;
     -fx-border-width: 0 0 0 0;
 }
@@ -95,6 +95,46 @@
     -fx-font-size: 14px;
     -fx-border-color:#000000;
     -fx-border-width: 0 0 1 0;
+}
+
+/* Styling the slider track */
+.jfx-slider > .track {
+    -fx-background-color: #EFF0F5;
+}
+
+/* Styling the slider thumb */
+.jfx-slider > .thumb {
+    -fx-background-color: #F7B538;
+}
+
+/* Styling the filled track */
+.jfx-slider > .colored-track {
+    -fx-background-color: #F7B538;
+}
+
+/* Styling the animated thumb */
+.jfx-slider > .animated-thumb {
+    -fx-background-color: #F7B538;
+}
+
+/* Styling the slider value text inside animated thumb */
+.jfx-slider .slider-value {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+
+/*Flat button example */
+.jfx-button {
+     -jfx-button-type: FLAT;
+     -fx-background-color: #31263E;
+     -fx-text-fill: black;
+}
+
+/*Raised button example */
+.jfx-button {
+     -jfx-button-type: RAISED;
+     -fx-background-color: #31263E;
+     -fx-text-fill: white;
 }
 
 

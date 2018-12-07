@@ -28,7 +28,7 @@ public class BikeController implements Initializable {
 
     private String list_Url;
     private String view_Url;
-    private String refresh_Time;
+    private int refresh_Time;
 
     @FXML
     private Label label1;
@@ -100,7 +100,7 @@ public class BikeController implements Initializable {
         this.view_Url = view_Url;
     }
 
-    public void setRefresh_Time(String refresh_Time) {
+    public void setRefresh_Time(int refresh_Time) {
         this.refresh_Time = refresh_Time;
     }
 

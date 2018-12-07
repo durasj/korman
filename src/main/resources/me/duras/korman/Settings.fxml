@@ -33,15 +33,15 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="70.0" layoutY="260.0" text="Refresh time in minutes">
+                        <Label layoutX="70.0" layoutY="300.0" text="Refresh time in minutes">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
                         <JFXTextField fx:id="listUrl" layoutX="320.0" layoutY="137.0" prefWidth="500.0" />
                         <JFXTextField fx:id="viewUrl" layoutX="320.0" layoutY="197.0" prefWidth="500.0" />
-                        <JFXTextField fx:id="refreshTime" layoutX="320.0" layoutY="257.0" prefWidth="120.0" />
-                        <JFXButton fx:id="addSettings" layoutX="320.0" layoutY="380.0" mnemonicParsing="false" onAction="#addSettings" prefHeight="40.0" prefWidth="120.0" text="Save" />
+                        <JFXButton fx:id="addSettings" layoutX="320.0" layoutY="420.0" mnemonicParsing="false" onAction="#addSettings" prefHeight="40.0" prefWidth="120.0" text="Save" />
+                        <JFXSlider fx:id="refreshTime" blockIncrement="1.0" layoutX="320.0" layoutY="304.0" majorTickUnit="10.0" max="60.0" minorTickCount="1" prefHeight="18.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
                     </children>
                 </AnchorPane>
             </children>

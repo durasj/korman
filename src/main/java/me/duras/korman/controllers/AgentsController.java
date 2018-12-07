@@ -1,6 +1,11 @@
 package me.duras.korman.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +29,7 @@ import me.duras.korman.models.*;
 
 public class AgentsController implements Initializable {
 
-    static ObservableList<Agent> agenti = FXCollections.observableArrayList();
+    private ObservableList<Agent> agenti = FXCollections.observableArrayList();
     AgentsDao dao = new AgentsDao();
 
     int pocet = dao.getAllAgents().size();
@@ -33,10 +38,10 @@ public class AgentsController implements Initializable {
     private JFXButton newAgentButton;
 
     @FXML
-    private TableView<Agent> agentTablePagin;
+    private JFXTreeTableView agentTablePagin;
 
     @FXML
-    private TableColumn<Agent, String> agentName, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
+    private JFXTreeTableColumn<Agent, String> agentName, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
 
     @FXML
     private void agentsButtonAction(ActionEvent event) {
@@ -72,7 +77,8 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
-
+        final TreeItem<Agent> root = new RecursiveTreeItem<Agent>(agenti, RecursiveTreeObject::getChildren);
+        
         agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         agentTablePagin.setOnMouseClicked((MouseEvent event) -> {
