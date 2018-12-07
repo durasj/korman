@@ -118,7 +118,7 @@ public class AgentsController implements Initializable {
             }
 
             if (agenti.size() > 0) {
-                /*agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+                agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
                 agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
                 agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
                 agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
@@ -128,7 +128,7 @@ public class AgentsController implements Initializable {
                 agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
                 agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
 
-                agentTablePagin.setItems(agenti);*/
+                agentTablePagin.setItems(agenti);
             }
         }
     }
@@ -136,7 +136,7 @@ public class AgentsController implements Initializable {
     public void onEdit() {
 
         if (agentTablePagin.getSelectionModel().getSelectedItem() != null) {
-/*            Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
+            Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
 
             NewAgentController newAgentController = new NewAgentController();
             newAgentController.onEdit(true);
@@ -160,7 +160,7 @@ public class AgentsController implements Initializable {
             newAgentController.setCat(category);
             newAgentController.setSz(size);
             newAgentController.setWm(forWomen);
-            showWindow("newAgent.fxml");*/
+            showWindow("newAgent.fxml");
 
         }
     }
