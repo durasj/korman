@@ -23,19 +23,20 @@
             <children>
                 <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
-                        <JFXTreeTableView  fx:id="agentTablePagin" prefWidth="912.0" prefHeight="960.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
+                        <TableView fx:id="agentTablePagin" prefWidth="912.0" prefHeight="960.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
                             <columns>
-                                <JFXTreeTableColumn  fx:id="agentName" minWidth="90.0" prefWidth="90.0" text="Name" />
-                                <JFXTreeTableColumn  fx:id="agentCategory" minWidth="100.0" prefWidth="100.0" text="Category" />
-                                <JFXTreeTableColumn  fx:id="agentSeries" minWidth="80.0" prefWidth="80" text="Series" />
-                                <JFXTreeTableColumn  fx:id="agentSize" minWidth="60.0" prefWidth="60.0" text="Size" />
-                                <JFXTreeTableColumn  fx:id="agentWmn" minWidth="120.0" prefWidth="120.0" text="For Woman" />
-                                <JFXTreeTableColumn  fx:id="agentMinPrice" minWidth="110.0" prefWidth="110.0" text="Min Price" />
-                                <JFXTreeTableColumn  fx:id="agentMaxPrice" minWidth="110.0" prefWidth="110.0" text="Max Price" />
-                                <JFXTreeTableColumn  fx:id="agentDiff" minWidth="120.0" prefWidth="120.0" text="Min Dfference" />
-                                <JFXTreeTableColumn  fx:id="agentYear" minWidth="122.0" prefWidth="122.0" text="Model Year" />
+                                <TableColumn fx:id="checkBox" minWidth="30.0" prefWidth="20.0" />
+                                <TableColumn fx:id="agentName" minWidth="90.0" prefWidth="90.0" text="Name" />
+                                <TableColumn fx:id="agentCategory" minWidth="100.0" prefWidth="100.0" text="Category" />
+                                <TableColumn fx:id="agentSeries" minWidth="80.0" prefWidth="80" text="Series" />
+                                <TableColumn fx:id="agentSize" minWidth="60.0" prefWidth="60.0" text="Size" />
+                                <TableColumn fx:id="agentWmn" minWidth="120.0" prefWidth="120.0" text="For Woman" />
+                                <TableColumn fx:id="agentMinPrice" minWidth="110.0" prefWidth="110.0" text="Min Price" />
+                                <TableColumn fx:id="agentMaxPrice" minWidth="110.0" prefWidth="110.0" text="Max Price" />
+                                <TableColumn fx:id="agentDiff" minWidth="120.0" prefWidth="120.0" text="Min Dfference" />
+                                <TableColumn fx:id="agentYear" minWidth="122.0" prefWidth="122.0" text="Model Year" />
                             </columns>
-                        </JFXTreeTableView >                       
+                        </TableView>                       
                         <Label layoutX="24.0" layoutY="16.0" text="Agents">
                             <font>
                                 <Font size="20.0" />
