@@ -98,11 +98,8 @@ public class AgentsController implements Initializable {
 
                     }
                 });
-
                 return new SimpleObjectProperty<JFXCheckBox>(checkBox);
-
             }
-
         });
 
         agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);

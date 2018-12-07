@@ -30,55 +30,55 @@
             <children>
                 <AnchorPane id="newAgentIN" fx:id="newAgentIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
-                        <AnchorPane layoutX="20.0" layoutY="60.0" prefHeight="410.0" prefWidth="920.0" style="-fx-background-color: #FFFFFF;">
+                        <AnchorPane layoutX="20.0" layoutY="66.0" prefHeight="484.0" prefWidth="920.0" style="-fx-background-color: #FFFFFF;">
                             <children>
-                                <Label layoutX="386.0" layoutY="63.0" text="to:">
+                                <Label layoutX="420.0" layoutY="141.0" text="to:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="89.0" layoutY="170.0" text="Category:">
+                                <Label layoutX="50.0" layoutY="250.0" text="Category:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="454.0" layoutY="311.0" text="Series:">
+                                <Label layoutX="420.0" layoutY="392.0" text="Series:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="89.0" layoutY="242.0" text="Size:">
+                                <Label layoutX="50.0" layoutY="322.0" text="Size:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
                 
-                                <Label layoutX="89.0" layoutY="312.0" text="For woman:">
+                                <Label layoutX="50.0" layoutY="392.0" text="For woman:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="39.0" layoutY="63.0" text="Price from:">
+                                <Label layoutX="50.0" layoutY="141.0" text="Price from:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="454.0" layoutY="169.0" text="Min difference:">
+                                <Label layoutX="420.0" layoutY="250.0" text="Min difference:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="454.0" layoutY="241.0" text="Model Year:">
+                                <Label layoutX="420.0" layoutY="322.0" text="Model Year:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <JFXSlider fx:id="setMinPrice" blockIncrement="100.0" layoutX="132.0" layoutY="67.0" majorTickUnit="1000.0" max="4000.0" minorTickCount="1" prefHeight="18.0" prefWidth="226.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
-                                <JFXSlider fx:id="setMaxPrice" blockIncrement="100.0" layoutX="420.0" layoutY="67.0" majorTickUnit="2000.0" max="10000.0" prefHeight="18.0" prefWidth="426.0" showTickLabels="true" showTickMarks="true" value="5000.0" />
-                                <JFXSlider fx:id="setDiff" blockIncrement="100.0" layoutX="584.0" layoutY="173.0" majorTickUnit="500.0" max="2000.0" minorTickCount="1" prefHeight="18.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
-                                <JFXSlider fx:id="setYear" blockIncrement="1.0" layoutX="584.0" layoutY="245.0" majorTickUnit="6.0" max="2018.0" min="2000.0" minorTickCount="2" prefHeight="18.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="2009.0" />
-                                <JFXTextField fx:id="setSeries" layoutX="584.0" layoutY="308.0" prefWidth="262.0" />
-                                <JFXComboBox fx:id="setCategory" layoutX="219.0" layoutY="167.0" prefWidth="120.0">
+                                <JFXSlider fx:id="setMinPrice" blockIncrement="100.0" layoutX="140.0" layoutY="145.0" majorTickUnit="1000.0" max="4000.0" minorTickCount="1" prefHeight="18.0" prefWidth="226.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
+                                <JFXSlider fx:id="setMaxPrice" blockIncrement="100.0" layoutX="451.0" layoutY="145.0" majorTickUnit="2000.0" max="10000.0" prefHeight="18.0" prefWidth="410.0" showTickLabels="true" showTickMarks="true" value="5000.0" />
+                                <JFXSlider fx:id="setDiff" blockIncrement="100.0" layoutX="570.0" layoutY="254.0" majorTickUnit="500.0" max="2000.0" minorTickCount="1" prefHeight="18.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
+                                <JFXSlider fx:id="setYear" blockIncrement="1.0" layoutX="570.0" layoutY="326.0" majorTickUnit="6.0" max="2018.0" min="2000.0" minorTickCount="2" prefHeight="18.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" value="2009.0" />
+                                <JFXTextField fx:id="setSeries" layoutX="570.0" layoutY="389.0" prefWidth="290.0" />
+                                <JFXComboBox fx:id="setCategory" layoutX="166.0" layoutY="247.0" prefWidth="120.0">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">
                                             <String fx:value="MTB/GRAVITY" />
@@ -89,7 +89,7 @@
                                         </FXCollections>
                                     </items>
                                 </JFXComboBox>
-                                <JFXComboBox fx:id="setSize" layoutX="219.0" layoutY="238.0" prefWidth="120.0">
+                                <JFXComboBox fx:id="setSize" layoutX="166.0" layoutY="318.0" prefWidth="120.0">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">
                                             <String fx:value="2XS" />
@@ -102,7 +102,13 @@
                                         </FXCollections>
                                     </items>
                                 </JFXComboBox>
-                                <JFXCheckBox fx:id="setForWoman" layoutX="219.0" layoutY="314.0" />
+                                <JFXCheckBox fx:id="setForWoman" layoutX="166.0" layoutY="394.0" />
+                                <JFXTextField fx:id="nameAgent" layoutX="140.0" layoutY="32.0" prefHeight="30.0" prefWidth="226.0" />
+                                <Label layoutX="50.0" layoutY="35.0" text="Name:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
                             </children>
                         </AnchorPane>
                         <Label layoutX="24.0" layoutY="16.0" text="New Agent">
@@ -110,8 +116,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="createAgentButton" layoutX="190.0" layoutY="496.0" onAction="#addAgent" prefHeight="40.0" prefWidth="100.0" text="Create" />
-                        <JFXTextField fx:id="nameAgent" layoutX="134.0" layoutY="14.0" prefHeight="30.0" prefWidth="300.0" />
+                        <JFXButton fx:id="createAgentButton" layoutY="10.0" onAction="#addAgent" prefHeight="40.0" prefWidth="100.0" text="Create" AnchorPane.rightAnchor="24.0" />
                     </children>
                 </AnchorPane>  
             </children>

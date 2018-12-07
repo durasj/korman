@@ -104,10 +104,9 @@ public class NewAgentController {
             agentsDao.createAgent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year, name, timeStamp);
         } else {
             agentsDao.editAgent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year, name, timeStamp);
+            createAgentButton.setText("Create");
+            onEdit = false;
         }
-
-        createAgentButton.setText("Create");
-        onEdit = false;
 
         try {
             BorderPane windowResource = FXMLLoader.load(App.class.getResource("AgentsTable.fxml"));
@@ -152,6 +151,11 @@ public class NewAgentController {
             if (wm.equals("true")) {
                 setForWoman.setSelected(true);
             }
+        } else {
+            setCategory.getSelectionModel().select("MTB/GRAVITY");
+            setSize.getSelectionModel().select("M");
+            setForWoman.setSelected(false);
+
         }
     }
 
