@@ -44,11 +44,14 @@ public class MenuController {
             );
             scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
             primaryStage.setScene(scene);
-            ToggleButton activeButton = (ToggleButton) scene.lookup("#" + buttonId);
-            activeButton.setSelected(true);
+            setActive(buttonId, scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public static void setActive(String buttonId, Scene currentScene) {
+        ToggleButton activeButton = (ToggleButton) currentScene.lookup("#" + buttonId);
+        activeButton.setSelected(true);
+    }
 }

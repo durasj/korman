@@ -37,7 +37,7 @@
     -fx-background-color: #F7B538;
 }
 
-#DataTableCard, #settingsTable {
+#agentsTableIN, #bicyclesTable, #settingsTable {
     -fx-background-radius: 8;
 }
 

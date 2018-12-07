@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import me.duras.korman.controllers.MenuController;
 import javafx.scene.image.Image;
 
 public class App extends Application implements Initializable {
@@ -43,6 +44,7 @@ public class App extends Application implements Initializable {
             App.class.getResource("icon.png").toString()
         ));
         scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+        MenuController.setActive("DashboardButton", scene);
         primaryStage.show();
     }
 
