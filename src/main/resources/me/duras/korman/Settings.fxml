@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -37,10 +38,10 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="listUrl" layoutX="320.0" layoutY="137.0" prefWidth="500.0" text="https://www.canyon.com/en-sk/factory-outlet/ajax" />
-                        <TextField fx:id="viewUrl" layoutX="320.0" layoutY="197.0" prefWidth="500.0" text="https://www.canyon.com/en-sk/factory-outlet/category.html#category=fitness-bikes&amp;id=" />
-                        <TextField fx:id="refreshTime" layoutX="320.0" layoutY="257.0" prefWidth="120.0" text="5" />
-                        <Button fx:id="addSettings" layoutX="320.0" layoutY="380.0" mnemonicParsing="false" onAction="#addSettings" prefHeight="40.0" prefWidth="120.0" text="Save" />
+                        <JFXTextField fx:id="listUrl" layoutX="320.0" layoutY="137.0" prefWidth="500.0" />
+                        <JFXTextField fx:id="viewUrl" layoutX="320.0" layoutY="197.0" prefWidth="500.0" />
+                        <JFXTextField fx:id="refreshTime" layoutX="320.0" layoutY="257.0" prefWidth="120.0" />
+                        <JFXButton fx:id="addSettings" layoutX="320.0" layoutY="380.0" mnemonicParsing="false" onAction="#addSettings" prefHeight="40.0" prefWidth="120.0" text="Save" />
                     </children>
                 </AnchorPane>
             </children>

@@ -1,13 +1,15 @@
 package me.duras.korman.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -35,13 +37,19 @@ public class NewAgentController {
     AgentsDao agentsDao = new AgentsDao();
 
     @FXML
-    private TextField setMinPrice, setMaxPrice, setDiff, setYear, setSeries, nameAgent;
+    private JFXSlider setMinPrice, setMaxPrice, setDiff, setYear;
 
     @FXML
-    private ComboBox<String> setCategory, setSize, forWoman;
+    private JFXTextField setSeries, nameAgent;
 
     @FXML
-    private Button createAgentButton;
+    private JFXComboBox<String> setCategory, setSize;
+
+    @FXML
+    private JFXCheckBox setForWoman;
+
+    @FXML
+    private JFXButton createAgentButton;
 
     @FXML
     private AnchorPane newAgent;
@@ -56,33 +64,21 @@ public class NewAgentController {
             this.name = outputAgentName;
         }
 
-        String outputMinPrice = setMinPrice.getText();
-        if (outputMinPrice.equals("")) {
-            this.minPrice = 0;
+        int outputMinPrice = (int) setMinPrice.getValue();
+        this.minPrice = outputMinPrice;
+
+        int outputMaxPrice = (int) setMaxPrice.getValue();
+        if (outputMaxPrice == 0) {
+            this.maxPrice = 10000;
         } else {
-            this.minPrice = Integer.parseInt(outputMinPrice);
+            this.maxPrice = outputMaxPrice;
         }
 
-        String outputMaxPrice = setMaxPrice.getText();
-        if (outputMaxPrice.equals("")) {
-            this.maxPrice = Integer.MAX_VALUE;
-        } else {
-            this.maxPrice = Integer.parseInt(outputMaxPrice);
-        }
+        int outputSetDiff = (int) setDiff.getValue();
+        this.difference = outputSetDiff;
 
-        String outputSetDiff = setDiff.getText();
-        if (outputSetDiff.equals("")) {
-            this.difference = 0;
-        } else {
-            this.difference = Integer.parseInt(outputSetDiff);
-        }
-
-        String outputSetYear = setYear.getText();
-        if (outputSetYear.equals("")) {
-            this.year = 0;
-        } else {
-            this.year = Integer.parseInt(outputSetYear);
-        }
+        int outputSetYear = (int) setYear.getValue();
+        this.year = outputSetYear;
 
         String outputSetSeries = setSeries.getText();
         if (outputSetSeries.equals("")) {
@@ -92,13 +88,13 @@ public class NewAgentController {
         }
 
         String outputSetCategory = setCategory.getSelectionModel().getSelectedItem();
+        this.category = outputSetCategory;
 
         String outputSetSize = setSize.getSelectionModel().getSelectedItem();
         this.size = outputSetSize;
 
-        String outputForWoman = forWoman.getSelectionModel().getSelectedItem();
-        System.out.println(outputForWoman);
-        if (outputForWoman == null || outputForWoman.equals("No")) {
+        boolean outputSetForWoman = setForWoman.isSelected();
+        if (outputSetForWoman == false) {
             this.wmn = false;
         } else {
             this.wmn = true;
@@ -143,18 +139,19 @@ public class NewAgentController {
     private void initialize() {
         if (onEdit) {
             createAgentButton.setText("Edit");
-            System.out.println("Ahoj som zapnuty");
+            System.out.println("onEdit zapnuty");
 
-            System.out.println(minPrice);
             nameAgent.setText(nm);
-            setMinPrice.setText(min);
-            setMaxPrice.setText(max);
-            setDiff.setText(diff);
-            setYear.setText(yr);
+            setMinPrice.setValue(Double.parseDouble(min));
+            setMaxPrice.setValue(Double.parseDouble(max));
+            setDiff.setValue(Double.parseDouble(diff));
+            setYear.setValue(Double.parseDouble(yr));
             setSeries.setText(ser);
             setCategory.getSelectionModel().select(cat);
             setSize.getSelectionModel().select(sz);
-            forWoman.getSelectionModel().select(wm);
+            if (wm.equals("true")) {
+                setForWoman.setSelected(true);
+            }
         }
     }
 
@@ -187,43 +184,25 @@ public class NewAgentController {
     }
 
     public void setWm(String wm) {
-        if (wm.equals("false")) {
-            this.wm = "No";
-        } else {
-            this.wm = "Yes";
-        }
+        this.wm = wm;
+
     }
 
     public void setMin(String min) {
-        if (!min.equals("0")) {
-            this.min = min;
-        } else {
-            this.min = "";
-        }
+        this.min = min;
+
     }
 
     public void setMax(String max) {
-        if (!max.equals("2147483647")) {
-            this.max = max;
-        } else {
-            this.max = "";
-        }
+        this.max = max;
     }
 
     public void setDiff(String diff) {
-        if (!diff.equals("0")) {
-            this.diff = diff;
-        } else {
-            this.diff = "";
-        }
+        this.diff = diff;
     }
 
     public void setYr(String yr) {
-        if (!yr.equals("0")) {
-            this.yr = yr;
-        } else {
-            this.yr = "";
-        }
+        this.yr = yr;
     }
 
 }

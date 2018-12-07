@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -22,7 +23,7 @@
             <children>
                 <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
-                        <TableView fx:id="agentTablePagin" prefWidth="912.0" prefHeight="800.0" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
+                        <TableView fx:id="agentTablePagin" prefWidth="912.0" prefHeight="960.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
                             <columns>
                                 <TableColumn fx:id="agentName" minWidth="90.0" prefWidth="90.0" text="Name" />
                                 <TableColumn fx:id="agentCategory" minWidth="100.0" prefWidth="100.0" text="Category" />
@@ -40,9 +41,8 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Pagination fx:id="agentPagination" prefHeight="484.0" prefWidth="912.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
-                        <Button fx:id="newAgentButton" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" text="New Agent" AnchorPane.rightAnchor="24.0">
-                        </Button>
+                        <JFXButton fx:id="newAgentButton" layoutY="10.0" mnemonicParsing="false" onAction="#agentsButtonAction" prefHeight="40.0" prefWidth="120.0" text="New Agent" AnchorPane.rightAnchor="24.0">
+                        </JFXButton>
                     </children>
                 </AnchorPane>
             </children>

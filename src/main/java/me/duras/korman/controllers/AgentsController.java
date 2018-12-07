@@ -1,13 +1,12 @@
 package me.duras.korman.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.application.Application.launch;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import me.duras.korman.App;
 import me.duras.korman.models.*;
 
@@ -30,17 +28,9 @@ public class AgentsController implements Initializable {
     AgentsDao dao = new AgentsDao();
 
     int pocet = dao.getAllAgents().size();
-    int zvysok = pocet % rowsPerPage();
-    int mnozstvo = pocet / rowsPerPage();
 
     @FXML
-    private Pagination agentPagination;
-
-    @FXML
-    private Button newAgentButton;
-
-    @FXML
-    private AnchorPane agentsTable, agentsTableIn;
+    private JFXButton newAgentButton;
 
     @FXML
     private TableView<Agent> agentTablePagin;
@@ -53,7 +43,6 @@ public class AgentsController implements Initializable {
 
         if (event.getSource() == newAgentButton) {
             showWindow("newAgent.fxml");
-
         }
     }
 
@@ -97,15 +86,17 @@ public class AgentsController implements Initializable {
             }
 
             if (agenti.size() > 0) {
+                agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+                agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+                agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
+                agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
+                agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
+                agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
+                agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
+                agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
+                agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
 
-                agentPagination.setPageCount(mnozstvo);
-
-                agentPagination.setPageFactory(new Callback<Integer, Node>() {
-                    @Override
-                    public Node call(Integer pageIndex) {
-                        return createPage(pageIndex);
-                    }
-                });
+                agentTablePagin.setItems(agenti);
             }
         }
     }
@@ -141,38 +132,4 @@ public class AgentsController implements Initializable {
 
         }
     }
-
-    public int itemsPerPage() {
-        return 1;
-    }
-
-    public int rowsPerPage() {
-        return 2;
-    }
-
-    public VBox createPage(int pageIndex) {
-        VBox box = new VBox(5);
-
-        agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
-        agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
-        agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
-        agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
-        agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
-        agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
-        agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-
-        System.out.println("Prvykoniec: " + (pageIndex * rowsPerPage() + zvysok) + ", druhykoniec: " + (pageIndex * rowsPerPage() + rowsPerPage()));
-
-        if (zvysok > 0) {
-            agentTablePagin.setItems(FXCollections.observableArrayList(agenti.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + zvysok)));
-        } else {
-            agentTablePagin.setItems(FXCollections.observableArrayList(agenti.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
-        }
-        box.getChildren().add(agentTablePagin);
-
-        return box;
-    }
-
 }
