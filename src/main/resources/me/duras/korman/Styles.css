@@ -34,7 +34,11 @@
 
 .button:focused {
     -fx-text-fill:#FFFFFF;
-    -fx-background-color: #31263E;
+    -fx-background-color: #F7B538;
+}
+
+#DataTableCard, #settingsTable {
+    -fx-background-radius: 8;
 }
 
 .label{

@@ -108,26 +108,7 @@ public class NewAgentController {
             onEdit = false;
         }
 
-        try {
-            BorderPane windowResource = FXMLLoader.load(App.class.getResource("AgentsTable.fxml"));
-
-            Stage primaryStage = (Stage) createAgentButton.getScene().getWindow();
-
-            Scene scene = new Scene(windowResource, primaryStage.getWidth() - 18, primaryStage.getHeight() - 47);
-            primaryStage.setTitle("Korman Launcher");
-            primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1218);
-            primaryStage.setMinHeight(600);
-
-            primaryStage.getIcons().add(new Image(
-                    App.class.getResource("icon.png").toString()
-            ));
-            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MenuController.showWindow("AgentsTable.fxml", "AgentsButton", createAgentButton.getScene());
     }
 
     public void onEdit(boolean onEdit) {

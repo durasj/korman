@@ -17,25 +17,24 @@ public class MenuController {
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-
+        Scene currentScene = dashboardButton.getScene();
         if (event.getSource() == dashboardButton) {
-            this.showWindow("Dashboard.fxml", dashboardButton.getId());
+            MenuController.showWindow("Dashboard.fxml", dashboardButton.getId(), currentScene);
         } else if (event.getSource() == bicyclesButton) {
-            this.showWindow("BikeTable.fxml", bicyclesButton.getId());
+            MenuController.showWindow("BikeTable.fxml", bicyclesButton.getId(), currentScene);
         } else if (event.getSource() == notificationsButton) {
-            this.showWindow("Notifications.fxml", notificationsButton.getId());
+            MenuController.showWindow("Notifications.fxml", notificationsButton.getId(), currentScene);
         } else if (event.getSource() == agentsButton) {
-            this.showWindow("AgentsTable.fxml", agentsButton.getId());
+            MenuController.showWindow("AgentsTable.fxml", agentsButton.getId(), currentScene);
         } else if (event.getSource() == settingsButton) {
-            this.showWindow("Settings.fxml", settingsButton.getId());
+            MenuController.showWindow("Settings.fxml", settingsButton.getId(), currentScene);
         }
     }
 
-    private void showWindow(String windowFxml, String buttonId) {
+    public static void showWindow(String windowFxml, String buttonId, Scene currentScene) {
         try {
             BorderPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
 
-            Scene currentScene = dashboardButton.getScene();
             Stage primaryStage = (Stage) currentScene.getWindow();
 
             Scene scene = new Scene(
