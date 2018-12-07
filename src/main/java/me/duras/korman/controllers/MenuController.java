@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import me.duras.korman.App;
@@ -20,19 +19,19 @@ public class MenuController {
     private void handleButtonAction(ActionEvent event) {
 
         if (event.getSource() == dashboardButton) {
-            this.showWindow("Dashnoard.fxml");
+            this.showWindow("Dashboard.fxml", dashboardButton.getId());
         } else if (event.getSource() == bicyclesButton) {
-            this.showWindow("BikeTable.fxml");
+            this.showWindow("BikeTable.fxml", bicyclesButton.getId());
         } else if (event.getSource() == notificationsButton) {
-            this.showWindow("Notifications.fxml");
+            this.showWindow("Notifications.fxml", notificationsButton.getId());
         } else if (event.getSource() == agentsButton) {
-            this.showWindow("AgentsTable.fxml");
+            this.showWindow("AgentsTable.fxml", agentsButton.getId());
         } else if (event.getSource() == settingsButton) {
-            this.showWindow("Settings.fxml");
+            this.showWindow("Settings.fxml", settingsButton.getId());
         }
     }
 
-    private void showWindow(String windowFxml) {
+    private void showWindow(String windowFxml, String buttonId) {
         try {
             BorderPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
 
@@ -46,6 +45,8 @@ public class MenuController {
             );
             scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
             primaryStage.setScene(scene);
+            ToggleButton activeButton = (ToggleButton) scene.lookup("#" + buttonId);
+            activeButton.setSelected(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
