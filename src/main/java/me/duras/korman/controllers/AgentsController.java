@@ -1,17 +1,16 @@
 package me.duras.korman.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.*;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,13 +23,13 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import me.duras.korman.AgentsTreeObject;
+import javafx.util.Callback;
 import me.duras.korman.App;
 import me.duras.korman.models.*;
 
 public class AgentsController implements Initializable {
 
-    final private ObservableList<Agent> agenti = FXCollections.observableArrayList();
+    ObservableList<Agent> agenti = FXCollections.observableArrayList();
     AgentsDao dao = new AgentsDao();
 
     int pocet = dao.getAllAgents().size();
@@ -39,10 +38,13 @@ public class AgentsController implements Initializable {
     private JFXButton newAgentButton;
 
     @FXML
-    private JFXTreeTableView agentTablePagin;
+    private TableView<Agent> agentTablePagin;
 
     @FXML
-    private JFXTreeTableColumn<Agent, String> agentName, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
+    private TableColumn<Agent, String> agentName, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
+
+    @FXML
+    private TableColumn<Agent, JFXCheckBox> checkBox;
 
     @FXML
     private void agentsButtonAction(ActionEvent event) {
@@ -78,8 +80,30 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
-        /*RecursiveTreeObject<Agent> agentsTree = new AgentsTreeObject();
-        agentsTree.setChildren(agenti);*/
+        checkBox.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Agent, JFXCheckBox>, ObservableValue<JFXCheckBox>>() {
+
+            @Override
+            public ObservableValue<JFXCheckBox> call(
+                    TableColumn.CellDataFeatures<Agent, JFXCheckBox> arg0) {
+                Agent user = arg0.getValue();
+
+                JFXCheckBox checkBox = new JFXCheckBox();
+
+                // checkBox.selectedProperty().setValue(user.isSelected());
+                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    public void changed(ObservableValue<? extends Boolean> ov,
+                            Boolean old_val, Boolean new_val) {
+                        System.out.println(arg0.getValue().getName());
+                        //  user.setSelected(new_val);
+
+                    }
+                });
+
+                return new SimpleObjectProperty<JFXCheckBox>(checkBox);
+
+            }
+
+        });
 
         agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
