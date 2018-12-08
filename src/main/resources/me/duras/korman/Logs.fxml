@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.controllers.LogsController">
+    <left>
+        <fx:include source="Menu.fxml" />
+    </left>
+    <center>
+        <AnchorPane id="logsCard" fx:id="logsCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+            <children>
+                <AnchorPane id="logsCard" fx:id="logsCard" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
+                    <children>
+                        <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Logs">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                        <JFXButton fx:id="clearLogsButton" layoutY="10.0" mnemonicParsing="false" onAction="#onClearLogs" prefHeight="40.0" prefWidth="120.0" text="Clear" AnchorPane.rightAnchor="24.0" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
