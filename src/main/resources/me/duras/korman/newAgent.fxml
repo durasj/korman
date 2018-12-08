@@ -81,11 +81,11 @@
                                 <JFXComboBox fx:id="setCategory" layoutX="166.0" layoutY="247.0" prefWidth="120.0">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="MTB/GRAVITY" />
-                                            <String fx:value="ROAD" />
-                                            <String fx:value="TRIATHLON" />
-                                            <String fx:value="URBAN" />
-                                            <String fx:value="FITNESS" />
+                                            <String fx:value="MTB" />
+                                            <String fx:value="Road" />
+                                            <String fx:value="Triathlon" />
+                                            <String fx:value="Urban" />
+                                            <String fx:value="Fitness" />
                                         </FXCollections>
                                     </items>
                                 </JFXComboBox>

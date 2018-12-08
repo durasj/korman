@@ -1,6 +1,9 @@
 package me.duras.korman.controllers;
 
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,23 +34,29 @@ public class MenuController {
         }
     }
 
-    public static void showWindow(String windowFxml, String buttonId, Scene currentScene) {
+    public static FXMLLoader showWindow(String windowFxml, String buttonId, Scene currentScene) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(windowFxml));
+        BorderPane windowResource;
         try {
-            BorderPane windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
-
-            Stage primaryStage = (Stage) currentScene.getWindow();
-
-            Scene scene = new Scene(
-                windowResource,
-                currentScene.getWidth(),
-                currentScene.getHeight()
-            );
-            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
-            primaryStage.setScene(scene);
-            setActive(buttonId, scene);
+            windowResource = loader.load();
+            MenuController.loadWindow(windowFxml, buttonId, currentScene, windowResource);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return loader;
+    }
+
+    private static void loadWindow(String windowFxml, String buttonId, Scene currentScene, BorderPane windowResource) {
+        Stage primaryStage = (Stage) currentScene.getWindow();
+
+        Scene scene = new Scene(
+            windowResource,
+            currentScene.getWidth(),
+            currentScene.getHeight()
+        );
+        scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+        primaryStage.setScene(scene);
+        setActive(buttonId, scene);
     }
 
     public static void setActive(String buttonId, Scene currentScene) {

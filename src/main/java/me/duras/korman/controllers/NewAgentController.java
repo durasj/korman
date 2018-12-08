@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,26 +17,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import me.duras.korman.App;
+import me.duras.korman.DaoFactory;
+import me.duras.korman.dao.AgentDao;
 import me.duras.korman.models.*;
 
 public class NewAgentController {
 
-    private String category;
-    private String series;
-    private String size;
-    private int idAgenta;
-    private boolean wmn;
-    private int minPrice;
-    private int maxPrice;
-    private int difference;
-    private int year;
-    private String name;
-    private String timeStamp;
-    private static boolean onEdit;
+    private Agent agent = null;
 
-    private static String cat, ser, sz, wm, min, max, diff, yr, nm;
-
-    AgentsDao agentsDao = new AgentsDao();
+    AgentDao dao = DaoFactory.INSTANCE.getAgentDao();
 
     @FXML
     private JFXSlider setMinPrice, setMaxPrice, setDiff, setYear;
@@ -56,137 +47,110 @@ public class NewAgentController {
 
     @FXML
     private void addAgent(ActionEvent event) {
+        List<BicycleCategory> categories = DaoFactory.INSTANCE.getBicycleCategoryDao().getAll();
+        BicycleCategory mtbCategory = null;
+        BicycleCategory roadCategory = null;
+        BicycleCategory triathlonCategory = null;
+        BicycleCategory urbanCategory = null;
+        BicycleCategory fitnessCategory = null;
 
-        String outputAgentName = nameAgent.getText();
-        if (outputAgentName.equals("")) {
-            this.name = "default";
-        } else {
-            this.name = outputAgentName;
+        for (BicycleCategory category : categories) {
+            if (category.getName().equals("MTB")) {
+                mtbCategory = category;
+            }
+            if (category.getName().equals("Road")) {
+                roadCategory = category;
+            }
+            if (category.getName().equals("Triathlon")) {
+                triathlonCategory = category;
+            }
+            if (category.getName().equals("Urban")) {
+                urbanCategory = category;
+            }
+            if (category.getName().equals("Fitness")) {
+                fitnessCategory = category;
+            }
         }
 
-        int outputMinPrice = (int) setMinPrice.getValue();
-        this.minPrice = outputMinPrice;
-
-        int outputMaxPrice = (int) setMaxPrice.getValue();
-        if (outputMaxPrice == 0) {
-            this.maxPrice = 10000;
-        } else {
-            this.maxPrice = outputMaxPrice;
+        String name = nameAgent.getText();
+        if (name.equals("")) {
+            name = "Unnamed";
         }
 
-        int outputSetDiff = (int) setDiff.getValue();
-        this.difference = outputSetDiff;
+        int minPrice = (int) setMinPrice.getValue();
+        int maxPrice = (int) setMaxPrice.getValue();
+        int minDiff = (int) setDiff.getValue();
+        int modelYear = (int) setYear.getValue();
+        String series = setSeries.getText();
 
-        int outputSetYear = (int) setYear.getValue();
-        this.year = outputSetYear;
-
-        String outputSetSeries = setSeries.getText();
-        if (outputSetSeries.equals("")) {
-            series = null;
-        } else {
-            this.series = outputSetSeries;
+        BicycleCategory category = null;
+        String chosenCategoryName = setCategory.getSelectionModel().getSelectedItem();
+        if (chosenCategoryName.equals("MTB")) {
+            category = mtbCategory;
+        }
+        if (chosenCategoryName.equals("Road")) {
+            category = roadCategory;
+        }
+        if (chosenCategoryName.equals("Triathlon")) {
+            category = triathlonCategory;
+        }
+        if (chosenCategoryName.equals("Urban")) {
+            category = urbanCategory;
+        }
+        if (chosenCategoryName.equals("Fitness")) {
+            category = fitnessCategory;
         }
 
-        String outputSetCategory = setCategory.getSelectionModel().getSelectedItem();
-        this.category = outputSetCategory;
+        String size = setSize.getSelectionModel().getSelectedItem();
+        boolean forWmn = setForWoman.isSelected();
 
-        String outputSetSize = setSize.getSelectionModel().getSelectedItem();
-        this.size = outputSetSize;
-
-        boolean outputSetForWoman = setForWoman.isSelected();
-        if (outputSetForWoman == false) {
-            this.wmn = false;
+        Agent savedAgent = null;
+        if (this.agent != null) {
+            agent.setName(name);
+            agent.setMinPrice(minPrice);
+            agent.setMaxPrice(maxPrice);
+            agent.setMinDiff(minDiff);
+            agent.setModelYear(modelYear);
+            agent.setSeries(series);
+            agent.setCategory(category);
+            agent.setSize(size);
+            agent.setWmn(forWmn);
+            savedAgent = agent;
         } else {
-            this.wmn = true;
+            savedAgent = new Agent(name, "TODO", category, series, size, forWmn, minPrice, maxPrice, minDiff, modelYear);
         }
 
-        if (!onEdit) {
-            agentsDao.createAgent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year, name, timeStamp);
-        } else {
-            agentsDao.editAgent(category, series, size, idAgenta, wmn, minPrice, maxPrice, difference, year, name, timeStamp);
+        dao.save(savedAgent);
+        if (agent == null) {
             createAgentButton.setText("Create");
-            onEdit = false;
         }
 
         MenuController.showWindow("AgentsTable.fxml", "AgentsButton", createAgentButton.getScene());
     }
 
-    public void onEdit(boolean onEdit) {
-        this.onEdit = onEdit;
-    }
-
     @FXML
     private void initialize() {
-        if (onEdit) {
-            createAgentButton.setText("Save");
+        nameAgent.setText("Unnamed");
+        setCategory.getSelectionModel().select("MTB");
+        setSize.getSelectionModel().select("M");
+        setForWoman.setSelected(false);
+    }
 
-            nameAgent.setText(nm);
-            setMinPrice.setValue(Double.parseDouble(min));
-            setMaxPrice.setValue(Double.parseDouble(max));
-            setDiff.setValue(Double.parseDouble(diff));
-            setYear.setValue(Double.parseDouble(yr));
-            setSeries.setText(ser);
-            setCategory.getSelectionModel().select(cat);
-            setSize.getSelectionModel().select(sz);
-            if (wm.equals("true")) {
-                setForWoman.setSelected(true);
-            }
-        } else {
-            setCategory.getSelectionModel().select("MTB/GRAVITY");
-            setSize.getSelectionModel().select("M");
-            setForWoman.setSelected(false);
+    public void setAgent(Agent agent) {
+        this.agent = agent;
 
+        createAgentButton.setText("Save");
+
+        nameAgent.setText(String.valueOf(agent.getName()));
+        setMinPrice.setValue((double) (agent.getMinPrice()));
+        setMaxPrice.setValue((double) (agent.getMaxPrice()));
+        setDiff.setValue((double) (agent.getMinDiff()));
+        setYear.setValue((double) (agent.getModelYear()));
+        setSeries.setText(agent.getSeries());
+        setCategory.getSelectionModel().select(agent.getCategory().getName());
+        setSize.getSelectionModel().select(agent.getSize());
+        if (agent.getWmn()) {
+            setForWoman.setSelected(true);
         }
     }
-
-    public void setName(String nm) {
-        this.nm = nm;
-    }
-
-    public void setCat(String cat) {
-        if (!cat.equals("null")) {
-            this.cat = cat;
-        } else {
-            this.cat = "";
-        }
-    }
-
-    public void setSer(String ser) {
-        if (!ser.equals("null")) {
-            this.ser = ser;
-        } else {
-            this.ser = "";
-        }
-    }
-
-    public void setSz(String sz) {
-        if (!sz.equals("null")) {
-            this.sz = sz;
-        } else {
-            this.sz = "";
-        }
-    }
-
-    public void setWm(String wm) {
-        this.wm = wm;
-
-    }
-
-    public void setMin(String min) {
-        this.min = min;
-
-    }
-
-    public void setMax(String max) {
-        this.max = max;
-    }
-
-    public void setDiff(String diff) {
-        this.diff = diff;
-    }
-
-    public void setYr(String yr) {
-        this.yr = yr;
-    }
-
 }

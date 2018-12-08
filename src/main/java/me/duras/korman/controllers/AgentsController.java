@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,14 +26,14 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import me.duras.korman.App;
+import me.duras.korman.DaoFactory;
+import me.duras.korman.dao.AgentDao;
 import me.duras.korman.models.*;
 
 public class AgentsController implements Initializable {
 
-    ObservableList<Agent> agenti = FXCollections.observableArrayList();
-    AgentsDao dao = new AgentsDao();
-
-    int pocet = dao.getAllAgents().size();
+    ObservableList<Agent> agents = FXCollections.observableArrayList();
+    AgentDao dao = DaoFactory.INSTANCE.getAgentDao();
 
     @FXML
     private JFXButton newAgentButton;
@@ -85,13 +86,15 @@ public class AgentsController implements Initializable {
             onEdit();
         });
 
-        if (pocet > 0) {
-            agenti.clear();
-            for (Agent agent : dao.getAllAgents()) {
-                agenti.add(agent);
+        List<Agent> list = dao.getAll();
+
+        if (list.size() > 0) {
+            agents.clear();
+            for (Agent agent : list) {
+                agents.add(agent);
             }
 
-            if (agenti.size() > 0) {
+            if (agents.size() > 0) {
                 agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
                 agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
                 agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
@@ -99,10 +102,10 @@ public class AgentsController implements Initializable {
                 agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
                 agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
                 agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
-                agentDiff.setCellValueFactory(new PropertyValueFactory<>("difference"));
-                agentYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+                agentDiff.setCellValueFactory(new PropertyValueFactory<>("minDiff"));
+                agentYear.setCellValueFactory(new PropertyValueFactory<>("modelYear"));
 
-                agentTablePagin.setItems(agenti);
+                agentTablePagin.setItems(agents);
             }
         }
     }
@@ -112,30 +115,10 @@ public class AgentsController implements Initializable {
         if (agentTablePagin.getSelectionModel().getSelectedItem() != null) {
             Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
 
-            NewAgentController newAgentController = new NewAgentController();
-            newAgentController.onEdit(true);
+            NewAgentController controller = MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene())
+                .getController();
 
-            String name = String.valueOf(selectedAgent.getName());
-            String minPrice = String.valueOf(selectedAgent.getMinPrice());
-            String maxPrice = String.valueOf(selectedAgent.getMaxPrice());
-            String minDiff = String.valueOf(selectedAgent.getDifference());
-            String modelYear = String.valueOf(selectedAgent.getYear());
-            String series = String.valueOf(selectedAgent.getSeries());
-            String category = String.valueOf(selectedAgent.getCategory());
-            String size = String.valueOf(selectedAgent.getSize());
-            String forWomen = String.valueOf(selectedAgent.getWmn());
-
-            newAgentController.setName(name);
-            newAgentController.setSer(series);
-            newAgentController.setYr(modelYear);
-            newAgentController.setDiff(minDiff);
-            newAgentController.setMin(minPrice);
-            newAgentController.setMax(maxPrice);
-            newAgentController.setCat(category);
-            newAgentController.setSz(size);
-            newAgentController.setWm(forWomen);
-            MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene());
-
+            controller.setAgent(selectedAgent);
         }
     }
 }

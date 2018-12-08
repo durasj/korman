@@ -1,42 +1,81 @@
 package me.duras.korman.models;
 
+import java.util.Date;
+
 /**
  * Agent model
  */
 public class Agent {
 
-    private String category;
+    private int id;
+    private String name;
+    private String email;
+    private BicycleCategory category;
     private String series;
     private String size;
-    private int idAgenta;
     private boolean wmn;
+
+    /**
+     * Min price in cents
+     */
     private int minPrice;
+    /**
+     * Max price in cents
+     */
     private int maxPrice;
-    private int difference;
-    private int year;
-    private String name;
-    private String timeStamp;
+
+    /**
+     * Minimum price difference in cents
+     */
+    private int minDiff;
+
+    private int modelYear;
+
+    private Date lastCheck;
     private boolean active;
 
-    public Agent(String category, String series, String size, int idAgenta, boolean wmn, int minPrice, int maxPrice, int difference, int year, String name, String timeStamp) {
+    public Agent(String name, String email, BicycleCategory category, String series, String size, boolean wmn, int minPrice, int maxPrice, int minDiff, int modelYear) {
+        this.name = name;
+        this.email = email;
         this.category = category;
         this.series = series;
         this.size = size;
-        this.idAgenta = idAgenta;
         this.wmn = wmn;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
-        this.difference = difference;
-        this.year = year;
-        this.name = name;
-        this.timeStamp = timeStamp;
+        this.minDiff = minDiff;
+        this.modelYear = modelYear;
     }
 
-    public String getCategory() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public BicycleCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(BicycleCategory category) {
         this.category = category;
     }
 
@@ -54,14 +93,6 @@ public class Agent {
 
     public void setSize(String size) {
         this.size = size;
-    }
-
-    public int getIdAgenta() {
-        return idAgenta;
-    }
-
-    public void setIdAgenta(int idAgenta) {
-        this.idAgenta = idAgenta;
     }
 
     public boolean getWmn() {
@@ -88,36 +119,28 @@ public class Agent {
         this.maxPrice = maxPrice;
     }
 
-    public int getDifference() {
-        return difference;
+    public int getMinDiff() {
+        return minDiff;
     }
 
-    public void setDifference(int difference) {
-        this.difference = difference;
+    public void setMinDiff(int minDiff) {
+        this.minDiff = minDiff;
     }
 
-    public int getYear() {
-        return year;
+    public int getModelYear() {
+        return modelYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setModelYear(int modelYear) {
+        this.modelYear = modelYear;
     }
 
-    public String getName() {
-        return name;
+    public Date getLastCheck() {
+        return lastCheck;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setLastCheck(Date lastCheck) {
+        this.lastCheck = lastCheck;
     }
 
     public boolean getActive() {
