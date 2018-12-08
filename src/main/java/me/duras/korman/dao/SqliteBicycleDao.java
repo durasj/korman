@@ -15,10 +15,10 @@ import me.duras.korman.models.Bicycle;
 import me.duras.korman.models.BicycleCategory;
 
 public class SqliteBicycleDao implements BicycleDao {
-    private JdbcTemplate jdbcTemplate;
+    protected JdbcTemplate jdbcTemplate;
 
-    private String columns = "b.id, b.externalId, b.category, b.series, b.size, b.wmn, b.price, b.diff, b.modelYear, b.url, b.photoUrl, b.createdAt, b.importedAt, c.id AS categoryId, c.name AS categoryName, c.externalUrl AS categoryExternalUrl";
-    private RowMapper<Bicycle> mapper = new RowMapper<Bicycle>() {
+    final static String columns = "b.id, b.externalId, b.category, b.series, b.size, b.wmn, b.price, b.diff, b.modelYear, b.url, b.photoUrl, b.createdAt, b.importedAt, c.id AS categoryId, c.name AS categoryName, c.externalUrl AS categoryExternalUrl";
+    protected RowMapper<Bicycle> mapper = new RowMapper<Bicycle>() {
 
         @Override
         public Bicycle mapRow(ResultSet rs, int rowNum) throws SQLException {
