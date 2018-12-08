@@ -42,7 +42,7 @@
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="420.0" layoutY="392.0" text="Series:">
+                                <Label layoutX="420.0" layoutY="392.0" text="Series (optional):">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

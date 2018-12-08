@@ -134,7 +134,7 @@ public class AgentsController implements Initializable {
             newAgentController.setCat(category);
             newAgentController.setSz(size);
             newAgentController.setWm(forWomen);
-            MenuController.showWindow("newAgent.fxml", "agentsButton", newAgentButton.getScene());
+            MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene());
 
         }
     }

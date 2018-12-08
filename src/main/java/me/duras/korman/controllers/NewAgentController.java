@@ -118,8 +118,7 @@ public class NewAgentController {
     @FXML
     private void initialize() {
         if (onEdit) {
-            createAgentButton.setText("Edit");
-            System.out.println("onEdit zapnuty");
+            createAgentButton.setText("Save");
 
             nameAgent.setText(nm);
             setMinPrice.setValue(Double.parseDouble(min));
