@@ -143,7 +143,7 @@ public class BikeController implements Initializable {
         if (bikeTablePagin.getSelectionModel().getSelectedItem() != null) {
             Bicycle selectedBicycle = bikeTablePagin.getSelectionModel().getSelectedItem();
            
-            ShowBikeController controller = MenuController.showWindow("Bicycle.fxml", "bicyclesButton", fetchBicyclesButton.getScene())
+            ShowBikeController controller = MenuController.showWindow("Bicycle.fxml", "BicyclesButton", fetchBicyclesButton.getScene())
                     .getController();
 
             controller.setBicycle(selectedBicycle);

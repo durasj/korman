@@ -27,10 +27,11 @@ public class ShowBikeController implements Initializable {
 
     public void setBicycle(Bicycle bicycle) {
         this.bicycle = bicycle;
-        try {
-            Image image = new Image(new FileInputStream(bicycle.getPhotoUrl()));
-            bikePic.setImage(image);
-        } catch (FileNotFoundException e) {
+        if (bicycle.getPhotoUrl() != null) {
+            try {
+                Image image = new Image(new FileInputStream(bicycle.getPhotoUrl()));
+                bikePic.setImage(image);
+            } catch (FileNotFoundException e) {}
         }
         category.setText(bicycle.getSeries());
         series.setText(bicycle.getSeries());
