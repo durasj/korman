@@ -1,8 +1,6 @@
 package me.duras.korman.controllers;
 
 import java.io.IOException;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +8,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
 import me.duras.korman.App;
 
 public class MenuController {
 
     @FXML
     private ToggleButton dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
+
+    @FXML
+    private ImageView dashboardButtonIcon, bicyclesButtonIcon, notificationsButtonIcon, agentsButtonIcon, settingsButtonIcon;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {

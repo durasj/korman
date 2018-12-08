@@ -27,8 +27,8 @@
                             <columns>
                                 <TableColumn fx:id="checkBox" minWidth="26.0" prefWidth="26.0" />
                                 <TableColumn fx:id="agentName" minWidth="90.0" prefWidth="90.0" text="Name" />
+                                <TableColumn fx:id="agentEmail" minWidth="80.0" prefWidth="80" text="Email" />
                                 <TableColumn fx:id="agentCategory" minWidth="90.0" prefWidth="90.0" text="Category" />
-                                <TableColumn fx:id="agentSeries" minWidth="80.0" prefWidth="80" text="Series" />
                                 <TableColumn fx:id="agentSize" minWidth="60.0" prefWidth="60.0" text="Size" />
                                 <TableColumn fx:id="agentWmn" minWidth="110.0" prefWidth="90.0" text="For Woman" />
                                 <TableColumn fx:id="agentMinPrice" minWidth="110.0" prefWidth="110.0" text="Min Price" />

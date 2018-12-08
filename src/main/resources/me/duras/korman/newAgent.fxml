@@ -32,6 +32,21 @@
                     <children>
                         <AnchorPane layoutX="20.0" layoutY="66.0" prefHeight="484.0" prefWidth="920.0" style="-fx-background-color: #FFFFFF;">
                             <children>
+                                <Label layoutX="50.0" layoutY="35.0" text="Name:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="420.0" layoutY="35.0" text="Email:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="420.0" layoutY="72.0" text="Notifications will be sent to this email">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Label>
                                 <Label layoutX="420.0" layoutY="141.0" text="to:">
                                     <font>
                                         <Font size="16.0" />
@@ -68,11 +83,18 @@
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
+                                <Label layoutX="420.0" layoutY="272.0" text="Discount compared to new">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Label>
                                 <Label layoutX="420.0" layoutY="322.0" text="Model Year:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
+                                <JFXTextField fx:id="nameAgent" layoutX="140.0" layoutY="32.0" prefHeight="30.0" prefWidth="226.0" />
+                                <JFXTextField fx:id="email" layoutX="500.0" layoutY="32.0" prefHeight="30.0" prefWidth="226.0" />
                                 <JFXSlider fx:id="setMinPrice" blockIncrement="100.0" layoutX="140.0" layoutY="145.0" majorTickUnit="1000.0" max="4000.0" minorTickCount="1" prefHeight="18.0" prefWidth="226.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
                                 <JFXSlider fx:id="setMaxPrice" blockIncrement="100.0" layoutX="451.0" layoutY="145.0" majorTickUnit="2000.0" max="10000.0" prefHeight="18.0" prefWidth="410.0" showTickLabels="true" showTickMarks="true" value="5000.0" />
                                 <JFXSlider fx:id="setDiff" blockIncrement="100.0" layoutX="570.0" layoutY="254.0" majorTickUnit="500.0" max="2000.0" minorTickCount="1" prefHeight="18.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" value="-1.0" />
@@ -103,12 +125,6 @@
                                     </items>
                                 </JFXComboBox>
                                 <JFXCheckBox fx:id="setForWoman" layoutX="166.0" layoutY="394.0" />
-                                <JFXTextField fx:id="nameAgent" layoutX="140.0" layoutY="32.0" prefHeight="30.0" prefWidth="226.0" />
-                                <Label layoutX="50.0" layoutY="35.0" text="Name:">
-                                    <font>
-                                        <Font size="16.0" />
-                                    </font>
-                                </Label>
                             </children>
                         </AnchorPane>
                         <Label layoutX="24.0" layoutY="16.0" text="New Agent">

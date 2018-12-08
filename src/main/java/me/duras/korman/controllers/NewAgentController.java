@@ -31,7 +31,7 @@ public class NewAgentController {
     private JFXSlider setMinPrice, setMaxPrice, setDiff, setYear;
 
     @FXML
-    private JFXTextField setSeries, nameAgent;
+    private JFXTextField setSeries, nameAgent, email;
 
     @FXML
     private JFXComboBox<String> setCategory, setSize;
@@ -77,6 +77,8 @@ public class NewAgentController {
             name = "Unnamed";
         }
 
+        String agentEmail = email.getText();
+
         int minPrice = (int) setMinPrice.getValue();
         int maxPrice = (int) setMaxPrice.getValue();
         int minDiff = (int) setDiff.getValue();
@@ -107,6 +109,7 @@ public class NewAgentController {
         Agent savedAgent = null;
         if (this.agent != null) {
             agent.setName(name);
+            agent.setEmail(agentEmail);
             agent.setMinPrice(minPrice);
             agent.setMaxPrice(maxPrice);
             agent.setMinDiff(minDiff);
@@ -117,7 +120,7 @@ public class NewAgentController {
             agent.setWmn(forWmn);
             savedAgent = agent;
         } else {
-            savedAgent = new Agent(name, "TODO", category, series, size, forWmn, minPrice, maxPrice, minDiff, modelYear);
+            savedAgent = new Agent(name, agentEmail, category, series, size, forWmn, minPrice, maxPrice, minDiff, modelYear);
         }
 
         dao.save(savedAgent);
@@ -141,7 +144,8 @@ public class NewAgentController {
 
         createAgentButton.setText("Save");
 
-        nameAgent.setText(String.valueOf(agent.getName()));
+        nameAgent.setText(agent.getName());
+        email.setText(agent.getEmail());
         setMinPrice.setValue((double) (agent.getMinPrice()));
         setMaxPrice.setValue((double) (agent.getMaxPrice()));
         setDiff.setValue((double) (agent.getMinDiff()));

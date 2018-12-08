@@ -3,32 +3,23 @@ package me.duras.korman.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.*;
 import javafx.fxml.Initializable;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.util.Callback;
-import me.duras.korman.App;
 import me.duras.korman.DaoFactory;
 import me.duras.korman.dao.AgentDao;
 import me.duras.korman.models.*;
@@ -46,7 +37,7 @@ public class AgentsController implements Initializable {
     private TableView<Agent> agentTablePagin;
 
     @FXML
-    private TableColumn<Agent, String> agentName, agentCategory, agentSeries, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
+    private TableColumn<Agent, String> agentName, agentCategory, agentEmail, agentSize, agentWmn, agentMinPrice, agentMaxPrice, agentDiff, agentYear;
 
     @FXML
     private TableColumn<Agent, JFXCheckBox> checkBox;
@@ -94,8 +85,34 @@ public class AgentsController implements Initializable {
             }
         });
 
-        agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        agentCategory.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Agent, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Agent, String> arg0) {
+                Agent agent = arg0.getValue();
 
+                return new SimpleStringProperty(agent.getCategory().getName());
+            }
+        });
+
+        agentWmn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Agent, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Agent, String> arg0) {
+                Agent agent = arg0.getValue();
+
+                return new SimpleStringProperty(agent.getWmn() ? "Yes" : "No");
+            }
+        });
+
+        agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        agentEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
+        agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
+        agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
+        agentDiff.setCellValueFactory(new PropertyValueFactory<>("minDiff"));
+        agentYear.setCellValueFactory(new PropertyValueFactory<>("modelYear"));
+
+        agentTablePagin.setItems(agents);
+        agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         agentTablePagin.setOnMouseClicked((MouseEvent event) -> {
             onEdit();
         });
@@ -128,24 +145,8 @@ public class AgentsController implements Initializable {
         agents.clear();
         List<Agent> list = dao.getAll();
 
-        if (list.size() > 0) {
-            for (Agent agent : list) {
-                agents.add(agent);
-            }
-
-            if (agents.size() > 0) {
-                agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
-                agentCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-                agentSeries.setCellValueFactory(new PropertyValueFactory<>("series"));
-                agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
-                agentWmn.setCellValueFactory(new PropertyValueFactory<>("wmn"));
-                agentMinPrice.setCellValueFactory(new PropertyValueFactory<>("minPrice"));
-                agentMaxPrice.setCellValueFactory(new PropertyValueFactory<>("maxPrice"));
-                agentDiff.setCellValueFactory(new PropertyValueFactory<>("minDiff"));
-                agentYear.setCellValueFactory(new PropertyValueFactory<>("modelYear"));
-
-                agentTablePagin.setItems(agents);
-            }
+        for (Agent agent : list) {
+            agents.add(agent);
         }
     }
 }

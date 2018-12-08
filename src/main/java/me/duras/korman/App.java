@@ -37,7 +37,7 @@ public class App extends Application implements Initializable {
         DaoFactory.INSTANCE.setJdbcTemplate(this.db.getTemplate());
 
         Scene scene = new Scene(rootPane);
-        primaryStage.setTitle("Korman Launcher");
+        primaryStage.setTitle("Korman");
         primaryStage.setScene(scene);
 
         primaryStage.getIcons().add(new Image(
