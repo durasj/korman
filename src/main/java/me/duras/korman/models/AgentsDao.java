@@ -38,11 +38,16 @@ public class AgentsDao {
     }
 
     // Delete Agent from the DB
-    public void deleteAgent() {
-
+    public void deleteAgent(int delete) {
+        for (Agent agent : list) {
+            if (agent.getIdAgenta() == delete) {
+                list.remove(agent);
+                System.out.println("Vymazal som");
+            }
+        }
     }
-
     // Get all Agents from the DB
+
     public List<Agent> getAllAgents() {
         return list;
     }

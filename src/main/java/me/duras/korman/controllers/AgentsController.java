@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +31,14 @@ import me.duras.korman.models.*;
 
 public class AgentsController implements Initializable {
 
-    ObservableList<Agent> agenti = FXCollections.observableArrayList();
+    private ObservableList<Agent> agenti = FXCollections.observableArrayList();
+    private List<Integer> checkBoxZoznam = new ArrayList<Integer>();
     AgentsDao dao = new AgentsDao();
 
-    int pocet = dao.getAllAgents().size();
+    private int pocet = dao.getAllAgents().size();
 
     @FXML
-    private JFXButton newAgentButton;
+    private JFXButton newAgentButton, delete;
 
     @FXML
     private TableView<Agent> agentTablePagin;
@@ -80,6 +83,11 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
+        if (checkBoxZoznam.size() > 0) {
+            delete.setDisable(false);
+        } else {
+            delete.setDisable(true);
+        }
         checkBox.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Agent, JFXCheckBox>, ObservableValue<JFXCheckBox>>() {
 
             @Override
@@ -89,12 +97,24 @@ public class AgentsController implements Initializable {
 
                 JFXCheckBox checkBox = new JFXCheckBox();
 
-                // checkBox.selectedProperty().setValue(user.isSelected());
+                /* for (int i = 0; i < checkBoxZoznam.size(); i++) {
+                    if (checkBoxZoznam.get(i).equals(pocet));
+                }*/
                 checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     public void changed(ObservableValue<? extends Boolean> ov,
                             Boolean old_val, Boolean new_val) {
-                        System.out.println(arg0.getValue().getName());
-                        //  user.setSelected(new_val);
+                        //user.setSelected(new_val);
+                        if (checkBox.isSelected()) {
+                            checkBoxZoznam.add(user.getIdAgenta());
+                            delete.setDisable(false);
+                            System.out.println("klik " + checkBoxZoznam.size());
+                        } else {
+                            checkBoxZoznam.remove(user.getIdAgenta());
+                            if (checkBoxZoznam.size() == 0) {
+                                delete.setDisable(true);
+                            }
+                            System.out.println("pokliku  " + checkBoxZoznam.size());
+                        }
 
                     }
                 });
@@ -164,5 +184,33 @@ public class AgentsController implements Initializable {
 
     @FXML
     public void deleteAgent(ActionEvent event) {
+        for (int i = 0; i < checkBoxZoznam.size(); i++) {
+            System.out.println("agenti size: " + agenti.size());
+            System.out.println("checkbox size: " + checkBoxZoznam.size());
+            agenti.remove(agenti.get(i).getName());
+            System.out.println(agenti.get(i).getName());
+            dao.deleteAgent(checkBoxZoznam.get(i));
+        }
+        /* BorderPane windowResource;
+        try {
+            windowResource = FXMLLoader.load(App.class.getResource("AgentsTable.fxml"));
+
+            Stage primaryStage = (Stage) newAgentButton.getScene().getWindow();
+
+            Scene scene = new Scene(windowResource, primaryStage.getWidth() - 18, primaryStage.getHeight() - 47);
+            primaryStage.setTitle("Korman");
+            primaryStage.setScene(scene);
+            primaryStage.setMinWidth(1218);
+            primaryStage.setMinHeight(600);
+
+            primaryStage.getIcons().add(new Image(
+                    App.class.getResource("icon.png").toString()
+            ));
+            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AgentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
     }
 }
