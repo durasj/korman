@@ -1,7 +1,7 @@
 package me.duras.korman.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
@@ -34,7 +34,10 @@ public class BikeController implements Initializable {
     private Label label1;
 
     @FXML
-    private Button fetchBicyclesButton;
+    private JFXButton fetchBicyclesButton;
+
+    @FXML
+    private TableView agentTablePagin;
 
     private int current = 1;
 
@@ -104,8 +107,13 @@ public class BikeController implements Initializable {
         this.refresh_Time = refresh_Time;
     }
 
+    @FXML
+    public void searchBicykle() {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 }
