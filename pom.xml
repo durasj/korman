@@ -62,7 +62,11 @@
       <artifactId>jsoup</artifactId>
       <version>1.11.3</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.simplejavamail</groupId>
+      <artifactId>simple-java-mail</artifactId>
+      <version>5.1.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -86,6 +90,29 @@
         </configuration>
       </plugin>
       <plugin>
+        <!-- Build an executable JAR -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>me.duras.korman.App</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>com.akathist.maven.plugins.launch4j</groupId>
         <artifactId>launch4j-maven-plugin</artifactId>
         <version>1.7.24</version>
@@ -106,6 +133,7 @@
               </classPath>
               <jre>
                 <minVersion>1.8.0_102</minVersion>
+                <maxVersion>1.8.0_999</maxVersion>
                 <initialHeapSize>512</initialHeapSize>
                 <maxHeapSize>1024</maxHeapSize>
               </jre>
@@ -126,29 +154,6 @@
                 <jreVersionErr>Unsupported Java Runtime version. Latest Java 1.8 needed.</jreVersionErr>
                 <launcherErr>This application couldn't start.</launcherErr>
               </messages>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <!-- Build an executable JAR -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>me.duras.korman.App</mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
             </configuration>
           </execution>
         </executions>
