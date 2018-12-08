@@ -23,7 +23,6 @@
             <children>
                 <AnchorPane id="bicyclesTable" fx:id="bicyclesTable" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
                     <children>
-                        <Pagination fx:id="bikePagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
                         <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Bicycles">
                             <font>
                                 <Font size="20.0" />
@@ -31,15 +30,16 @@
                         </Label>
                         <JFXTextField fx:id="searchBike" layoutY="16.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.rightAnchor="166.0" />
                         <JFXButton fx:id="fetchBicyclesButton" layoutY="10.0" mnemonicParsing="false" onAction="#fetchBicycles" prefHeight="40.0" prefWidth="120.0" text="Refresh" AnchorPane.rightAnchor="24.0" />
-                        <TableView fx:id="agentTablePagin" layoutX="10.0" layoutY="10.0" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
+                        <Pagination fx:id="bikePagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
+                        <TableView fx:id="bikeTablePagin" layoutX="10.0" layoutY="10.0" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
                             <columns>
-                                <TableColumn fx:id="agentCategory" minWidth="130.0" prefWidth="130.0" text="Category" />
-                                <TableColumn fx:id="agentSeries" minWidth="130.0" prefWidth="130.0" text="Series" />
-                                <TableColumn fx:id="agentSize" minWidth="130.0" prefWidth="130.0" text="Size" />
-                                <TableColumn fx:id="agentWmn" minWidth="130.0" prefWidth="130.0" text="For Woman" />
+                                <TableColumn fx:id="bikeCategory" minWidth="130.0" prefWidth="130.0" text="Category" />
+                                <TableColumn fx:id="bikeSeries" minWidth="130.0" prefWidth="130.0" text="Series" />
+                                <TableColumn fx:id="bikeSize" minWidth="130.0" prefWidth="130.0" text="Size" />
+                                <TableColumn fx:id="bikeWmn" minWidth="130.0" prefWidth="130.0" text="For Woman" />
                                 <TableColumn fx:id="bikePrice" minWidth="130.0" prefWidth="130.0" text="Price" />
                                 <TableColumn fx:id="bikeDiff" minWidth="130.0" prefWidth="130.0" text="Dfference" />
-                                <TableColumn fx:id="agentYear" minWidth="130.0" prefWidth="30.0" text="Model Year" />
+                                <TableColumn fx:id="bikeYear" minWidth="130.0" prefWidth="30.0" text="Model Year" />
                             </columns>
                         </TableView>
                     </children>

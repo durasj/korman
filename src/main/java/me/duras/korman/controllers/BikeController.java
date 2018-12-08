@@ -12,12 +12,21 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+import javafx.stage.Stage;
 
 import me.duras.korman.*;
+import me.duras.korman.dao.AgentDao;
 import me.duras.korman.dao.BicycleDao;
+import me.duras.korman.models.Agent;
 import me.duras.korman.models.Bicycle;
 import me.duras.korman.models.BicycleCategory;
 
@@ -26,9 +35,13 @@ import me.duras.korman.models.BicycleCategory;
  */
 public class BikeController implements Initializable {
 
+    private ObservableList<Bicycle> bicycles = FXCollections.observableArrayList();
+    private BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
+
     private String list_Url;
     private String view_Url;
     private int refresh_Time;
+    private int vyskaOkna;
 
     @FXML
     private Label label1;
@@ -37,7 +50,13 @@ public class BikeController implements Initializable {
     private JFXButton fetchBicyclesButton;
 
     @FXML
-    private TableView agentTablePagin;
+    private TableView bikeTablePagin;
+
+    @FXML
+    private TableColumn bikeCategory, bikeSeries, bikeSize, bikeWmn, bikePrice, bikeDiff, bikeYear;
+
+    @FXML
+    private Pagination bikePagin;
 
     private int current = 1;
 
@@ -63,7 +82,7 @@ public class BikeController implements Initializable {
             Supplier<List<Bicycle>> fetch = () -> {
                 Fetching fetching = new Fetching(
                         // TODO Implement dynamic loading of the URL and cssSelector
-                        list_Url + category.getExternalUrl()
+                        "https://www.canyon.com/en-sk/factory-outlet/ajax" + category.getExternalUrl()
                 );
 
                 List<Bicycle> list = new ArrayList<Bicycle>();
@@ -71,7 +90,7 @@ public class BikeController implements Initializable {
                     // TODO: Fix detail URL
                     list.addAll(
                             fetching.fetchItems("div article", Bicycle.fetchMap,
-                                    view_Url)
+                                    "https://www.canyon.com/en-sk/factory-outlet/category.html#category=fitness-bikes&amp;id=")
                                     .stream().map((Bicycle b) -> {
                                         b.setCategory(category);
                                         return b;
@@ -114,6 +133,84 @@ public class BikeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        bikeTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        // System.out.println(bikeTablePagin.getScene().getHeight());
+        loadList();
+
+        bikePagin.setPageCount(bicycles.size() / rowsPerPage() + 1);
+        bikePagin.setPageFactory(new Callback<Integer, Node>() {
+            @Override
+            public Node call(Integer pageIndex) {
+                if (pageIndex > bicycles.size() / rowsPerPage() + 1) {
+                    return null;
+                } else {
+                    return createPage(pageIndex);
+                }
+            }
+        });
+    }
+
+    private void loadList() {
+        bicycles.clear();
+        List<Bicycle> list = dao.getAll();
+
+        for (Bicycle bike : list) {
+            bicycles.add(bike);
+        }
+    }
+
+    public int itemsPerPage() {
+        return 1;
+    }
+
+    public int rowsPerPage() {
+
+        return 6;
+    }
+
+    public VBox createPage(int pageIndex) {
+        int lastIndex = 0;
+        int displace = bicycles.size() % rowsPerPage();
+        if (displace > 0) {
+            lastIndex = bicycles.size() / rowsPerPage();
+        } else {
+            lastIndex = bicycles.size() / rowsPerPage() - 1;
+        }
+
+        VBox box = new VBox(5);
+        int page = pageIndex * itemsPerPage();
+
+        for (int i = page; i < page + itemsPerPage(); i++) {
+
+            bikeCategory.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("category"));
+
+            bikeSeries.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("series"));
+
+            bikeSize.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("size"));
+
+            bikeWmn.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("wmn"));
+
+            bikePrice.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("price"));
+
+            bikeDiff.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("diff"));
+
+            bikeYear.setCellValueFactory(
+                    new PropertyValueFactory<Bicycle, String>("modelYear"));
+
+            if (lastIndex == pageIndex) {
+                bikeTablePagin.setItems(FXCollections.observableArrayList(bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + displace)));
+            } else {
+                bikeTablePagin.setItems(FXCollections.observableArrayList(bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
+            }
+            box.getChildren().add(bikeTablePagin);
+        }
+        return box;
     }
 }

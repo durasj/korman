@@ -150,3 +150,11 @@
     -fx-fill: white;
     -fx-stroke: white;
 }
+
+#delete{
+    -fx-background-color: #E03616;
+}
+
+#delete:hoover{
+    -fx-background-color: #d13415;
+}
