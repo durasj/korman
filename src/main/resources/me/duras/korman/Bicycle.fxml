@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.duras.korman.controllers.ShowBikeController">
+    <left> 
+        <fx:include source="Menu.fxml" />
+    </left>
+    <center>
+        <AnchorPane id="bicycle" fx:id="bicyclePane" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #F6F7FB;">
+            <children>
+                <AnchorPane id="bicycleView" fx:id="bicycleView" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
+                    <children>
+                        <Label layoutX="24.0" layoutY="16.0" text="Bicycle">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <JFXButton fx:id="closeBike" layoutY="10.0" prefHeight="40.0" prefWidth="120.0" text="Close" AnchorPane.rightAnchor="24.0" />
+                  <ImageView fx:id="bikePic" fitHeight="375.0" fitWidth="600.0" layoutX="51.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="700.0" layoutY="120.0" text="Category:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="700.0" layoutY="170.0" text="Series:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="700.0" layoutY="220.0" text="Size:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="700.0" layoutY="270.0" text="For women:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="700.0" layoutY="320.0" text="Price:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="700.0" layoutY="370.0" text="Difference:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="700.0" layoutY="420.0" text="Model year:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="category" layoutX="820.0" layoutY="120.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="series" layoutX="820.0" layoutY="170.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="size" layoutX="820.0" layoutY="220.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="wmn" layoutX="820.0" layoutY="270.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price" layoutX="820.0" layoutY="320.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="difference" layoutX="820.0" layoutY="370.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="year" layoutX="820.0" layoutY="420.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                    </children>
+                </AnchorPane>  
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
