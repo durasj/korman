@@ -8,6 +8,10 @@
 
 Currently implemented for the [Canyon Factory Outlet](https://www.canyon.com/en-sk/factory-outlet/).
 
+# Development
+
+This project is using Maven. There is CI building .exe of the application. To manually package the app, run `mvn clean package`.
+
 # Credits
 
 - [SQLite JDBC Driver](https://github.com/xerial/sqlite-jdbc) by [Taro L. Saito](http://www.xerial.org/leo) licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
