@@ -81,6 +81,10 @@
     -fx-alignment: TOP-RIGHT;
 }
 
+#agentYear{
+    -fx-padding: 16 24 16 8;
+}
+
 .table-view .column-header{
     -fx-background-color: #FFFFFF;
     -fx-border-color:#E0E0E0;
@@ -108,7 +112,17 @@
 }
 
 #checkBox {
-    -fx-alignment: TOP-CENTER;
+    -fx-padding: 16 0 16 12;
+}
+
+.jfx-check-box {
+    -jfx-checked-color: #F7B538;
+    -jfx-unchecked-color: black;
+}
+
+/* Styling checkmark */
+.jfx-check-box .mark{
+    -fx-border-color: white;
 }
 
 /* Styling the slider track */
