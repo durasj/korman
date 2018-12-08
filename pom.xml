@@ -99,7 +99,7 @@
             <configuration>
               <headerType>gui</headerType>
               <outfile>target/Korman.exe</outfile>
-              <jar>target/${project.artifactId}-${project.version}.jar</jar>
+              <jar>target/${project.artifactId}-${project.version}-jar-with-dependencies.jar</jar>
               <dontWrapJar>false</dontWrapJar>
               <classPath>
                 <mainClass>me.duras.korman.App</mainClass>
@@ -133,17 +133,25 @@
       <plugin>
         <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>${project.groupId}.${project.artifactId}.App</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>me.duras.korman.App</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
