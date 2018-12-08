@@ -19,11 +19,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import me.duras.korman.*;
 import me.duras.korman.dao.BicycleDao;
+import me.duras.korman.models.Agent;
 import me.duras.korman.models.Bicycle;
 import me.duras.korman.models.BicycleCategory;
 
@@ -42,7 +44,7 @@ public class BikeController implements Initializable {
     private JFXButton fetchBicyclesButton;
 
     @FXML
-    private TableView bikeTablePagin;
+    private TableView<Bicycle> bikeTablePagin;
 
     @FXML
     private TableColumn bikeCategory, bikeSeries, bikeSize, bikeWmn, bikePrice, bikeDiff, bikeYear;
@@ -79,6 +81,10 @@ public class BikeController implements Initializable {
                     return createPage(pageIndex);
                 }
             }
+        });
+
+        bikeTablePagin.setOnMouseClicked((MouseEvent event) -> {
+            showBike();
         });
     }
 
@@ -131,5 +137,16 @@ public class BikeController implements Initializable {
             box.getChildren().add(bikeTablePagin);
         }
         return box;
+    }
+
+    public void showBike() {
+        if (bikeTablePagin.getSelectionModel().getSelectedItem() != null) {
+            Bicycle selectedBicycle = bikeTablePagin.getSelectionModel().getSelectedItem();
+           
+            ShowBikeController controller = MenuController.showWindow("Bicycle.fxml", "bicyclesButton", fetchBicyclesButton.getScene())
+                    .getController();
+
+            controller.setBicycle(selectedBicycle);
+        }
     }
 }

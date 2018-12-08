@@ -57,6 +57,7 @@
     -fx-text-fill:#FFFFFF;
     -fx-font-size:16; 
     -fx-padding: 5 0 5 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 15, 0, 0, 5);
 }
 
 .jfx-button:hover{     
@@ -155,6 +156,13 @@
     -fx-background-color: #E03616;
 }
 
-#delete:hoover{
+#delete:hover{
     -fx-background-color: #d13415;
+}
+
+.text-input {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
 }
