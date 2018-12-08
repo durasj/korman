@@ -12,4 +12,6 @@ public interface AgentDao {
     Agent save(Agent agent);
 
     int delete(Agent agent);
+
+    int delete(int id);
 }

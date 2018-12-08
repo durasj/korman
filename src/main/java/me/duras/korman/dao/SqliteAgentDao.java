@@ -36,7 +36,7 @@ public class SqliteAgentDao implements AgentDao {
         }
 
     };
-
+ 
     public SqliteAgentDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -122,7 +122,12 @@ public class SqliteAgentDao implements AgentDao {
 
     @Override
     public int delete(Agent agent) {
+        return delete(agent.getId());
+    }
+
+    @Override
+    public int delete(int id) {
         String sql = "DELETE FROM agent WHERE id = ?";
-        return jdbcTemplate.update(sql, agent.getId());
+        return jdbcTemplate.update(sql, id);
     }
 }

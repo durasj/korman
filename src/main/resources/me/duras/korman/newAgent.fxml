@@ -116,7 +116,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="createAgentButton" layoutY="10.0" onAction="#addAgent" prefHeight="40.0" prefWidth="100.0" text="Create" AnchorPane.rightAnchor="24.0" />
+                        <JFXButton fx:id="createAgentButton" layoutY="10.0" onAction="#addAgent" prefHeight="40.0" prefWidth="120.0" text="Create" AnchorPane.rightAnchor="24.0" />
                     </children>
                 </AnchorPane>  
             </children>

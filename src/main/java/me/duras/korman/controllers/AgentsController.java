@@ -5,8 +5,11 @@ import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
@@ -32,11 +35,12 @@ import me.duras.korman.models.*;
 
 public class AgentsController implements Initializable {
 
-    ObservableList<Agent> agents = FXCollections.observableArrayList();
-    AgentDao dao = DaoFactory.INSTANCE.getAgentDao();
+    private ObservableList<Agent> agents = FXCollections.observableArrayList();
+    private AgentDao dao = DaoFactory.INSTANCE.getAgentDao();
+    private Set<Integer> deleteList = new HashSet<Integer>();
 
     @FXML
-    private JFXButton newAgentButton;
+    private JFXButton newAgentButton, delete;
 
     @FXML
     private TableView<Agent> agentTablePagin;
@@ -58,21 +62,31 @@ public class AgentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
+        if (deleteList.size() > 0) {
+            delete.setDisable(false);
+        } else {
+            delete.setDisable(true);
+        }
         checkBox.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Agent, JFXCheckBox>, ObservableValue<JFXCheckBox>>() {
 
             @Override
             public ObservableValue<JFXCheckBox> call(
                     TableColumn.CellDataFeatures<Agent, JFXCheckBox> arg0) {
-                Agent user = arg0.getValue();
+                Agent agent = arg0.getValue();
 
                 JFXCheckBox checkBox = new JFXCheckBox();
 
-                // checkBox.selectedProperty().setValue(user.isSelected());
                 checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    public void changed(ObservableValue<? extends Boolean> ov,
-                            Boolean old_val, Boolean new_val) {
-                        System.out.println(arg0.getValue().getName());
-                        //  user.setSelected(new_val);
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                         if (checkBox.isSelected()) {
+                            deleteList.add(agent.getId());
+                            delete.setDisable(false);
+                        } else {
+                            deleteList.remove(agent.getId());
+                            if (deleteList.size() == 0) {
+                                delete.setDisable(true);
+                            }
+                        }
 
                     }
                 });
@@ -86,10 +100,33 @@ public class AgentsController implements Initializable {
             onEdit();
         });
 
+        loadList();
+    }
+
+    public void onEdit() {
+        if (agentTablePagin.getSelectionModel().getSelectedItem() != null) {
+            Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
+
+            NewAgentController controller = MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene())
+                .getController();
+
+            controller.setAgent(selectedAgent);
+        }
+    }
+
+    @FXML
+    public void deleteAgent(ActionEvent event) {
+        for (int agentId : deleteList) {
+            System.out.println(agentId);
+        }
+        loadList();
+    }
+
+    private void loadList() {
+        agents.clear();
         List<Agent> list = dao.getAll();
 
         if (list.size() > 0) {
-            agents.clear();
             for (Agent agent : list) {
                 agents.add(agent);
             }
@@ -107,18 +144,6 @@ public class AgentsController implements Initializable {
 
                 agentTablePagin.setItems(agents);
             }
-        }
-    }
-
-    public void onEdit() {
-
-        if (agentTablePagin.getSelectionModel().getSelectedItem() != null) {
-            Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
-
-            NewAgentController controller = MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene())
-                .getController();
-
-            controller.setAgent(selectedAgent);
         }
     }
 }
