@@ -117,8 +117,10 @@ public class AgentsController implements Initializable {
     @FXML
     public void deleteAgent(ActionEvent event) {
         for (int agentId : deleteList) {
-            System.out.println(agentId);
+            dao.delete(agentId);
         }
+        deleteList.clear();
+        delete.setDisable(true);
         loadList();
     }
 
