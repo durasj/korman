@@ -15,9 +15,9 @@
             <children>
                 <ToggleButton id="DashboardButton" fx:id="dashboardButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Dashboard">
                 </ToggleButton>
-                <ImageView fx:id="dashboardButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="DashboardButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@dashboard.png" />
+                        <Image url="@icons/dashboard.png" />
                     </image>
                 </ImageView>
             </children>
@@ -26,9 +26,9 @@
             <children>
                 <ToggleButton id="BicyclesButton" fx:id="bicyclesButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Bicycles">
                 </ToggleButton>
-                <ImageView fx:id="bicyclesButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="BicyclesButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@bicycles.png" />
+                        <Image url="@icons/bicycles.png" />
                     </image>
                 </ImageView>
             </children>
@@ -38,9 +38,9 @@
                 <ToggleButton id="NotificationsButton" fx:id="notificationsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Notifications">
                 </ToggleButton>
                 <Label id="NotificationsNumberView" layoutX="152.0" layoutY="5.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: EFF0F5;" visible="false" />
-                <ImageView fx:id="notificationsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="NotificationsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@notifications.png" />
+                        <Image url="@icons/notifications.png" />
                     </image>
                 </ImageView>
             </children>
@@ -49,9 +49,9 @@
             <children>
                 <ToggleButton id="AgentsButton" fx:id="agentsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Agents">
                 </ToggleButton>
-                <ImageView fx:id="agentsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="AgentsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@agents.png" />
+                        <Image url="@icons/agents.png" />
                     </image>
                 </ImageView>
             </children>
@@ -60,9 +60,20 @@
             <children>
                 <ToggleButton id="SettingsButton" fx:id="settingsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Settings">
                 </ToggleButton>
-                <ImageView fx:id="settingsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="SettingsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@settings.png" />
+                        <Image url="@icons/settings.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane id="anchorButton" layoutY="288.0" prefHeight="30.0" prefWidth="192.0">
+            <children>
+                <ToggleButton id="LogsButton" fx:id="logsButton" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="192.0" text="Logs">
+                </ToggleButton>
+                <ImageView id="LogsButtonIcon" fitHeight="14.0" fitWidth="14.0" layoutX="24.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@icons/logs.png" />
                     </image>
                 </ImageView>
             </children>

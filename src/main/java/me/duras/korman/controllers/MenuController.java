@@ -1,6 +1,8 @@
 package me.duras.korman.controllers;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import me.duras.korman.App;
@@ -16,10 +19,7 @@ import me.duras.korman.App;
 public class MenuController {
 
     @FXML
-    private ToggleButton dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton;
-
-    @FXML
-    private ImageView dashboardButtonIcon, bicyclesButtonIcon, notificationsButtonIcon, agentsButtonIcon, settingsButtonIcon;
+    private ToggleButton dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton, logsButton;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -34,6 +34,8 @@ public class MenuController {
             MenuController.showWindow("AgentsTable.fxml", agentsButton.getId(), currentScene);
         } else if (event.getSource() == settingsButton) {
             MenuController.showWindow("Settings.fxml", settingsButton.getId(), currentScene);
+        } else if (event.getSource() == logsButton) {
+            MenuController.showWindow("Logs.fxml", logsButton.getId(), currentScene);
         }
     }
 
@@ -65,5 +67,15 @@ public class MenuController {
     public static void setActive(String buttonId, Scene currentScene) {
         ToggleButton activeButton = (ToggleButton) currentScene.lookup("#" + buttonId);
         activeButton.setSelected(true);
+        ImageView activeButtonIcon = (ImageView) currentScene.lookup("#" + buttonId + "Icon");
+
+        // Get window name from the button id
+        Pattern pattern = Pattern.compile("([A-Z][a-z]+)");
+        Matcher matcher = pattern.matcher(buttonId);
+        if (matcher.find()) {
+            String windowName = matcher.group(1).toLowerCase();
+            String activeIconPath = App.class.getResource("icons/" + windowName + "-active.png").toExternalForm();
+            activeButtonIcon.setImage(new Image(activeIconPath));
+        }
     }
 }
