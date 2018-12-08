@@ -5,18 +5,13 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import me.duras.korman.App;
 import me.duras.korman.DaoFactory;
 import me.duras.korman.dao.AgentDao;
 import me.duras.korman.models.*;
@@ -133,6 +128,11 @@ public class NewAgentController {
 
     @FXML
     private void initialize() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, 1);
+
+        setYear.setMax((double) cal.get(Calendar.YEAR));
+
         nameAgent.setText("Unnamed");
         setCategory.getSelectionModel().select("MTB");
         setSize.getSelectionModel().select("M");
