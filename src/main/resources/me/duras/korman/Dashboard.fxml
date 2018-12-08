@@ -14,7 +14,13 @@
     </left>
     <center>
         <AnchorPane id="DataTableCard" fx:id="defaultTable" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
-           
+           <children>
+                <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Dashboard">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+           </children>
         </AnchorPane>
     </center>
 </BorderPane>

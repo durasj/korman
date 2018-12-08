@@ -53,30 +53,7 @@ public class AgentsController implements Initializable {
     private void agentsButtonAction(ActionEvent event) {
 
         if (event.getSource() == newAgentButton) {
-            showWindow("newAgent.fxml");
-        }
-    }
-
-    public void showWindow(String windowFxml) {
-        BorderPane windowResource;
-        try {
-            windowResource = FXMLLoader.load(App.class.getResource(windowFxml));
-
-            Stage primaryStage = (Stage) newAgentButton.getScene().getWindow();
-
-            Scene scene = new Scene(windowResource, primaryStage.getWidth() - 18, primaryStage.getHeight() - 47);
-            primaryStage.setTitle("Korman");
-            primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1218);
-            primaryStage.setMinHeight(600);
-
-            primaryStage.getIcons().add(new Image(
-                    App.class.getResource("icon.png").toString()
-            ));
-            scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(AgentsController.class.getName()).log(Level.SEVERE, null, ex);
+            MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene());
         }
     }
 
@@ -177,7 +154,7 @@ public class AgentsController implements Initializable {
             newAgentController.setCat(category);
             newAgentController.setSz(size);
             newAgentController.setWm(forWomen);
-            showWindow("newAgent.fxml");
+            MenuController.showWindow("newAgent.fxml", "agentsButton", newAgentButton.getScene());
 
         }
     }
