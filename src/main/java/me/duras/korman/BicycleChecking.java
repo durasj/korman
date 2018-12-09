@@ -2,11 +2,11 @@ package me.duras.korman;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -19,9 +19,9 @@ import me.duras.korman.models.Log;
 
 public class BicycleChecking {
     static private boolean inProgress = false;
+    static private Timer timer = new Timer();
 
     private String listUrl, viewUrl;
-    private int refreshTime;
 
     private int categoryProgress = 1;
 
@@ -30,7 +30,6 @@ public class BicycleChecking {
 
         listUrl = settingDao.getByKey("listUrl").getValue();
         viewUrl = settingDao.getByKey("viewUrl").getValue();
-        refreshTime = (int) Double.parseDouble(settingDao.getByKey("refreshTime").getValue());
     }
 
     static public boolean isInProgress() {
@@ -103,5 +102,23 @@ public class BicycleChecking {
                 }
             });
         }
+    }
+
+    static public void startTimer(int refreshTime) {
+        BicycleChecking checking = new BicycleChecking();
+
+        timer.cancel();
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                checking.fetchAll();
+            }
+        };
+        timer.schedule(task, 0L, refreshTime * 60000);
+    }
+
+    static public void stopTimer() {
+        timer.cancel();
+        timer = new Timer();
     }
 }

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.sqlite.SQLiteConfig;
 
 /**
  * Database abstraction

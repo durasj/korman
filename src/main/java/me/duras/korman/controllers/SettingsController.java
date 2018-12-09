@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
+import me.duras.korman.BicycleChecking;
 import me.duras.korman.DaoFactory;
 import me.duras.korman.dao.SettingDao;
 import me.duras.korman.models.Setting;
@@ -80,6 +80,13 @@ public class SettingsController implements Initializable {
         dao.save(smtpUserSetting);
         dao.save(smtpPasswordSetting);
         dao.save(emailFromSetting);
+
+        int refreshTimeValue = (int) Math.round(refreshTime.getValue());
+        if (refreshTimeValue > 0) {
+            BicycleChecking.startTimer(refreshTimeValue);
+        } else {
+            BicycleChecking.stopTimer();
+        }
     }
 
     @Override

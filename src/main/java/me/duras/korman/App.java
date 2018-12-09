@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import me.duras.korman.controllers.MenuController;
+import me.duras.korman.dao.SettingDao;
 import javafx.scene.image.Image;
 
 public class App extends Application implements Initializable {
@@ -46,6 +47,13 @@ public class App extends Application implements Initializable {
         scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
         MenuController.setActive("DashboardButton", scene);
         primaryStage.show();
+
+        // Start bicycle checking timer
+        SettingDao settingDao = DaoFactory.INSTANCE.getSettingDao();
+        int refreshTime = (int) Math.round(Double.parseDouble(settingDao.getByKey("refreshTime").getValue()));
+        if (refreshTime > 0) {
+            BicycleChecking.startTimer(refreshTime);
+        }
     }
 
     @Override
