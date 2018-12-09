@@ -146,10 +146,23 @@ public class BicycleChecking {
                         .collect(Collectors.toList());
 
                     archivedDao.saveMany(archivedBicycles);
+                    int affected = dao.deleteManyByExternalId(
+                        archivedBicycles.stream()
+                            .map((b) -> b.getExternalId())
+                            .collect(Collectors.toList())
+                    );
+                    System.out.println(affected);
+                    System.out.println(archivedBicycles.stream()
+                    .map((b) -> b.getExternalId())
+                    .collect(Collectors.toList()));
 
                     logDao.save(new Log(
                         "Archived " + archivedBicycles.size() + " from " + current.size() + " saved bicycles for category " + categoryName)
                     );
+                    
+
+                    // Check if those new bikes fit the criteria
+
 
                     if (total == categoryProgress) {
                         categoryProgress = 1;
@@ -185,5 +198,13 @@ public class BicycleChecking {
     static public void stopTimer() {
         timer.cancel();
         timer = new Timer();
+    }
+
+    public void checkAllAgentsForBicycles(List<Bicycle> bicycles) {
+
+    }
+
+    public void checkBicyclesForAgent() {
+        
     }
 }

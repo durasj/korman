@@ -2,13 +2,17 @@ package me.duras.korman.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import me.duras.korman.models.Bicycle;
@@ -43,14 +47,14 @@ public class SqliteBicycleDao implements BicycleDao {
 
     @Override
     public List<Bicycle> getAll() {
-        String sql = "SELECT " + this.columns + " FROM bicycle b INNER JOIN bicycle_category c ON b.category = c.id";
+        String sql = "SELECT " + SqliteBicycleDao.columns + " FROM bicycle b INNER JOIN bicycle_category c ON b.category = c.id";
 
         return jdbcTemplate.query(sql, this.mapper);
     }
 
     @Override
     public Bicycle getById(int id) {
-        String sql = "SELECT " + this.columns
+        String sql = "SELECT " + SqliteBicycleDao.columns
                 + " FROM bicycle b INNER JOIN bicycle_category c ON b.category = c.id WHERE b.id = ?";
         Object[] args = new Object[] { id };
         return jdbcTemplate.queryForObject(sql, args, this.mapper);
@@ -129,5 +133,14 @@ public class SqliteBicycleDao implements BicycleDao {
     public int delete(Bicycle bicycle) {
         String sql = "DELETE FROM bicycle WHERE id = ?";
         return jdbcTemplate.update(sql, bicycle.getId());
+    }
+
+    @Override
+    public int deleteManyByExternalId(List<String> externalIds) {
+        String sql = "DELETE FROM bicycle WHERE externalId IN (:externalIds)";
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("externalIds", externalIds, Types.VARCHAR);
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        return namedParameterJdbcTemplate.update(sql, parameters);
     }
 }

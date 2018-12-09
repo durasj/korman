@@ -14,4 +14,6 @@ public interface BicycleDao {
     void saveMany(List<Bicycle> bicycles);
 
     int delete(Bicycle bicycle);
+
+    int deleteManyByExternalId(List<String> externalIds);
 }
