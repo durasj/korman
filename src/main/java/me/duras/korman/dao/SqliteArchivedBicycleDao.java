@@ -84,7 +84,7 @@ public class SqliteArchivedBicycleDao implements ArchivedBicycleDao {
                 values.put("photoUrl", bicycle.getPhotoUrl());
                 values.put("createdAt", bicycle.getCreatedAt());
                 values.put("importedAt", bicycle.getImportedAt());
-                values.put("archivedAt", (int) (new Date()).getTime() / 1000);
+                values.put("archivedAt", (int) Math.round((new Date()).getTime() / 1000));
                 rows[i] = values;
             } else {
                 throw new RuntimeException("Updating is not supported for archived bicycles");

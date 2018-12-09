@@ -11,6 +11,8 @@ public interface NotificationDao {
 
     Notification save(Notification notification);
 
+    void saveMany(List<Notification> notifications);
+
     int delete(Notification notification);
 
     int delete(int notificationId);

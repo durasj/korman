@@ -9,6 +9,8 @@ public interface BicycleDao {
 
     Bicycle getById(int id);
 
+    Bicycle getByExternalId(String id);
+
     Bicycle save(Bicycle bicycle);
 
     void saveMany(List<Bicycle> bicycles);

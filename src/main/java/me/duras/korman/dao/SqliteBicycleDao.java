@@ -61,6 +61,14 @@ public class SqliteBicycleDao implements BicycleDao {
     }
 
     @Override
+    public Bicycle getByExternalId(String id) {
+        String sql = "SELECT " + SqliteBicycleDao.columns
+                + " FROM bicycle b INNER JOIN bicycle_category c ON b.category = c.id WHERE b.externalId = ?";
+        Object[] args = new Object[] { id };
+        return jdbcTemplate.queryForObject(sql, args, this.mapper);
+    }
+
+    @Override
     public Bicycle save(Bicycle bicycle) {
         if (bicycle.getId() == 0) {
             // Creating
@@ -81,7 +89,7 @@ public class SqliteBicycleDao implements BicycleDao {
             values.put("url", bicycle.getUrl());
             values.put("photoUrl", bicycle.getPhotoUrl());
             values.put("createdAt", bicycle.getCreatedAt());
-            values.put("importedAt", (int) (new Date()).getTime() / 1000);
+            values.put("importedAt", (int) Math.round((new Date()).getTime() / 1000));
 
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();
             bicycle.setId((int) id);
@@ -118,7 +126,7 @@ public class SqliteBicycleDao implements BicycleDao {
                 values.put("url", bicycle.getUrl());
                 values.put("photoUrl", bicycle.getPhotoUrl());
                 values.put("createdAt", bicycle.getCreatedAt());
-                values.put("importedAt", (int) (new Date()).getTime() / 1000);
+                values.put("importedAt", (int) Math.round((new Date()).getTime() / 1000));
                 rows[i] = values;
             } else {
                 throw new RuntimeException("Updating is not supported for bicycles");

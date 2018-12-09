@@ -137,6 +137,7 @@ public class NewAgentController {
         setCategory.getSelectionModel().select("MTB");
         setSize.getSelectionModel().select("M");
         setForWoman.setSelected(false);
+        setYear.setValue(Calendar.getInstance().get(Calendar.YEAR));
     }
 
     public void setAgent(Agent agent) {

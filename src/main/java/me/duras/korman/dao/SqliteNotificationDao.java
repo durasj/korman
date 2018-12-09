@@ -68,7 +68,7 @@ public class SqliteNotificationDao implements NotificationDao {
             Map<String, Object> values = new HashMap<>();
             values.put("agent", notification.getAgent().getId());
             values.put("bicycle", notification.getBicycle().getId());
-            values.put("createdAt", (int) (new Date()).getTime() / 1000);
+            values.put("createdAt", (int) Math.round((new Date()).getTime() / 1000));
             values.put("emailSent", notification.getEmailSent() ? 1 : 0);
 
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();
@@ -94,6 +94,35 @@ public class SqliteNotificationDao implements NotificationDao {
         }
 
         return notification;
+    }
+
+    @Override
+    public void saveMany(List<Notification> notifications) {
+        Notification[] list = new Notification[notifications.size()];
+        notifications.toArray(list);
+
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        simpleJdbcInsert.withTableName("notification");
+        simpleJdbcInsert.usingGeneratedKeyColumns("id");
+        simpleJdbcInsert.usingColumns("agent", "bicycle", "createdAt", "emailSent");
+
+        Map<String, Object>[] rows = new HashMap[notifications.size()];
+        int i = 0;
+        for (Notification notification : list) {
+            if (notification.getId() == 0) {
+                Map<String, Object> values = new HashMap<>();
+                values.put("agent", notification.getAgent().getId());
+                values.put("bicycle", notification.getBicycle().getId());
+                values.put("createdAt", (int) Math.round((new Date()).getTime() / 1000));
+                values.put("emailSent", notification.getEmailSent() ? 1 : 0);
+                rows[i] = values;
+            } else {
+                throw new RuntimeException("Updating is not supported for notifications in bulk");
+            }
+            i++;
+        }
+
+        simpleJdbcInsert.executeBatch(rows);
     }
 
     @Override

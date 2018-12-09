@@ -1,5 +1,16 @@
 package me.duras.korman;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.github.jknack.handlebars.Context;
+import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Template;
+
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
@@ -40,6 +51,10 @@ public class Emailing {
             .buildMailer();
     }
 
+    public boolean isInitialized() {
+        return this.mailer != null;
+    }
+
     public void sendEmail(String recipientEmail, String subject, String htmlContent) {
         // We can't send emails if mailer was not initialized
         if (mailer == null) {
@@ -56,5 +71,15 @@ public class Emailing {
         mailer.sendMail(email);
     }
 
-    
+    public String prepareTemplate(InputStream templateStream, Map<String, Object> data) throws IOException {
+        Handlebars handlebars = new Handlebars();
+
+        Context context = Context.newBuilder(data).combine(data).build();
+        String templateContent = (new BufferedReader(new InputStreamReader(templateStream)))
+            .lines()
+            .collect(Collectors.joining("\n"));
+        Template template = handlebars.compileInline(templateContent);
+
+        return template.apply(context);
+    }
 }

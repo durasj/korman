@@ -1,15 +1,20 @@
 package me.duras.korman;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,26 +24,26 @@ import me.duras.korman.FetchingMap;
 import me.duras.korman.dao.ArchivedBicycleDao;
 import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.dao.LogDao;
+import me.duras.korman.dao.NotificationDao;
 import me.duras.korman.dao.SettingDao;
+import me.duras.korman.models.Agent;
 import me.duras.korman.models.ArchivedBicycle;
 import me.duras.korman.models.Bicycle;
 import me.duras.korman.models.BicycleCategory;
 import me.duras.korman.models.Log;
+import me.duras.korman.models.Notification;
 
 public class BicycleChecking {
     static private boolean inProgress = false;
     static private Timer timer = new Timer();
 
     private String listUrl, viewUrl;
-
     private int categoryProgress = 1;
+    private LogDao logDao = DaoFactory.INSTANCE.getLogDao();
+    private NotificationDao notificationDao = DaoFactory.INSTANCE.getNotificationDao();
+    private BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
 
-    public BicycleChecking() {
-        SettingDao settingDao = DaoFactory.INSTANCE.getSettingDao();
-
-        listUrl = settingDao.getByKey("listUrl").getValue();
-        viewUrl = settingDao.getByKey("viewUrl").getValue();
-    }
+    public BicycleChecking() {}
 
     private static final FetchingMap<Element, Bicycle> fetchMap = (Element el, String detailUrl) -> {
         String externalId = el.attr("data-id");
@@ -83,9 +88,11 @@ public class BicycleChecking {
         }
         BicycleChecking.inProgress = true;
 
-        BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
         ArchivedBicycleDao archivedDao = DaoFactory.INSTANCE.getArchivedBicycleDao();
-        LogDao logDao = DaoFactory.INSTANCE.getLogDao();
+        SettingDao settingDao = DaoFactory.INSTANCE.getSettingDao();
+
+        listUrl = settingDao.getByKey("listUrl").getValue();
+        viewUrl = settingDao.getByKey("viewUrl").getValue();
 
         logDao.save(new Log("Fetching bicycles"));
         List<BicycleCategory> categories = DaoFactory.INSTANCE.getBicycleCategoryDao().getAll();
@@ -146,23 +153,20 @@ public class BicycleChecking {
                         .collect(Collectors.toList());
 
                     archivedDao.saveMany(archivedBicycles);
-                    int affected = dao.deleteManyByExternalId(
+                    dao.deleteManyByExternalId(
                         archivedBicycles.stream()
                             .map((b) -> b.getExternalId())
                             .collect(Collectors.toList())
                     );
-                    System.out.println(affected);
-                    System.out.println(archivedBicycles.stream()
-                    .map((b) -> b.getExternalId())
-                    .collect(Collectors.toList()));
 
                     logDao.save(new Log(
                         "Archived " + archivedBicycles.size() + " from " + current.size() + " saved bicycles for category " + categoryName)
                     );
-                    
 
                     // Check if those new bikes fit the criteria
-
+                    if (newBicycles.size() > 0) {
+                        checkAllAgentsForBicycles(newBicycles);
+                    }
 
                     if (total == categoryProgress) {
                         categoryProgress = 1;
@@ -201,10 +205,112 @@ public class BicycleChecking {
     }
 
     public void checkAllAgentsForBicycles(List<Bicycle> bicycles) {
+        List<Agent> agents = DaoFactory.INSTANCE.getAgentDao().getAll();
 
+        agents.stream()
+            .forEach((agent) -> {
+                List<Notification> notifications = bicycles.stream()
+                    .filter((bicycle) -> {
+                        if (agent.getCategory().getId() != bicycle.getCategory().getId()) {
+                            return false;
+                        }
+
+                        if (agent.getSeries() != null && !agent.getSeries().equals("") &&
+                            (bicycle.getSeries().toLowerCase().contains(agent.getSeries().toLowerCase()))) {
+                            return false;
+                        }
+
+                        if (!bicycle.getSize().equals(agent.getSize())) {
+                            return false;
+                        }
+
+                        if (bicycle.isWmn() != agent.getWmn()) {
+                            return false;
+                        }
+
+                        int price = bicycle.getPrice() / 100;
+                        if (price > agent.getMaxPrice() || price < agent.getMinPrice()) {
+                            return false;
+                        }
+
+                        if ((bicycle.getDiff() / 100) < agent.getMinDiff()) {
+                            return false;
+                        }
+
+                        if (bicycle.getModelYear() != agent.getModelYear()) {
+                            return false;
+                        }
+
+                        return true;
+                    })
+                    .map((bicycle) -> new Notification(
+                        agent,
+                        dao.getByExternalId(bicycle.getExternalId()),
+                        new Date(),
+                        false
+                    ))
+                    .collect(Collectors.toList());
+
+                notificationDao.saveMany(notifications);
+                String email = agent.getEmail();
+                if (email != null && !email.equals("")) {
+                    sendEmail(notifications, email);
+                }
+            });
     }
 
-    public void checkBicyclesForAgent() {
-        
+    public void sendEmail(List<Notification> notifications, String email) {
+        // Do sending asynchronously since we rely on external services
+        CompletableFuture.runAsync(() -> {
+            Emailing emailing = new Emailing();
+            if (!emailing.isInitialized()) {
+                return;
+            }
+
+            logDao.save(new Log("Sending email to " + email));
+
+            NumberFormat format = NumberFormat.getCurrencyInstance(Locale.GERMANY);
+            String emailTitle = notifications.size() + " new matching bikes";
+
+            List<Map<String, String>> bicycles = notifications.stream()
+                .map((notification) -> notification.getBicycle())
+                .map((bicycle) -> {
+                    HashMap<String, String> prepared = new HashMap<String, String>();
+                    prepared.put("url", bicycle.getUrl());
+                    prepared.put("series", bicycle.getSeries());
+                    prepared.put("price", format.format(bicycle.getPrice() / 100));
+                    prepared.put("diff", format.format(bicycle.getDiff() / 100));
+                    prepared.put("modelYear", String.valueOf(bicycle.getModelYear()));
+                    prepared.put("size", bicycle.getSize());
+                    return prepared;
+                })
+                .collect(Collectors.toList());
+
+            Map<String, Object> templateData = new HashMap<String, Object>();
+            templateData.put("title", emailTitle);
+            templateData.put("bikes", bicycles);
+
+            String emailContent;
+            try {
+                InputStream templateStream = App.class.getResourceAsStream("email.hbs");
+                emailContent = emailing.prepareTemplate(templateStream, templateData);
+            } catch (Exception e) {
+                logDao.save(new Log("Preparing email to " + email + " failed with: " + e.getMessage()));
+                e.printStackTrace(System.err);
+                return;
+            }
+
+            try {
+                emailing.sendEmail(email, emailTitle, emailContent);
+                // TODO: Sending emails duplicates records
+                for (Notification notification : notifications) {
+                    notification.setEmailSent(true);
+                    notificationDao.save(notification);
+                }
+                logDao.save(new Log("Sent email to " + email));
+            } catch (Exception e) {
+                logDao.save(new Log("Sending email failed to " + email + " with: " + e.getMessage()));
+            }
+        });
     }
 }
