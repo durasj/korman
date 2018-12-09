@@ -7,12 +7,14 @@ import me.duras.korman.dao.ArchivedBicycleDao;
 import me.duras.korman.dao.BicycleCategoryDao;
 import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.dao.LogDao;
+import me.duras.korman.dao.NotificationDao;
 import me.duras.korman.dao.SettingDao;
 import me.duras.korman.dao.SqliteAgentDao;
 import me.duras.korman.dao.SqliteArchivedBicycleDao;
 import me.duras.korman.dao.SqliteBicycleCategoryDao;
 import me.duras.korman.dao.SqliteBicycleDao;
 import me.duras.korman.dao.SqliteLogDao;
+import me.duras.korman.dao.SqliteNotificationDao;
 import me.duras.korman.dao.SqliteSettingDao;
 
 public enum DaoFactory {
@@ -25,6 +27,7 @@ public enum DaoFactory {
     private BicycleDao bicycleDao;
     private ArchivedBicycleDao archivedBicycleDao;
     private BicycleCategoryDao bicycleCategoryDao;
+    private NotificationDao notificationDao;
     private LogDao logDao;
 
     public AgentDao getAgentDao() {
@@ -73,6 +76,14 @@ public enum DaoFactory {
         }
 
         return bicycleCategoryDao;
+    }
+
+    public NotificationDao getNotificationDao() {
+        if (notificationDao == null) {
+            notificationDao = new SqliteNotificationDao(getJdbcTemplate());
+        }
+
+        return notificationDao;
     }
 
     public void setJdbcTemplate(JdbcTemplate template) {

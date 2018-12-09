@@ -41,7 +41,7 @@
     -fx-background-color: #F7B538;
 }
 
-#agentsTableIN, #bicyclesTable, #settingsTable, #logsCard {
+#agentsTableIN, #bicyclesTable, #settingsTable, #logsCard, #notificationsTable {
     -fx-background-radius: 8;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 15, 0, 0, 0);
 }
@@ -179,6 +179,15 @@
 }
 
 #delete:hover{
+    -fx-background-color: #d13415;
+}
+
+#deleteNotif{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0), 0, 0, 0, 0);
+    -fx-background-color: #E03616;
+}
+
+#deleteNotif:hover{
     -fx-background-color: #d13415;
 }
 

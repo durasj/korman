@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -13,14 +14,32 @@
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <AnchorPane id="DataTableCard" fx:id="defaultTable" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+        <AnchorPane id="DataTableCard" fx:id="defaultTableB" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
             <children>
-                <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Notifications">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-           </children>
+                <AnchorPane id="notificationsTable" fx:id="notificationsTable" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
+                    <children>
+                        <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Notifications">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                        <JFXButton fx:id="deleteNotif" layoutY="10.0" mnemonicParsing="false" onAction="#deleteNotif" prefHeight="40.0" prefWidth="90.0" text="Delete" AnchorPane.rightAnchor="158.0" />
+                        <JFXButton fx:id="sendEmailNotif" layoutY="10.0" mnemonicParsing="false" onAction="#sendEmail" prefHeight="40.0" prefWidth="120.0" text="Send email" AnchorPane.rightAnchor="24.0" />
+                        <Pagination fx:id="notifPagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
+                        <TableView fx:id="notifTablePagin" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                            <columns>
+                                <TableColumn fx:id="checkBox" minWidth="32.0" prefWidth="32.0" />
+                                <TableColumn fx:id="notifAgent" minWidth="110" prefWidth="110" text="Agent name" />
+                                <TableColumn fx:id="notifEmail" minWidth="110" prefWidth="110" text="Email" />
+                                <TableColumn fx:id="notifCategory" minWidth="90" prefWidth="90" text="Bicycle category" />
+                                <TableColumn fx:id="notifSize" minWidth="110" prefWidth="110" text="Bicycle size" />
+                                <TableColumn fx:id="notifPrice" minWidth="110" prefWidth="110" text="Price" />
+                                <TableColumn fx:id="notifSentEmail" minWidth="110" prefWidth="110" text="Email sent" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </children>
         </AnchorPane>
     </center>
 </BorderPane>

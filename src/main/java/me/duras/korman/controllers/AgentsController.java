@@ -69,7 +69,7 @@ public class AgentsController implements Initializable {
 
                 checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-                         if (checkBox.isSelected()) {
+                        if (checkBox.isSelected()) {
                             deleteList.add(agent.getId());
                             delete.setDisable(false);
                         } else {
@@ -103,6 +103,8 @@ public class AgentsController implements Initializable {
             }
         });
 
+        loadList();
+
         agentName.setCellValueFactory(new PropertyValueFactory<>("name"));
         agentEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         agentSize.setCellValueFactory(new PropertyValueFactory<>("size"));
@@ -113,11 +115,10 @@ public class AgentsController implements Initializable {
 
         agentTablePagin.setItems(agents);
         agentTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
         agentTablePagin.setOnMouseClicked((MouseEvent event) -> {
             onEdit();
         });
-
-        loadList();
     }
 
     public void onEdit() {
@@ -125,7 +126,7 @@ public class AgentsController implements Initializable {
             Agent selectedAgent = agentTablePagin.getSelectionModel().getSelectedItem();
 
             NewAgentController controller = MenuController.showWindow("newAgent.fxml", "AgentsButton", newAgentButton.getScene())
-                .getController();
+                    .getController();
 
             controller.setAgent(selectedAgent);
         }

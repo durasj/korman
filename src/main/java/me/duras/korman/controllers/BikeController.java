@@ -3,16 +3,9 @@ package me.duras.korman.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
-import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,10 +22,8 @@ import javafx.util.Callback;
 import me.duras.korman.*;
 import me.duras.korman.dao.ArchivedBicycleDao;
 import me.duras.korman.dao.BicycleDao;
-import me.duras.korman.models.Agent;
 import me.duras.korman.models.ArchivedBicycle;
 import me.duras.korman.models.Bicycle;
-import me.duras.korman.models.BicycleCategory;
 
 /**
  * Bike Controller
