@@ -66,7 +66,7 @@ public class LogsController implements Initializable {
         List<Log> list = dao.getAll();
 
         for (Log log : list) {
-            items.add(getLogText(log));
+            items.add(0, getLogText(log));
         }
 
         this.lastCheck = new Date();
@@ -84,7 +84,7 @@ public class LogsController implements Initializable {
                 continue;
             }
 
-            items.add("[" + log.getCreatedAt() + "] " + log.getContent());
+            items.add(0, getLogText(log));
         }
 
         this.lastCheck = new Date();

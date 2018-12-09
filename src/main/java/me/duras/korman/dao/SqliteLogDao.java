@@ -77,7 +77,7 @@ public class SqliteLogDao implements LogDao {
 
     @Override
     public int clear() {
-        String sql = "DELETE FROM setting";
+        String sql = "DELETE FROM log";
         return jdbcTemplate.update(sql);
     }
 }

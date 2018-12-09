@@ -14,7 +14,7 @@
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <AnchorPane id="logsCard" fx:id="logsCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+        <AnchorPane id="logsScreen" fx:id="logsScreen" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
             <children>
                 <AnchorPane id="logsCard" fx:id="logsCard" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
                     <children>
