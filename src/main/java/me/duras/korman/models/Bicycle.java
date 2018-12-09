@@ -1,12 +1,6 @@
 package me.duras.korman.models;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.jsoup.nodes.Element;
-
-import me.duras.korman.FetchingMap;
 
 public class Bicycle {
 
@@ -33,38 +27,6 @@ public class Bicycle {
 
     private Date createdAt;
     private Date importedAt;
-
-    public static final FetchingMap<Element, Bicycle> fetchMap = (Element el, String detailUrl) -> {
-        String externalId = el.attr("data-id");
-        String series = el.attr("data-series");
-        String size = el.attr("data-size").replaceAll("\\|", "");
-        boolean wmn = el.attr("data-wmn") == "1";
-        int price = Integer.parseInt(el.attr("data-price"));
-        int year = Integer.parseInt(el.attr("data-year"));
-        int diff = Integer.parseInt(el.attr("data-diff"));
-        String url = detailUrl + externalId;
-        String photoUrl = null;
-        try {
-            photoUrl = el.selectFirst("img").attr("data-srcset").split(" ")[0];
-        } catch (Exception e) {
-            // Silently ignore, photoUrl is not neccessary
-        }
-
-        // Will be filled after the fetching
-        BicycleCategory category = null;
-
-        Date created = null;
-        try {
-            created = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(el.attr("data-date"));
-        } catch (ParseException e) {
-            System.err.println("Incorrect bicycle date");
-        }
-
-        Bicycle bike = new Bicycle(externalId, category, series, size, wmn, price, year, url, photoUrl, created);
-        bike.setDiff(diff);
-
-        return bike;
-    };
 
     public Bicycle() {}
 
