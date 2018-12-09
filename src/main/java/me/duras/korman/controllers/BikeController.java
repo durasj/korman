@@ -139,7 +139,7 @@ public class BikeController implements Initializable {
             lastIndex = 0;
         }
 
-        VBox box = new VBox(6);
+        VBox box = new VBox();
         int page = pageIndex * itemsPerPage();
 
         bikeCategory.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("category"));

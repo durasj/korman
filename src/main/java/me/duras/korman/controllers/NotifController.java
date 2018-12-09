@@ -28,10 +28,10 @@ import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.dao.NotificationDao;
 import me.duras.korman.models.*;
 
-public class NotifController  {
+public class NotifController implements Initializable {
 
     private ObservableList<Notification> notifications = FXCollections.observableArrayList();
-    private Set<Integer> deleteList = new HashSet<Integer>();
+    private Set<Notification> deleteList = new HashSet<Notification>();
     private NotificationDao dao = DaoFactory.INSTANCE.getNotificationDao();
 
     @FXML
@@ -48,27 +48,27 @@ public class NotifController  {
 
     @FXML
     public void deleteNotif() {
-     /*   for (int notif : deleteList) {
+           for (Notification notif : deleteList) {
             dao.delete(notif);
         }
         deleteList.clear();
         deleteNotif.setDisable(true);
-        loadList();*/
+        loadList();
     }
 
     public void loadList() {
-      /*  notifications.clear();
+        notifications.clear();
         List<Notification> list = dao.getAll();
 
         for (Notification notification : list) {
             notifications.add(notification);
-        }*/
+        }
     }
 
     @FXML
-    private void sendEmail() {
+    public void sendEmail() {
     }
-/*
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -89,15 +89,14 @@ public class NotifController  {
                 checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
                         if (checkBox.isSelected()) {
-                            deleteList.add(notification.getId());
+                            deleteList.add(notification);
                             deleteNotif.setDisable(false);
                         } else {
-                            deleteList.remove(notification.getId());
+                            deleteList.remove(notification);
                             if (deleteList.size() == 0) {
                                 deleteNotif.setDisable(true);
                             }
                         }
-
                     }
                 });
                 return new SimpleObjectProperty<JFXCheckBox>(checkBox);
@@ -106,8 +105,8 @@ public class NotifController  {
 
         loadList();
 
-        notifTablePagin.setPageCount(notifications.size() / rowsPerPage() + 1);
-        notifTablePagin.setPageFactory(new Callback<Integer, Node>() {
+        notifPagin.setPageCount(notifications.size() / rowsPerPage() + 1);
+        notifPagin.setPageFactory(new Callback<Integer, Node>() {
             @Override
             public Node call(Integer pageIndex) {
                 if (pageIndex > notifications.size() / rowsPerPage() + 1) {
@@ -117,7 +116,6 @@ public class NotifController  {
                 }
             }
         });
-
         notifTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
@@ -134,40 +132,38 @@ public class NotifController  {
     public VBox createPage(int pageIndex) {
         int lastIndex = 0;
 
-        int displace = bicycles.size() % rowsPerPage();
+        int displace = notifications.size() % rowsPerPage();
 
-        if (bicycles.size() != 0) {
+        if (notifications.size() != 0) {
             if (displace > 0) {
-                lastIndex = bicycles.size() / rowsPerPage();
+                lastIndex = notifications.size() / rowsPerPage();
             } else {
-                lastIndex = bicycles.size() / rowsPerPage() - 1;
+                lastIndex = notifications.size() / rowsPerPage() - 1;
             }
         } else {
             lastIndex = 0;
         }
 
-        VBox box = new VBox(6);
+        VBox box = new VBox();
         int page = pageIndex * itemsPerPage();
 
-        bikeCategory.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("category"));
-        bikeSeries.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("series"));
-        bikeSize.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("size"));
-        bikeWmn.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("wmn"));
-        bikePrice.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("price"));
-        bikeDiff.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("diff"));
-        bikeYear.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("modelYear"));
-        bikeArch.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("archivedAt"));
+        notifAgent.setCellValueFactory(new PropertyValueFactory<Notification, String>("agent"));
+        notifEmail.setCellValueFactory(new PropertyValueFactory<Notification, String>("bicycle"));
+        notifCategory.setCellValueFactory(new PropertyValueFactory<Notification, String>("bicycle"));
+        notifSize.setCellValueFactory(new PropertyValueFactory<Notification, String>("bicycle"));
+        notifPrice.setCellValueFactory(new PropertyValueFactory<Notification, String>("bicycle"));
+        notifSentEmail.setCellValueFactory(new PropertyValueFactory<Notification, String>("emailSent"));
 
         for (int i = page; i < page + itemsPerPage(); i++) {
             if (lastIndex == pageIndex) {
-                bikeTablePagin.setItems(FXCollections.observableArrayList(
-                        bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + displace)));
+                notifTablePagin.setItems(FXCollections.observableArrayList(
+                        notifications.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + displace)));
             } else {
-                bikeTablePagin.setItems(FXCollections.observableArrayList(
-                        bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
+                notifTablePagin.setItems(FXCollections.observableArrayList(
+                        notifications.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
             }
-            box.getChildren().add(bikeTablePagin);
+            box.getChildren().add(notifTablePagin);
         }
         return box;
-    }*/
+    }
 }
