@@ -28,20 +28,27 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <JFXTextField fx:id="searchBike" layoutY="16.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="166.0" promptText="Search"/>
+                        <JFXTextField fx:id="searchBike" layoutY="16.0" prefHeight="30.0" prefWidth="240.0" promptText="Search" AnchorPane.rightAnchor="166.0" />
                         <JFXButton fx:id="fetchBicyclesButton" layoutY="10.0" mnemonicParsing="false" onAction="#fetchBicycles" prefHeight="40.0" prefWidth="120.0" text="Refresh" AnchorPane.rightAnchor="24.0" />
                         <Pagination fx:id="bikePagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
                         <TableView fx:id="bikeTablePagin" layoutX="10.0" layoutY="10.0" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="64.0">
                             <columns>
-                                <TableColumn fx:id="bikeCategory" minWidth="130.0" prefWidth="130.0" text="Category" />
-                                <TableColumn fx:id="bikeSeries" minWidth="130.0" prefWidth="130.0" text="Series" />
-                                <TableColumn fx:id="bikeSize" minWidth="130.0" prefWidth="130.0" text="Size" />
-                                <TableColumn fx:id="bikeWmn" minWidth="130.0" prefWidth="130.0" text="For Woman" />
-                                <TableColumn fx:id="bikePrice" minWidth="130.0" prefWidth="130.0" text="Price" />
-                                <TableColumn fx:id="bikeDiff" minWidth="130.0" prefWidth="130.0" text="Dfference" />
-                                <TableColumn fx:id="bikeYear" minWidth="130.0" prefWidth="30.0" text="Model Year" />
+                                <TableColumn fx:id="bikeCategory" minWidth="110" prefWidth="110" text="Category" />
+                                <TableColumn fx:id="bikeSeries" minWidth="110" prefWidth="110" text="Series" />
+                                <TableColumn fx:id="bikeSize" minWidth="110" prefWidth="110" text="Size" />
+                                <TableColumn fx:id="bikeWmn" minWidth="110" prefWidth="110" text="For Woman" />
+                                <TableColumn fx:id="bikePrice" minWidth="110" prefWidth="110" text="Price" />
+                                <TableColumn fx:id="bikeDiff" minWidth="110" prefWidth="110" text="Dfference" />
+                                <TableColumn fx:id="bikeYear" minWidth="110" prefWidth="110" text="Model Year" />
+                                <TableColumn fx:id="bikeArch" minWidth="110" prefWidth="110" text="Archived" visible="false" />
                             </columns>
                         </TableView>
+                        <JFXToggleButton fx:id="archivedButton" contentDisplay="RIGHT" prefHeight="40.0" prefWidth="60.0" toggleColor="#f7b538" toggleLineColor="#f6ac23" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="2.0" />
+                        <Label layoutX="429.0" layoutY="21.0" text="Archived" AnchorPane.rightAnchor="500.0">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
                     </children>
                 </AnchorPane>
             </children>

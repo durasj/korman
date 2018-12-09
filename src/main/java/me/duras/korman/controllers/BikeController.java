@@ -1,6 +1,7 @@
 package me.duras.korman.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
@@ -12,6 +13,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,8 +27,10 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import me.duras.korman.*;
+import me.duras.korman.dao.ArchivedBicycleDao;
 import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.models.Agent;
+import me.duras.korman.models.ArchivedBicycle;
 import me.duras.korman.models.Bicycle;
 import me.duras.korman.models.BicycleCategory;
 
@@ -36,18 +41,19 @@ public class BikeController implements Initializable {
 
     private ObservableList<Bicycle> bicycles = FXCollections.observableArrayList();
     private BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
-
-    @FXML
-    private Label label1;
+    private ArchivedBicycleDao archivedDao = DaoFactory.INSTANCE.getArchivedBicycleDao();
 
     @FXML
     private JFXButton fetchBicyclesButton;
 
     @FXML
+    private JFXToggleButton archivedButton;
+
+    @FXML
     private TableView<Bicycle> bikeTablePagin;
 
     @FXML
-    private TableColumn bikeCategory, bikeSeries, bikeSize, bikeWmn, bikePrice, bikeDiff, bikeYear;
+    private TableColumn bikeCategory, bikeSeries, bikeSize, bikeWmn, bikePrice, bikeDiff, bikeYear, bikeArch;
 
     @FXML
     private Pagination bikePagin;
@@ -66,8 +72,43 @@ public class BikeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         bikeTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        archivedButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                if (!archivedButton.isSelected()) {
+                    bikeArch.setVisible(false);
+                    loadList(false);
+                    System.out.println("vypnuty");
+                } else {
+                    bikeArch.setVisible(true);
+                    loadList(true);
+                    System.out.println("zapnuty");
+                }
+            }
+        });
+
         // System.out.println(bikeTablePagin.getScene().getHeight());
-        loadList();
+        loadList(false);
+
+        bikeTablePagin.setOnMouseClicked((MouseEvent event) -> {
+            showBike();
+        });
+    }
+
+    private void loadList(boolean isArchived) {
+        bicycles.clear();
+
+        if (!isArchived) {
+            List<Bicycle> list = dao.getAll();
+            for (Bicycle bike : list) {
+                bicycles.add(bike);
+            }
+        } else {
+            List<ArchivedBicycle> list = archivedDao.getAll();
+            for (ArchivedBicycle bike : list) {
+                bicycles.add(bike);
+            }
+        }
 
         bikePagin.setPageCount(bicycles.size() / rowsPerPage() + 1);
         bikePagin.setPageFactory(new Callback<Integer, Node>() {
@@ -80,19 +121,6 @@ public class BikeController implements Initializable {
                 }
             }
         });
-
-        bikeTablePagin.setOnMouseClicked((MouseEvent event) -> {
-            showBike();
-        });
-    }
-
-    private void loadList() {
-        bicycles.clear();
-        List<Bicycle> list = dao.getAll();
-
-        for (Bicycle bike : list) {
-            bicycles.add(bike);
-        }
     }
 
     public int itemsPerPage() {
@@ -123,6 +151,7 @@ public class BikeController implements Initializable {
         bikePrice.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("price"));
         bikeDiff.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("diff"));
         bikeYear.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("modelYear"));
+        bikeArch.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("archivedAt"));
 
         for (int i = page; i < page + itemsPerPage(); i++) {
             if (lastIndex == pageIndex) {
@@ -140,7 +169,7 @@ public class BikeController implements Initializable {
     public void showBike() {
         if (bikeTablePagin.getSelectionModel().getSelectedItem() != null) {
             Bicycle selectedBicycle = bikeTablePagin.getSelectionModel().getSelectedItem();
-           
+
             ShowBikeController controller = MenuController.showWindow("Bicycle.fxml", "BicyclesButton", fetchBicyclesButton.getScene())
                     .getController();
 

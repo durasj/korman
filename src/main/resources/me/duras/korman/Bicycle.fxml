@@ -35,7 +35,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="closeBike" layoutY="10.0" prefHeight="40.0" prefWidth="120.0" text="Close" AnchorPane.rightAnchor="24.0" />
+                        <JFXButton fx:id="closeBike" layoutY="10.0" onAction="#close" prefHeight="40.0" prefWidth="120.0" text="Close" AnchorPane.rightAnchor="24.0" />
                   <ImageView fx:id="bikePic" fitHeight="375.0" fitWidth="600.0" layoutX="51.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@bike-placeholder.png" />
