@@ -21,7 +21,7 @@ import me.duras.korman.models.Notification;
 public class SqliteNotificationDao implements NotificationDao {
     protected JdbcTemplate jdbcTemplate;
 
-    final static String columns = "n.id, n.agent, n.bicycle, n.createdAt, n.emailSent, ";
+    final static String columns = "n.id, n.agent, n.bicycle, n.createdAt, n.emailSent";
     protected RowMapper<Notification> mapper = new RowMapper<Notification>() {
 
         @Override
@@ -98,7 +98,12 @@ public class SqliteNotificationDao implements NotificationDao {
 
     @Override
     public int delete(Notification notification) {
+        return delete(notification.getId());
+    }
+
+    @Override
+    public int delete(int notificationId) {
         String sql = "DELETE FROM notification WHERE id = ?";
-        return jdbcTemplate.update(sql, notification.getId());
+        return jdbcTemplate.update(sql, notificationId);
     }
 }
