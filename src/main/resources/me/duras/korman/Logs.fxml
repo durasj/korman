@@ -24,6 +24,8 @@
                             </font>
                         </Label>
                         <JFXButton fx:id="clearLogsButton" layoutY="10.0" mnemonicParsing="false" onAction="#onClearLogs" prefHeight="40.0" prefWidth="120.0" text="Clear" AnchorPane.rightAnchor="24.0" />
+
+                        <JFXListView fx:id="logsList" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
                     </children>
                 </AnchorPane>
             </children>

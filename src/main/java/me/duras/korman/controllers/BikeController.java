@@ -54,9 +54,7 @@ public class BikeController implements Initializable {
 
     @FXML
     void fetchBicycles() {
-        System.out.println("Loading" + Instant.now());
-
-        (new BicycleFetching()).fetchAll();
+        (new BicycleChecking()).fetchAll();
     }
 
     @FXML

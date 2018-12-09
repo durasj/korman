@@ -152,6 +152,18 @@
     -fx-stroke: white;
 }
 
+.list-view {
+    -fx-background-color: #FFFFFF;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #EFECF0;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #F7B538;
+}
+
 #delete{
     -fx-background-color: #E03616;
 }

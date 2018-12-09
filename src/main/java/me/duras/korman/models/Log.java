@@ -7,6 +7,8 @@ public class Log {
     private String content;
     private Date createdAt;
 
+    public Log() {}
+
     public Log(String content) {
         this.content = content;
     }

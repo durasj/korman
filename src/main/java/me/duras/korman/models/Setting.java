@@ -5,6 +5,8 @@ public class Setting {
     private String key;
     private String value;
 
+    public Setting() {}
+
     public Setting(int id, String key, String value) {
         this.id = id;
         this.key = key;

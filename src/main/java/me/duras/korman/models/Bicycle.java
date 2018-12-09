@@ -66,6 +66,8 @@ public class Bicycle {
         return bike;
     };
 
+    public Bicycle() {}
+
     public Bicycle(String externalId, BicycleCategory category, String series, String size, boolean wmn, int price,
             int modelYear, String url, String photoUrl, Date createdAt) {
         this.externalId = externalId;

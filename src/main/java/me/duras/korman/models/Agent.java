@@ -34,6 +34,8 @@ public class Agent {
     private Date lastCheck;
     private boolean active;
 
+    public Agent() {}
+
     public Agent(String name, String email, BicycleCategory category, String series, String size, boolean wmn, int minPrice, int maxPrice, int minDiff, int modelYear) {
         this.name = name;
         this.email = email;

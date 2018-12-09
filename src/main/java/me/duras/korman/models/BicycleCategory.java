@@ -6,6 +6,8 @@ public class BicycleCategory {
     private String name;
     private String externalUrl;
 
+    public BicycleCategory() {}
+
     public BicycleCategory(int id, String name, String externalUrl) {
         this.id = id;
         this.name = name;

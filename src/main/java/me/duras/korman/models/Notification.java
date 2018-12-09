@@ -9,6 +9,8 @@ public class Notification {
     private Date createdAt;
     private boolean emailSent;
 
+    public Notification() {}
+
     public Notification(Agent agent, Bicycle bicycle, Date createdAt, boolean emailSent) {
         this.agent = agent;
         this.bicycle = bicycle;

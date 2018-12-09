@@ -17,12 +17,18 @@ import javafx.stage.Stage;
 import me.duras.korman.App;
 
 public class MenuController {
+    static private Runnable onDestroy;
 
     @FXML
     private ToggleButton dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton, logsButton;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        if (onDestroy != null) {
+            MenuController.onDestroy.run();
+            MenuController.onDestroy = null;
+        }
+
         Scene currentScene = dashboardButton.getScene();
         if (event.getSource() == dashboardButton) {
             MenuController.showWindow("Dashboard.fxml", dashboardButton.getId(), currentScene);
@@ -35,7 +41,8 @@ public class MenuController {
         } else if (event.getSource() == settingsButton) {
             MenuController.showWindow("Settings.fxml", settingsButton.getId(), currentScene);
         } else if (event.getSource() == logsButton) {
-            MenuController.showWindow("Logs.fxml", logsButton.getId(), currentScene);
+            FXMLLoader loader = MenuController.showWindow("Logs.fxml", logsButton.getId(), currentScene);
+            MenuController.onDestroy = ((LogsController) loader.getController()).afterInitialize();
         }
     }
 

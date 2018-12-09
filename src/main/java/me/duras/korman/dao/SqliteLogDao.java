@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -39,6 +38,23 @@ public class SqliteLogDao implements LogDao {
     }
 
     @Override
+    public List<Log> getNew(Date from) {
+        String sql = "SELECT id, content, createdAt FROM log WHERE createdAt >= ?";
+
+        return jdbcTemplate.query(sql, new RowMapper<Log>() {
+
+            @Override
+            public Log mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Log log = new Log(rs.getString("content"));
+                log.setId(rs.getInt("id"));
+                log.setCreatedAt(new Date((long) rs.getInt("createdAt") * 1000));
+                return log;
+            }
+
+        }, new Object[] { (int) (from.getTime() / 1000) });
+    }
+
+    @Override
     public Log save(Log log) {
         if (log.getId() == 0) {
             SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
@@ -48,7 +64,7 @@ public class SqliteLogDao implements LogDao {
 
             Map<String, Object> values = new HashMap<>();
             values.put("content", log.getContent());
-            values.put("createdAt", (int) (log.getCreatedAt().getTime() / 1000));
+            values.put("createdAt", (int) ((new Date()).getTime() / 1000));
 
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();
             log.setId((int) id);
