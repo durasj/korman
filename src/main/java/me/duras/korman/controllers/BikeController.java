@@ -128,20 +128,27 @@ public class BikeController implements Initializable {
     }
 
     public int rowsPerPage() {
+        int rows = 6;
 
-        return 6;
+        return rows;
     }
 
     public VBox createPage(int pageIndex) {
         int lastIndex = 0;
+
         int displace = bicycles.size() % rowsPerPage();
-        if (displace > 0) {
-            lastIndex = bicycles.size() / rowsPerPage();
+        
+        if (bicycles.size() != 0) {
+            if (displace > 0) {
+                lastIndex = bicycles.size() / rowsPerPage();
+            } else {
+                lastIndex = bicycles.size() / rowsPerPage() - 1;
+            }
         } else {
-            lastIndex = bicycles.size() / rowsPerPage() - 1;
+            lastIndex = 0;
         }
 
-        VBox box = new VBox(5);
+        VBox box = new VBox(6);
         int page = pageIndex * itemsPerPage();
 
         bikeCategory.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("category"));

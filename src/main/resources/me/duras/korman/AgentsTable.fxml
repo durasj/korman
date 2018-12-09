@@ -23,7 +23,7 @@
             <children>
                 <AnchorPane id="agentsTableIN" fx:id="agentsTableIN" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
-                        <TableView fx:id="agentTablePagin" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="64.0">
+                        <TableView fx:id="agentTablePagin" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="70.0">
                             <columns>
                                 <TableColumn fx:id="checkBox" minWidth="32.0" prefWidth="32.0" />
                                 <TableColumn fx:id="agentName" minWidth="90.0" prefWidth="90.0" text="Name" />
