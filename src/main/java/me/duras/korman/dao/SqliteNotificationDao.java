@@ -74,7 +74,7 @@ public class SqliteNotificationDao implements NotificationDao {
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();
             notification.setId((int) id);
         } else {
-            String sql = "UPDATE agent SET agent = ?, bicycle = ?, createdAt = ?, emailSent = ? WHERE id = ?";
+            String sql = "UPDATE notification SET agent = ?, bicycle = ?, createdAt = ?, emailSent = ? WHERE id = ?";
             Object[] params = {
                 notification.getAgent().getId(),
                 notification.getBicycle().getId(),
