@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import me.duras.korman.App;
 
 public class MenuController {
-    static private Runnable onDestroy;
+    static public Runnable onDestroy;
 
     @FXML
     private ToggleButton dashboardButton, bicyclesButton, notificationsButton, agentsButton, settingsButton, logsButton;

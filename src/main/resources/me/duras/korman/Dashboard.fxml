@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -13,13 +14,30 @@
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <AnchorPane id="DataTableCard" fx:id="defaultTable" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
+        <AnchorPane id="dashboardCard" fx:id="dashboardCard" layoutX="192.0" prefHeight="600.0" prefWidth="1008.0" style="-fx-background-color: #F6F7FB;">
            <children>
-                <Label fx:id="label1" layoutX="24.0" layoutY="16.0" text="Dashboard">
+                <Label fx:id="shortcutsTitle" layoutX="24.0" layoutY="32.0" text="Features">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="18.0" />
                     </font>
                 </Label>
+                <Button id="bicyclesLinkCard" fx:id="bicyclesLinkCard" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="96.0" prefWidth="192.0" layoutX="24.0" layoutY="80.0" text="Bicycles"></Button>
+                <Button id="notificationsLinkCard" fx:id="notificationsLinkCard" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="96.0" prefWidth="192.0" layoutX="240.0" layoutY="80.0" text="Notifications"></Button>
+                <Button id="agentsLinkCard" fx:id="agentsLinkCard" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="96.0" prefWidth="192.0" layoutX="24.0" layoutY="200.0" text="Agents"></Button>
+                <Button id="settingsLinkCard" fx:id="settingsLinkCard" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="96.0" prefWidth="192.0" layoutX="240.0" layoutY="200.0" text="Settings"></Button>
+                <Button id="logsLinkCard" fx:id="logsLinkCard" alignment="BASELINE_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="96.0" prefWidth="192.0" layoutX="24.0" layoutY="320.0" text="Logs"></Button>
+
+                <Label fx:id="latestNotificationsTitle" layoutX="456.0" layoutY="32.0" text="Latest Notifications">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="latestNotificationsCount" layoutX="616.0" layoutY="32.0" text="11" prefWidth="24.0" prefHeight="24.0" alignment="BASELINE_CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <JFXListView fx:id="latestNotificationsList" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="456.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="80.0" />
            </children>
         </AnchorPane>
     </center>

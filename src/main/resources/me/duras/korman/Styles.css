@@ -197,3 +197,77 @@
 .text-input:focused {
     -fx-prompt-text-fill: transparent;
 }
+
+.link-card {
+    -fx-font-size: 16;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 15, 0, 0, 0);
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+}
+
+.link-card:hover {
+    -fx-text-fill: #FFFFFF;
+}
+
+#bicyclesLinkCard {
+    -fx-background-color: #31263e;
+    -fx-effect: dropshadow(three-pass-box, rgba(49, 38, 62, 0.75), 15, 0, 0, 0);
+    -fx-background-image: url('icons/bicycles-card.png');
+}
+
+#bicyclesLinkCard:hover {
+    -fx-background-color: #0e0a13;
+}
+
+#notificationsLinkCard {
+    -fx-background-color: #f7b538;
+    -fx-effect: dropshadow(three-pass-box, rgba(247, 181, 56, 0.75), 15, 0, 0, 0);
+    -fx-background-image: url('icons/notifications-card.png');
+}
+
+#notificationsLinkCard:hover {
+    -fx-background-color: #fda500;
+}
+
+#agentsLinkCard {
+    -fx-background-color: #221e22;
+    -fx-effect: dropshadow(three-pass-box, rgba(34, 30, 34, 0.75), 15, 0, 0, 0);
+    -fx-background-image: url('icons/agents-card.png');
+}
+
+#agentsLinkCard:hover {
+    -fx-background-color: #0c0b0c;
+}
+
+#settingsLinkCard {
+    -fx-background-color: #e03616;
+    -fx-effect: dropshadow(three-pass-box, rgba(224, 54, 22, 0.75), 15, 0, 0, 0);
+    -fx-background-image: url('icons/settings-card.png');
+}
+
+#settingsLinkCard:hover {
+    -fx-background-color: #be2000;
+}
+
+#logsLinkCard {
+    -fx-background-color: #40bfac;
+    -fx-effect: dropshadow(three-pass-box, rgba(64, 191, 172, 0.75), 15, 0, 0, 0);
+    -fx-background-image: url('icons/logs-card.png');
+}
+
+#logsLinkCard:hover {
+    -fx-background-color: #00af95;
+}
+
+#latestNotificationsList {
+    -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+#latestNotificationsCount {
+    -fx-background-color: #e03616;
+    -fx-background-radius: 16;
+    -fx-text-fill: #FFFFFF;
+}
