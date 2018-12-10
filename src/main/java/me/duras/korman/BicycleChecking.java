@@ -118,16 +118,21 @@ public class BicycleChecking {
                             b.setCategory(category);
                             return b;
                         }).collect(Collectors.toList()));
+                    return list;
                 } catch (IOException e) {
                     logDao.save(new Log(
                         "Fetching error: " + e.getMessage())
                     );
                 }
 
-                return list;
+                return null;
             };
 
             CompletableFuture.supplyAsync(fetch).thenAccept((list) -> {
+                if (list == null) {
+                    return;
+                }
+
                 try {
                     String categoryName = category.getName();
 
