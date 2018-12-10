@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,13 +20,13 @@ import me.duras.korman.models.BicycleCategory;
 public class SqliteBicycleDao implements BicycleDao {
     protected JdbcTemplate jdbcTemplate;
 
-    final static String columns = "b.id, b.externalId, b.category, b.series, b.size, b.wmn, b.price, b.diff, b.modelYear, b.url, b.photoUrl, b.createdAt, b.importedAt, c.id AS categoryId, c.name AS categoryName, c.externalUrl AS categoryExternalUrl";
+    final static String columns = "b.id, b.externalId, b.category, b.series, b.size, b.wmn, b.price, b.diff, b.modelYear, b.url, b.photoUrl, b.createdAt, b.importedAt, c.id AS categoryId, c.name AS categoryName, c.externalUrl AS categoryExternalUrl, c.externalDetailUrl AS categoryExternalDetailUrl";
     protected RowMapper<Bicycle> mapper = new RowMapper<Bicycle>() {
 
         @Override
         public Bicycle mapRow(ResultSet rs, int rowNum) throws SQLException {
             BicycleCategory category = new BicycleCategory(rs.getInt("categoryId"), rs.getString("categoryName"),
-                    rs.getString("categoryExternalUrl"));
+                    rs.getString("categoryExternalUrl"), rs.getString("categoryExternalDetailUrl"));
 
             Bicycle bicycle = new Bicycle(rs.getString("externalId"), category, rs.getString("series"),
                     rs.getString("size"), rs.getInt("wmn") == 1, rs.getInt("price"), rs.getInt("modelYear"),

@@ -111,8 +111,9 @@ public class BicycleChecking {
                         listUrl + category.getExternalUrl());
 
                 List<Bicycle> list = new ArrayList<Bicycle>();
+                String detailUrl = viewUrl + category.getExternalDetailUrl();
                 try {
-                    list.addAll(fetching.fetchItems("div article", BicycleChecking.fetchMap, viewUrl)
+                    list.addAll(fetching.fetchItems("div article", BicycleChecking.fetchMap, detailUrl)
                         .stream().map((Bicycle b) -> {
                             b.setCategory(category);
                             return b;

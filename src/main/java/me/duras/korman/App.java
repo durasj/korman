@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import me.duras.korman.controllers.DashboardController;
 import me.duras.korman.controllers.MenuController;
 import me.duras.korman.dao.SettingDao;
 import javafx.scene.image.Image;
@@ -20,9 +21,6 @@ public class App extends Application implements Initializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        Parent rootPane = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-
         if (Utils.isFirstRun()) {
             try {
                 Utils.initUserDataDir();
@@ -37,6 +35,8 @@ public class App extends Application implements Initializable {
         this.db.connect();
         DaoFactory.INSTANCE.setJdbcTemplate(this.db.getTemplate());
 
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("Dashboard.fxml"));
+        Parent rootPane = loader.load();
         Scene scene = new Scene(rootPane);
         primaryStage.setTitle("Korman");
         primaryStage.setScene(scene);
@@ -46,6 +46,7 @@ public class App extends Application implements Initializable {
         ));
         scene.getStylesheets().add(App.class.getResource("Styles.css").toExternalForm());
         MenuController.setActive("DashboardButton", scene);
+        MenuController.onDestroy = ((DashboardController) loader.getController()).afterInitialize();
         primaryStage.show();
 
         // Start bicycle checking timer

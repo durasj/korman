@@ -31,7 +31,8 @@ public class MenuController {
 
         Scene currentScene = dashboardButton.getScene();
         if (event.getSource() == dashboardButton) {
-            MenuController.showWindow("Dashboard.fxml", dashboardButton.getId(), currentScene);
+            FXMLLoader loader = MenuController.showWindow("Dashboard.fxml", dashboardButton.getId(), currentScene);
+            MenuController.onDestroy = ((DashboardController) loader.getController()).afterInitialize();
         } else if (event.getSource() == bicyclesButton) {
             MenuController.showWindow("BikeTable.fxml", bicyclesButton.getId(), currentScene);
         } else if (event.getSource() == notificationsButton) {

@@ -18,13 +18,13 @@ import me.duras.korman.models.BicycleCategory;
 public class SqliteAgentDao implements AgentDao {
     private JdbcTemplate jdbcTemplate;
 
-    private String columns = "a.id, a.name, a.email, a.category, a.series, a.wmn, a.size, a.minPrice, a.maxPrice, a.minDiff, a.modelYear, a.lastCheck, a.active, c.id AS categoryId, c.name AS categoryName, c.externalUrl AS categoryExternalUrl";
+    private String columns = "a.id, a.name, a.email, a.category, a.series, a.wmn, a.size, a.minPrice, a.maxPrice, a.minDiff, a.modelYear, a.lastCheck, a.active, c.id AS categoryId, c.name AS categoryName, c.externalUrl AS categoryExternalUrl, c.externalDetailUrl AS categoryExternalDetailUrl";
     private RowMapper<Agent> mapper = new RowMapper<Agent>() {
 
         @Override
         public Agent mapRow(ResultSet rs, int rowNum) throws SQLException {
             BicycleCategory category = new BicycleCategory(rs.getInt("categoryId"), rs.getString("categoryName"),
-                    rs.getString("categoryExternalUrl"));
+                    rs.getString("categoryExternalUrl"), rs.getString("categoryExternalDetailUrl"));
 
             Agent agent = new Agent(rs.getString("name"), rs.getString("email"), category, rs.getString("series"),
                     rs.getString("size"), rs.getInt("wmn") == 1, rs.getInt("minPrice"), rs.getInt("maxPrice"), rs.getInt("minDiff"), rs.getInt("modelYear"));

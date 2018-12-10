@@ -23,7 +23,7 @@ public class SqliteArchivedBicycleDao implements ArchivedBicycleDao {
         @Override
         public ArchivedBicycle mapRow(ResultSet rs, int rowNum) throws SQLException {
             BicycleCategory category = new BicycleCategory(rs.getInt("categoryId"), rs.getString("categoryName"),
-                    rs.getString("categoryExternalUrl"));
+                    rs.getString("categoryExternalUrl"), rs.getString("categoryExternalDetailUrl"));
 
             ArchivedBicycle bicycle = new ArchivedBicycle(rs.getString("externalId"), category, rs.getString("series"),
                     rs.getString("size"), rs.getInt("wmn") == 1, rs.getInt("price"), rs.getInt("modelYear"),

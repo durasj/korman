@@ -18,13 +18,13 @@ public class Fetching {
         this.url = url;
     }
 
-    public <Item> List<Item> fetchItems(String selectCssQuery, FetchingMap<Element, Item> mapping, String detailUrl) throws IOException {
+    public <Item> List<Item> fetchItems(String selectCssQuery, FetchingMap<Element, Item> mapping, String url) throws IOException {
         Document doc = Jsoup.connect(this.url).get();
 
         Elements elements = doc.select(selectCssQuery);
         List<Item> list = new ArrayList<Item>();
         for (Element element : elements) {
-            list.add(mapping.map(element, detailUrl));
+            list.add(mapping.map(element, url));
         }
 
         return list;
