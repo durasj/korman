@@ -28,7 +28,7 @@ public class App extends Application implements Initializable {
                 Utils.initUserDataDir();
                 Database.copyInitial();
             } catch (IOException e) {
-                System.out.println("Unable to initialize user data directory.");
+                System.err.println("Unable to initialize user data directory.");
                 e.printStackTrace();
             }
         }

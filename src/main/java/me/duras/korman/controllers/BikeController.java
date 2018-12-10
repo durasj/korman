@@ -69,15 +69,14 @@ public class BikeController implements Initializable {
                 if (!archivedButton.isSelected()) {
                     bikeArch.setVisible(false);
                     loadList(false);
-                    System.out.println("vypnuty");
                 } else {
                     bikeArch.setVisible(true);
                     loadList(true);
-                    System.out.println("zapnuty");
                 }
             }
         });
 
+        // TODO: Figure out why this doesn't work
         // System.out.println(bikeTablePagin.getScene().getHeight());
         loadList(false);
 
