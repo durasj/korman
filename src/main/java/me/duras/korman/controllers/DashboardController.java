@@ -134,7 +134,8 @@ public class DashboardController implements Initializable {
     private void handleCardClick(ActionEvent event) {
         Scene currentScene = bicyclesLinkCard.getScene();
         if (event.getSource() == bicyclesLinkCard) {
-            MenuController.showWindow("BikeTable.fxml", "BicyclesButton", currentScene);
+            FXMLLoader loader = MenuController.showWindow("BikeTable.fxml", "BicyclesButton", currentScene);
+            ((BikeController) loader.getController()).afterInitialize();
         } else if (event.getSource() == notificationsLinkCard) {
             MenuController.showWindow("Notifications.fxml", "NotificationsButton", currentScene);
         } else if (event.getSource() == agentsLinkCard) {

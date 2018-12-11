@@ -39,6 +39,8 @@ public class App extends Application implements Initializable {
         Parent rootPane = loader.load();
         Scene scene = new Scene(rootPane);
         primaryStage.setTitle("Korman");
+        primaryStage.setMinWidth(1224);
+        primaryStage.setMinHeight(640);
         primaryStage.setScene(scene);
 
         primaryStage.getIcons().add(new Image(

@@ -28,7 +28,8 @@ public class ShowBikeController implements Initializable {
     @FXML
     private void close() {
         BikeController controller = MenuController.showWindow("BikeTable.fxml", "BicyclesButton", closeBike.getScene())
-                .getController();
+            .getController();
+        controller.afterInitialize();
     }
 
     @Override

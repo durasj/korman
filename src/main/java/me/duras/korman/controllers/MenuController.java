@@ -34,7 +34,8 @@ public class MenuController {
             FXMLLoader loader = MenuController.showWindow("Dashboard.fxml", dashboardButton.getId(), currentScene);
             MenuController.onDestroy = ((DashboardController) loader.getController()).afterInitialize();
         } else if (event.getSource() == bicyclesButton) {
-            MenuController.showWindow("BikeTable.fxml", bicyclesButton.getId(), currentScene);
+            FXMLLoader loader = MenuController.showWindow("BikeTable.fxml", bicyclesButton.getId(), currentScene);
+            ((BikeController) loader.getController()).afterInitialize();
         } else if (event.getSource() == notificationsButton) {
             MenuController.showWindow("Notifications.fxml", notificationsButton.getId(), currentScene);
         } else if (event.getSource() == agentsButton) {

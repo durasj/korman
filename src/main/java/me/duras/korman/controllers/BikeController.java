@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 import me.duras.korman.*;
 import me.duras.korman.dao.ArchivedBicycleDao;
@@ -112,10 +113,6 @@ public class BikeController implements Initializable {
                 }
             }
         });
-
-        // TODO: Figure out why this doesn't work
-        // System.out.println(bikeTablePagin.getScene().getHeight());
-        loadList(false);
 
         bikeTablePagin.setOnMouseClicked((MouseEvent event) -> {
             showBike();
@@ -217,6 +214,22 @@ public class BikeController implements Initializable {
 
     public void onSearch(ActionEvent event){
         System.out.println("test") ;
+    }
+
+    public void afterInitialize() {
+        double height = bikeTablePagin.getHeight();
+        System.out.println("Height");
+        System.out.println(height);
+
+        Stage stage = (Stage) bikeTablePagin.getScene().getWindow();
+        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            System.out.println("New height");
+            System.out.println(newVal);
+            // SKONTROLUJ CI ROZDIEL JE DOSTATOCNE VELKY NA TO ABY SA ZMENIL POCET RIADKOV
+            // INAK BUDEME NACITAVAT PRILIS CASTO LEBO SA CASTO TRIGGUJE TENTO EVENT
+        });
+
+        loadList(false);
     }
 
     private <T extends Bicycle> List<T> filterBikes(List<T> bicycles, String search) {
