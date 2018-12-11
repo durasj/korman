@@ -42,6 +42,7 @@ public class Bicycle {
         this.price = price;
         this.modelYear = modelYear;
         this.url = url;
+        this.photoUrl = photoUrl;
         this.createdAt = createdAt;
     }
 
