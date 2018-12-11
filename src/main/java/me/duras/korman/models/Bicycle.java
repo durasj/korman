@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Bicycle {
 
+    final static public String[] sizes = { "2XS", "XS", "S", "M", "L", "XL", "2XL" };
+
     private int id;
     private String externalId;
     private BicycleCategory category;

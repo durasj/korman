@@ -18,19 +18,19 @@ class Utils {
     public static String getUserDataPath(String osName) {
         String workingDirectory;
 
-        if (osName == "windows") {
+        if (osName.equals("windows")) {
             workingDirectory = System.getenv("AppData");
 
             return workingDirectory + "\\Korman";
         }
 
-        if (osName == "mac") {
+        if (osName.equals("mac")) {
             workingDirectory = System.getProperty("user.home") + "/Library/Application Support";
 
             return workingDirectory + "/me.duras.korman";
         }
 
-        if (osName == "linux") {
+        if (osName.equals("linux")) {
             workingDirectory = System.getProperty("user.home");
 
             return workingDirectory + "/.korman";

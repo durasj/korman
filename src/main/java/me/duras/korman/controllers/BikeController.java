@@ -1,11 +1,21 @@
 package me.duras.korman.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
+
+import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,9 +28,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 
 import me.duras.korman.*;
 import me.duras.korman.dao.ArchivedBicycleDao;
+import me.duras.korman.dao.BicycleCategoryDao;
 import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.models.ArchivedBicycle;
 import me.duras.korman.models.Bicycle;
@@ -33,6 +46,7 @@ public class BikeController implements Initializable {
     private ObservableList<Bicycle> bicycles = FXCollections.observableArrayList();
     private BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
     private ArchivedBicycleDao archivedDao = DaoFactory.INSTANCE.getArchivedBicycleDao();
+    private BicycleCategoryDao categoryDao = DaoFactory.INSTANCE.getBicycleCategoryDao();
 
     @FXML
     private JFXButton fetchBicyclesButton;
@@ -50,17 +64,40 @@ public class BikeController implements Initializable {
     private Pagination bikePagin;
 
     @FXML
+    private JFXTextField searchBike;
+
+    private Set<String> possibleCategories;
+    private Set<String> possibleSizes;
+    private Pattern priceRangePattern = Pattern.compile("(\\d+)-(\\d+)");
+    private Pattern modelYearPattern = Pattern.compile("2\\d{3}");
+
+    private final int FILTER_CATEGORY = 1;
+    private final int FILTER_SIZE = 2;
+    private final int FILTER_GENDER = 3;
+    private final int FILTER_RANGE = 4;
+    private final int FILTER_MODEL_YEAR = 5;
+    private final int FILTER_SERIES = 6;
+
+    @FXML
     void fetchBicycles() {
         (new BicycleChecking()).fetchAll();
     }
 
-    @FXML
-    public void searchBicykle() {
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        possibleCategories = categoryDao.getAll().stream()
+            .map((category) -> category.getName().toLowerCase())
+            .collect(Collectors.toSet());
+
+        possibleSizes = Arrays.stream(Bicycle.sizes)
+            .map((size) -> size.toLowerCase())
+            .collect(Collectors.toSet());
+
+        searchBike.setOnKeyPressed((KeyEvent ke) -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                loadList(archivedButton.isSelected());
+            }
+        });
 
         bikeTablePagin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -88,16 +125,20 @@ public class BikeController implements Initializable {
     private void loadList(boolean isArchived) {
         bicycles.clear();
 
+        String search = searchBike.getText();
+
         if (!isArchived) {
             List<Bicycle> list = dao.getAll();
-            for (Bicycle bike : list) {
-                bicycles.add(bike);
+            if (!search.equals("")) {
+                list = filterBikes(list, search);
             }
+            bicycles.addAll(list);
         } else {
             List<ArchivedBicycle> list = archivedDao.getAll();
-            for (ArchivedBicycle bike : list) {
-                bicycles.add(bike);
+            if (!search.equals("")) {
+                list = filterBikes(list, search);
             }
+            bicycles.addAll(list);
         }
 
         bikePagin.setPageCount(bicycles.size() / rowsPerPage() + 1);
@@ -172,5 +213,104 @@ public class BikeController implements Initializable {
 
             controller.setBicycle(selectedBicycle);
         }
+    }
+
+    public void onSearch(ActionEvent event){
+        System.out.println("test") ;
+    }
+
+    private <T extends Bicycle> List<T> filterBikes(List<T> bicycles, String search) {
+        // Process conditions
+        List<Object[]> conditions = Arrays.stream(search.split(","))
+            .map((token) -> {
+                token = token.trim().toLowerCase();
+                // Check for one the categories
+                if (possibleCategories.contains(token)) {
+                    Object[] condition = { FILTER_CATEGORY, token };
+                    return condition;
+                }
+
+                // Check for Size
+                if (possibleSizes.contains(token)) {
+                    Object[] condition = { FILTER_SIZE, token };
+                    return condition;
+                }
+
+                // Check for woman/man
+                if (token.equals("man") || token.equals("woman")) {
+                    Object[] condition = { FILTER_GENDER, token };
+                    return condition;
+                }
+
+                // Check for price range
+                Matcher rangeMatcher = priceRangePattern.matcher(token);
+                if (rangeMatcher.find()) {
+                    Object[] condition = { FILTER_RANGE, rangeMatcher.group(1), rangeMatcher.group(2) };
+                    return condition;
+                }
+
+                // Check for model year
+                Matcher yearMatcher = modelYearPattern.matcher(token);
+                if (yearMatcher.find()) {
+                    Object[] condition = { FILTER_MODEL_YEAR, token };
+                    return condition;
+                }
+
+                // Else it's series
+                Object[] condition = { FILTER_SERIES, token };
+                return condition;
+            })
+            .collect(Collectors.toList());
+
+        // Filter bicycles
+        return bicycles.stream()
+            .filter((bicycle) -> {
+                for (Object[] condition : conditions) {
+                    switch ((int) condition[0]) {
+                        case FILTER_CATEGORY:
+                            if (!bicycle.getCategory().getName().toLowerCase().equals(condition[1])) {
+                                return false;
+                            }
+                            break;
+
+                        case FILTER_SIZE:
+                            if (!bicycle.getSize().toLowerCase().equals(condition[1])) {
+                                return false;
+                            }
+                            break;
+
+                        case FILTER_GENDER:
+                            if (!(bicycle.isWmn() ? "woman" : "man").equals(condition[1])) {
+                                return false;
+                            }
+                            break;
+
+                        case FILTER_RANGE:
+                            int price = Math.round(bicycle.getPrice() / 100);
+                            int minPrice = Integer.parseInt((String) condition[1]);
+                            int maxPrice = Integer.parseInt((String) condition[2]);
+                            if (price < minPrice || price > maxPrice) {
+                                return false;
+                            }
+                            break;
+
+                        case FILTER_MODEL_YEAR:
+                            if (!String.valueOf(bicycle.getModelYear()).equals(condition[1])) {
+                                return false;
+                            }
+                            break;
+
+                        case FILTER_SERIES:
+                            String series = bicycle.getSeries();
+                            if (series != null && !series.toLowerCase().contains((String) condition[1])) {
+                                return false;
+                            }
+                            break;
+                    }
+                }
+
+                return true;
+            })
+            .collect(Collectors.toList());
     }
 }

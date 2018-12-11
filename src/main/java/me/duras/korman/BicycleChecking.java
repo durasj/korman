@@ -49,7 +49,7 @@ public class BicycleChecking {
         String externalId = el.attr("data-id");
         String series = el.attr("data-series");
         String size = el.attr("data-size").replaceAll("\\|", "");
-        boolean wmn = el.attr("data-wmn") == "1";
+        boolean wmn = el.attr("data-wmn").equals("1");
         int price = Integer.parseInt(el.attr("data-price"));
         int year = Integer.parseInt(el.attr("data-year"));
         int diff = Integer.parseInt(el.attr("data-diff"));
@@ -222,7 +222,7 @@ public class BicycleChecking {
                         }
 
                         if (agent.getSeries() != null && !agent.getSeries().equals("") &&
-                            (bicycle.getSeries().toLowerCase().contains(agent.getSeries().toLowerCase()))) {
+                            !(bicycle.getSeries().toLowerCase().contains(agent.getSeries().toLowerCase()))) {
                             return false;
                         }
 
@@ -239,7 +239,7 @@ public class BicycleChecking {
                             return false;
                         }
 
-                        if ((bicycle.getDiff() / 100) < agent.getMinDiff()) {
+                        if ((bicycle.getDiff() / 100) <= agent.getMinDiff()) {
                             return false;
                         }
 
@@ -259,7 +259,7 @@ public class BicycleChecking {
 
                 notificationDao.saveMany(notifications);
                 String email = agent.getEmail();
-                if (email != null && !email.equals("")) {
+                if (email != null && !email.equals("") && notifications.size() > 0) {
                     sendEmail(notifications, email);
                 }
             });
@@ -308,7 +308,6 @@ public class BicycleChecking {
 
             try {
                 emailing.sendEmail(email, emailTitle, emailContent);
-                // TODO: Sending emails duplicates records
                 for (Notification notification : notifications) {
                     notification.setEmailSent(true);
                     notificationDao.save(notification);

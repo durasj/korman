@@ -45,6 +45,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button bicyclesLinkCard, notificationsLinkCard, agentsLinkCard, settingsLinkCard, logsLinkCard;
 
+    @FXML
+    private Label latestNotificationsCount;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Button[] linkCards = {bicyclesLinkCard, notificationsLinkCard, agentsLinkCard, settingsLinkCard, logsLinkCard};
@@ -64,6 +67,8 @@ public class DashboardController implements Initializable {
             }
         };
         timer.schedule(task, 0L, 1000L);
+
+        latestNotificationsCount.setVisible(false);
     }
 
     public Runnable afterInitialize() {
@@ -81,14 +86,16 @@ public class DashboardController implements Initializable {
 
         for (Notification notification : list) {
             items.add(0, getNotificationText(notification));
+            if (items.size() > 9) {
+                items.remove(9);
+            }
         }
 
         this.lastCheck = new Date();
     }
 
     private void loadNew() {
-        // TODO
-        List<Notification> list = new ArrayList()/*dao.getNew(this.lastCheck)*/;
+        List<Notification> list = dao.getNew(this.lastCheck);
 
         for (Notification notification : list) {
             Optional<String> duplicate = items.stream()
@@ -96,19 +103,31 @@ public class DashboardController implements Initializable {
                 .findFirst();
 
             if (duplicate.isPresent()) {
+                list.remove(notification);
                 continue;
             }
 
             items.add(0, getNotificationText(notification));
+            if (items.size() > 9) {
+                items.remove(9);
+            }
         }
 
-        this.lastCheck = new Date();
+        int newCount = list.size();
+        if (newCount > 0) {
+            String currentCount = latestNotificationsCount.getText();
+            latestNotificationsCount.setText(String.valueOf(Integer.parseInt(currentCount) + newCount));
+            latestNotificationsCount.setVisible(true);
+            this.lastCheck = new Date();
+        }
     }
 
     private String getNotificationText(Notification notification) {
         String categoryName = notification.getBicycle().getCategory().getName();
         String series = notification.getBicycle().getSeries();
-        return categoryName + " " + series + " - ";
+        String agentName = notification.getAgent().getName();
+        String agentEmail = notification.getAgent().getEmail();
+        return categoryName + " " + series + " for " + agentName + " " + agentEmail;
     }
 
     @FXML

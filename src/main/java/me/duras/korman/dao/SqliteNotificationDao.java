@@ -49,6 +49,13 @@ public class SqliteNotificationDao implements NotificationDao {
     }
 
     @Override
+    public List<Notification> getNew(Date from) {
+        String sql = "SELECT " + SqliteNotificationDao.columns + " FROM notification n WHERE createdAt >= ?";
+
+        return jdbcTemplate.query(sql, this.mapper, new Object[] { (int) (from.getTime() / 1000) });
+    }
+
+    @Override
     public Notification getById(int id) {
         String sql = "SELECT " + SqliteNotificationDao.columns
                 + " FROM notification n";
