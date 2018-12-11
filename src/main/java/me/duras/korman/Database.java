@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -36,17 +38,25 @@ public class Database {
         } catch (URISyntaxException e) {
             file = new File(initialUrl.getPath());
         } finally {
-            Files.copy(file.toPath(), (new File(target).toPath()));
+            copyInitial(file.toPath(), (new File(target).toPath()));
         }
+    }
+
+    public static void copyInitial(Path initial, Path target) throws IOException {
+        Files.copy(initial, target, StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
      * Connect to database
      */
     public Connection connect() {
+        return connect(Utils.getUserDataPath() + File.separator + Database.DB_FILE_NAME);
+    }
+
+    public Connection connect(String dbPath) {
         try {
             String connectionUrl =
-                "jdbc:sqlite:" + Utils.getUserDataPath() + File.separator + Database.DB_FILE_NAME;
+                "jdbc:sqlite:" + dbPath;
 
                 DriverManagerDataSource dataSource = new DriverManagerDataSource();
                 dataSource.setDriverClassName("org.sqlite.JDBC");

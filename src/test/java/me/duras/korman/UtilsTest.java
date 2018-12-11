@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import junit.framework.TestCase;
+
 @DisplayName("Utils")
-class UtilsTest {
+public class UtilsTest extends TestCase {
 
     @Test
     @DisplayName("Give correct user data path for each OS")
-    void testUserDataPath() {
+    public void testUserDataPath() {
         String windowsDataPath = Utils.getUserDataPath("windows");
         assertTrue(windowsDataPath.matches(".*\\\\Korman"));
 

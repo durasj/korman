@@ -28,7 +28,13 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <JFXTextField fx:id="searchBike" layoutY="16.0" prefHeight="30.0" prefWidth="240.0" promptText="Type keywords and press enter to search" AnchorPane.rightAnchor="166.0"/>
+                        <JFXToggleButton fx:id="archivedButton" contentDisplay="RIGHT" prefHeight="40.0" prefWidth="60.0" toggleColor="#f7b538" toggleLineColor="#f6ac23" AnchorPane.rightAnchor="540.0" AnchorPane.topAnchor="2.0" />
+                        <Label layoutX="429.0" layoutY="21.0" text="Archived" AnchorPane.rightAnchor="600.0">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <JFXTextField fx:id="searchBike" layoutY="16.0" prefHeight="30.0" prefWidth="340.0" promptText="Type keywords delimited by comma and press enter to search" AnchorPane.rightAnchor="166.0"/>
                         <JFXButton fx:id="fetchBicyclesButton" layoutY="10.0" mnemonicParsing="false" onAction="#fetchBicycles" prefHeight="40.0" prefWidth="120.0" text="Refresh" AnchorPane.rightAnchor="24.0" />
                         <Pagination fx:id="bikePagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
                         <TableView fx:id="bikeTablePagin" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
@@ -43,12 +49,6 @@
                                 <TableColumn fx:id="bikeArch" minWidth="110" prefWidth="110" text="Archived" visible="false" />
                             </columns>
                         </TableView>
-                        <JFXToggleButton fx:id="archivedButton" contentDisplay="RIGHT" prefHeight="40.0" prefWidth="60.0" toggleColor="#f7b538" toggleLineColor="#f6ac23" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="2.0" />
-                        <Label layoutX="429.0" layoutY="21.0" text="Archived" AnchorPane.rightAnchor="500.0">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
                     </children>
                 </AnchorPane>
             </children>
