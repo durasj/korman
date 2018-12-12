@@ -111,6 +111,17 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="showDetails" layoutY="10.0" onAction="#showDetails" prefHeight="40.0" prefWidth="160.0" text="Open in browser" AnchorPane.rightAnchor="158.0" />
+                  <Label layoutX="700.0" layoutY="470.0" text="Archived at:" visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="archivedAt" layoutX="820.0" layoutY="470.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                     </children>
                 </AnchorPane>  
             </children>

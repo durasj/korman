@@ -7,14 +7,17 @@ import javafx.fxml.FXML;
 
 import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import javafx.beans.property.SimpleStringProperty;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,6 +51,7 @@ public class BikeController implements Initializable {
     private BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
     private ArchivedBicycleDao archivedDao = DaoFactory.INSTANCE.getArchivedBicycleDao();
     private BicycleCategoryDao categoryDao = DaoFactory.INSTANCE.getBicycleCategoryDao();
+    private int rows;
 
     @FXML
     private JFXButton fetchBicyclesButton;
@@ -87,12 +91,12 @@ public class BikeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         possibleCategories = categoryDao.getAll().stream()
-            .map((category) -> category.getName().toLowerCase())
-            .collect(Collectors.toSet());
+                .map((category) -> category.getName().toLowerCase())
+                .collect(Collectors.toSet());
 
         possibleSizes = Arrays.stream(Bicycle.sizes)
-            .map((size) -> size.toLowerCase())
-            .collect(Collectors.toSet());
+                .map((size) -> size.toLowerCase())
+                .collect(Collectors.toSet());
 
         searchBike.setOnKeyPressed((KeyEvent ke) -> {
             if (ke.getCode().equals(KeyCode.ENTER)) {
@@ -138,11 +142,11 @@ public class BikeController implements Initializable {
             bicycles.addAll(list);
         }
 
-        bikePagin.setPageCount(bicycles.size() / rowsPerPage() + 1);
+        bikePagin.setPageCount(bicycles.size() / rowsPerPage(false) + 1);
         bikePagin.setPageFactory(new Callback<Integer, Node>() {
             @Override
             public Node call(Integer pageIndex) {
-                if (pageIndex > bicycles.size() / rowsPerPage() + 1) {
+                if (pageIndex > bicycles.size() / rowsPerPage(false) + 1) {
                     return null;
                 } else {
                     return createPage(pageIndex);
@@ -155,22 +159,28 @@ public class BikeController implements Initializable {
         return 1;
     }
 
-    public int rowsPerPage() {
-        int rows = 6;
+    public int rowsPerPage(boolean zmenaOkna) {
+        if (!zmenaOkna) {
+            rows = 6;
+        } else {
+        }
 
         return rows;
     }
 
     public VBox createPage(int pageIndex) {
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.GERMANY);
+
         int lastIndex = 0;
 
-        int displace = bicycles.size() % rowsPerPage();
-        
+        int displace = bicycles.size() % rowsPerPage(false);
+
         if (bicycles.size() != 0) {
             if (displace > 0) {
-                lastIndex = bicycles.size() / rowsPerPage();
+                lastIndex = bicycles.size() / rowsPerPage(false);
             } else {
-                lastIndex = bicycles.size() / rowsPerPage() - 1;
+                lastIndex = bicycles.size() / rowsPerPage(false) - 1;
             }
         } else {
             lastIndex = 0;
@@ -179,22 +189,54 @@ public class BikeController implements Initializable {
         VBox box = new VBox();
         int page = pageIndex * itemsPerPage();
 
-        bikeCategory.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("category"));
+        bikeCategory.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bicycle, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Bicycle, String> arg0) {
+                Bicycle bike = arg0.getValue();
+
+                return new SimpleStringProperty(bike.getCategory().getName());
+            }
+        });
+
+        bikeWmn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bicycle, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Bicycle, String> arg0) {
+                Bicycle bike = arg0.getValue();
+
+                return new SimpleStringProperty(bike.isWmn() ? "Yes" : "No");
+            }
+        });
+
+        bikePrice.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bicycle, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Bicycle, String> arg0) {
+                Bicycle bike = arg0.getValue();
+
+                return new SimpleStringProperty(format.format(bike.getPrice() / 100));
+            }
+        });
+
+        bikeDiff.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bicycle, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Bicycle, String> arg0) {
+                Bicycle bike = arg0.getValue();
+
+                return new SimpleStringProperty(format.format(bike.getDiff() / 100));
+            }
+        });
+
         bikeSeries.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("series"));
         bikeSize.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("size"));
-        bikeWmn.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("wmn"));
-        bikePrice.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("price"));
-        bikeDiff.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("diff"));
         bikeYear.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("modelYear"));
         bikeArch.setCellValueFactory(new PropertyValueFactory<Bicycle, String>("archivedAt"));
 
         for (int i = page; i < page + itemsPerPage(); i++) {
             if (lastIndex == pageIndex) {
                 bikeTablePagin.setItems(FXCollections.observableArrayList(
-                        bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + displace)));
+                        bicycles.subList(pageIndex * rowsPerPage(false), pageIndex * rowsPerPage(false) + displace)));
             } else {
                 bikeTablePagin.setItems(FXCollections.observableArrayList(
-                        bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
+                        bicycles.subList(pageIndex * rowsPerPage(false), pageIndex * rowsPerPage(false) + rowsPerPage(false))));
             }
             box.getChildren().add(bikeTablePagin);
         }
@@ -212,19 +254,21 @@ public class BikeController implements Initializable {
         }
     }
 
-    public void onSearch(ActionEvent event){
-        System.out.println("test") ;
+    public void onSearch(ActionEvent event) {
+        System.out.println("test");
     }
 
     public void afterInitialize() {
-        double height = bikeTablePagin.getHeight();
-        System.out.println("Height");
-        System.out.println(height);
-
         Stage stage = (Stage) bikeTablePagin.getScene().getWindow();
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            System.out.println("New height");
-            System.out.println(newVal);
+
+            double oldValue = ((Number) oldVal).doubleValue();
+            double newValue = ((Number) newVal).doubleValue();
+            if ((newValue - oldValue) > 100) {
+                rows = (int) newValue / 107;
+                System.out.println(rows);
+                loadList(false);
+            }
             // SKONTROLUJ CI ROZDIEL JE DOSTATOCNE VELKY NA TO ABY SA ZMENIL POCET RIADKOV
             // INAK BUDEME NACITAVAT PRILIS CASTO LEBO SA CASTO TRIGGUJE TENTO EVENT
         });
@@ -235,95 +279,95 @@ public class BikeController implements Initializable {
     private <T extends Bicycle> List<T> filterBikes(List<T> bicycles, String search) {
         // Process conditions
         List<Object[]> conditions = Arrays.stream(search.split(","))
-            .map((token) -> {
-                token = token.trim().toLowerCase();
-                // Check for one the categories
-                if (possibleCategories.contains(token)) {
-                    Object[] condition = { FILTER_CATEGORY, token };
-                    return condition;
-                }
+                .map((token) -> {
+                    token = token.trim().toLowerCase();
+                    // Check for one the categories
+                    if (possibleCategories.contains(token)) {
+                        Object[] condition = {FILTER_CATEGORY, token};
+                        return condition;
+                    }
 
-                // Check for Size
-                if (possibleSizes.contains(token)) {
-                    Object[] condition = { FILTER_SIZE, token };
-                    return condition;
-                }
+                    // Check for Size
+                    if (possibleSizes.contains(token)) {
+                        Object[] condition = {FILTER_SIZE, token};
+                        return condition;
+                    }
 
-                // Check for woman/man
-                if (token.equals("man") || token.equals("woman")) {
-                    Object[] condition = { FILTER_GENDER, token };
-                    return condition;
-                }
+                    // Check for woman/man
+                    if (token.equals("man") || token.equals("woman")) {
+                        Object[] condition = {FILTER_GENDER, token};
+                        return condition;
+                    }
 
-                // Check for price range
-                Matcher rangeMatcher = priceRangePattern.matcher(token);
-                if (rangeMatcher.find()) {
-                    Object[] condition = { FILTER_RANGE, rangeMatcher.group(1), rangeMatcher.group(2) };
-                    return condition;
-                }
+                    // Check for price range
+                    Matcher rangeMatcher = priceRangePattern.matcher(token);
+                    if (rangeMatcher.find()) {
+                        Object[] condition = {FILTER_RANGE, rangeMatcher.group(1), rangeMatcher.group(2)};
+                        return condition;
+                    }
 
-                // Check for model year
-                Matcher yearMatcher = modelYearPattern.matcher(token);
-                if (yearMatcher.find()) {
-                    Object[] condition = { FILTER_MODEL_YEAR, token };
-                    return condition;
-                }
+                    // Check for model year
+                    Matcher yearMatcher = modelYearPattern.matcher(token);
+                    if (yearMatcher.find()) {
+                        Object[] condition = {FILTER_MODEL_YEAR, token};
+                        return condition;
+                    }
 
-                // Else it's series
-                Object[] condition = { FILTER_SERIES, token };
-                return condition;
-            })
-            .collect(Collectors.toList());
+                    // Else it's series
+                    Object[] condition = {FILTER_SERIES, token};
+                    return condition;
+                })
+                .collect(Collectors.toList());
 
         // Filter bicycles
         return bicycles.stream()
-            .filter((bicycle) -> {
-                for (Object[] condition : conditions) {
-                    switch ((int) condition[0]) {
-                        case FILTER_CATEGORY:
-                            if (!bicycle.getCategory().getName().toLowerCase().equals(condition[1])) {
-                                return false;
-                            }
-                            break;
+                .filter((bicycle) -> {
+                    for (Object[] condition : conditions) {
+                        switch ((int) condition[0]) {
+                            case FILTER_CATEGORY:
+                                if (!bicycle.getCategory().getName().toLowerCase().equals(condition[1])) {
+                                    return false;
+                                }
+                                break;
 
-                        case FILTER_SIZE:
-                            if (!bicycle.getSize().toLowerCase().equals(condition[1])) {
-                                return false;
-                            }
-                            break;
+                            case FILTER_SIZE:
+                                if (!bicycle.getSize().toLowerCase().equals(condition[1])) {
+                                    return false;
+                                }
+                                break;
 
-                        case FILTER_GENDER:
-                            if (!(bicycle.isWmn() ? "woman" : "man").equals(condition[1])) {
-                                return false;
-                            }
-                            break;
+                            case FILTER_GENDER:
+                                if (!(bicycle.isWmn() ? "woman" : "man").equals(condition[1])) {
+                                    return false;
+                                }
+                                break;
 
-                        case FILTER_RANGE:
-                            int price = Math.round(bicycle.getPrice() / 100);
-                            int minPrice = Integer.parseInt((String) condition[1]);
-                            int maxPrice = Integer.parseInt((String) condition[2]);
-                            if (price < minPrice || price > maxPrice) {
-                                return false;
-                            }
-                            break;
+                            case FILTER_RANGE:
+                                int price = Math.round(bicycle.getPrice() / 100);
+                                int minPrice = Integer.parseInt((String) condition[1]);
+                                int maxPrice = Integer.parseInt((String) condition[2]);
+                                if (price < minPrice || price > maxPrice) {
+                                    return false;
+                                }
+                                break;
 
-                        case FILTER_MODEL_YEAR:
-                            if (!String.valueOf(bicycle.getModelYear()).equals(condition[1])) {
-                                return false;
-                            }
-                            break;
+                            case FILTER_MODEL_YEAR:
+                                if (!String.valueOf(bicycle.getModelYear()).equals(condition[1])) {
+                                    return false;
+                                }
+                                break;
 
-                        case FILTER_SERIES:
-                            String series = bicycle.getSeries();
-                            if (series != null && !series.toLowerCase().contains((String) condition[1])) {
-                                return false;
-                            }
-                            break;
+                            case FILTER_SERIES:
+                                String series = bicycle.getSeries();
+                                if (series != null && !series.toLowerCase().contains((String) condition[1])) {
+                                    return false;
+                                }
+                                break;
+                        }
                     }
-                }
 
-                return true;
-            })
-            .collect(Collectors.toList());
+                    return true;
+                })
+                .collect(Collectors.toList());
     }
 }
