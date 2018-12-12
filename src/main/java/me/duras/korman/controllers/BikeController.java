@@ -51,7 +51,9 @@ public class BikeController implements Initializable {
     private BicycleDao dao = DaoFactory.INSTANCE.getBicycleDao();
     private ArchivedBicycleDao archivedDao = DaoFactory.INSTANCE.getArchivedBicycleDao();
     private BicycleCategoryDao categoryDao = DaoFactory.INSTANCE.getBicycleCategoryDao();
-    private int rows;
+    private int rows = 6;
+    private double height;
+    private boolean archived;
 
     @FXML
     private JFXButton fetchBicyclesButton;
@@ -110,10 +112,12 @@ public class BikeController implements Initializable {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
                 if (!archivedButton.isSelected()) {
                     bikeArch.setVisible(false);
-                    loadList(false);
+                    archived = false;
+                    loadList(archived);
                 } else {
                     bikeArch.setVisible(true);
-                    loadList(true);
+                    archived = true;
+                    loadList(archived);
                 }
             }
         });
@@ -142,11 +146,11 @@ public class BikeController implements Initializable {
             bicycles.addAll(list);
         }
 
-        bikePagin.setPageCount(bicycles.size() / rowsPerPage(false) + 1);
+        bikePagin.setPageCount(bicycles.size() / rowsPerPage() + 1);
         bikePagin.setPageFactory(new Callback<Integer, Node>() {
             @Override
             public Node call(Integer pageIndex) {
-                if (pageIndex > bicycles.size() / rowsPerPage(false) + 1) {
+                if (pageIndex > bicycles.size() / rowsPerPage() + 1) {
                     return null;
                 } else {
                     return createPage(pageIndex);
@@ -159,12 +163,7 @@ public class BikeController implements Initializable {
         return 1;
     }
 
-    public int rowsPerPage(boolean zmenaOkna) {
-        if (!zmenaOkna) {
-            rows = 6;
-        } else {
-        }
-
+    public int rowsPerPage() {
         return rows;
     }
 
@@ -174,13 +173,13 @@ public class BikeController implements Initializable {
 
         int lastIndex = 0;
 
-        int displace = bicycles.size() % rowsPerPage(false);
+        int displace = bicycles.size() % rowsPerPage();
 
         if (bicycles.size() != 0) {
             if (displace > 0) {
-                lastIndex = bicycles.size() / rowsPerPage(false);
+                lastIndex = bicycles.size() / rowsPerPage();
             } else {
-                lastIndex = bicycles.size() / rowsPerPage(false) - 1;
+                lastIndex = bicycles.size() / rowsPerPage() - 1;
             }
         } else {
             lastIndex = 0;
@@ -233,10 +232,10 @@ public class BikeController implements Initializable {
         for (int i = page; i < page + itemsPerPage(); i++) {
             if (lastIndex == pageIndex) {
                 bikeTablePagin.setItems(FXCollections.observableArrayList(
-                        bicycles.subList(pageIndex * rowsPerPage(false), pageIndex * rowsPerPage(false) + displace)));
+                        bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + displace)));
             } else {
                 bikeTablePagin.setItems(FXCollections.observableArrayList(
-                        bicycles.subList(pageIndex * rowsPerPage(false), pageIndex * rowsPerPage(false) + rowsPerPage(false))));
+                        bicycles.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
             }
             box.getChildren().add(bikeTablePagin);
         }
@@ -260,20 +259,26 @@ public class BikeController implements Initializable {
 
     public void afterInitialize() {
         Stage stage = (Stage) bikeTablePagin.getScene().getWindow();
+        height = stage.getHeight();
+
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
 
             double oldValue = ((Number) oldVal).doubleValue();
             double newValue = ((Number) newVal).doubleValue();
-            if ((newValue - oldValue) > 100) {
-                rows = (int) newValue / 107;
-                System.out.println(rows);
-                loadList(false);
+            System.out.println("archivovane " + archived);
+            if ((newValue - height) > 100) {
+                height = newValue;
+                rows = (int) height / 70;
+                loadList(archived);
+                System.out.println("+ " + archived);
+            } else if ((height - newValue) > 80) {
+                height = newValue;
+                rows = (int) height / 100;
+                loadList(archived);
+                System.out.println("-" + archived);
             }
-            // SKONTROLUJ CI ROZDIEL JE DOSTATOCNE VELKY NA TO ABY SA ZMENIL POCET RIADKOV
-            // INAK BUDEME NACITAVAT PRILIS CASTO LEBO SA CASTO TRIGGUJE TENTO EVENT
         });
-
-        loadList(false);
+        loadList(archived);
     }
 
     private <T extends Bicycle> List<T> filterBikes(List<T> bicycles, String search) {

@@ -30,7 +30,7 @@
             <children>
                 <AnchorPane id="bicycleView" fx:id="bicycleView" prefHeight="552.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0"> 
                     <children>
-                        <Label layoutX="24.0" layoutY="16.0" text="Bicycle">
+                        <Label fx:id="bikeName" layoutX="24.0" layoutY="16.0" text="Bicycle">
                             <font>
                                 <Font size="18.0" />
                             </font>

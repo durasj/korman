@@ -26,7 +26,7 @@
                         <JFXButton fx:id="deleteNotif" layoutY="10.0" mnemonicParsing="false" onAction="#deleteNotif" prefHeight="40.0" prefWidth="90.0" text="Delete" AnchorPane.rightAnchor="158.0" />
                         <JFXButton fx:id="sendEmailNotif" layoutY="10.0" mnemonicParsing="false" onAction="#sendEmail" prefHeight="40.0" prefWidth="120.0" text="Send email" AnchorPane.rightAnchor="24.0" />
                         <Pagination fx:id="notifPagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
-                        <TableView fx:id="notifTablePagin" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                        <TableView fx:id="notifTablePagin" prefHeight="1200.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                             <columns>
                                 <TableColumn fx:id="checkBox" minWidth="32.0" prefWidth="32.0" />
                                 <TableColumn fx:id="notifAgent" minWidth="110" prefWidth="110" text="Agent name" />

@@ -36,8 +36,8 @@
                         </Label>
                         <JFXTextField fx:id="searchBike" layoutY="16.0" prefHeight="30.0" prefWidth="340.0" promptText="Type keywords delimited by comma and press enter to search" AnchorPane.rightAnchor="166.0" />
                         <JFXButton fx:id="fetchBicyclesButton" layoutY="10.0" mnemonicParsing="false" onAction="#fetchBicycles" prefHeight="40.0" prefWidth="120.0" text="Refresh" AnchorPane.rightAnchor="24.0" />
-                        <Pagination fx:id="bikePagin" prefHeight="464.0" prefWidth="912.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
-                        <TableView fx:id="bikeTablePagin" prefHeight="960.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                        <Pagination fx:id="bikePagin" prefWidth="912.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
+                        <TableView fx:id="bikeTablePagin" prefHeight="1200.0" prefWidth="912.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                             <columns>
                                 <TableColumn fx:id="bikeCategory" minWidth="70.0" prefWidth="70.0" text="Category" />
                                 <TableColumn fx:id="bikeSeries" minWidth="110" prefWidth="110" text="Series" />

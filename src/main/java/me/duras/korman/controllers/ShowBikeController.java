@@ -59,10 +59,10 @@ public class ShowBikeController implements Initializable {
             bikePic.setImage(image);
         }
 
-        category.setText(bicycle.getSeries());
+        category.setText(bicycle.getCategory().getName());
         series.setText(bicycle.getSeries());
         size.setText(bicycle.getSize());
-        wmn.setText(bicycle.getSize());
+        wmn.setText(bicycle.isWmn() ? "Yes" : "No");
         price.setText(String.valueOf(format.format(bicycle.getPrice() / 100)));
         difference.setText(String.valueOf(format.format(bicycle.getDiff() / 100)));
         year.setText(String.valueOf(bicycle.getModelYear()));
