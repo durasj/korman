@@ -3,12 +3,12 @@ package me.duras.korman.controllers;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import me.duras.korman.models.Bicycle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -20,15 +20,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import me.duras.korman.BicycleChecking;
 import me.duras.korman.DaoFactory;
-import me.duras.korman.dao.BicycleDao;
 import me.duras.korman.dao.NotificationDao;
 import me.duras.korman.models.*;
 
@@ -36,6 +34,7 @@ public class NotifController implements Initializable {
 
     private ObservableList<Notification> notifications = FXCollections.observableArrayList();
     private Set<Notification> deleteList = new HashSet<Notification>();
+    private List<Notification> sendEmailList = new ArrayList<Notification>();
     private NotificationDao dao = DaoFactory.INSTANCE.getNotificationDao();
     private int rows = 6;
     private double height;
@@ -62,6 +61,18 @@ public class NotifController implements Initializable {
         loadList();
     }
 
+    @FXML
+    public void sendEmail() {
+        BicycleChecking checking = new BicycleChecking();
+        
+        //NEDOKONCENE
+        for (Notification notif : sendEmailList) {
+            checking.sendEmail(sendEmailList, notif.getAgent().getEmail());
+        }
+        sendEmailList.clear();
+        loadList();
+    }
+
     public void loadList() {
         notifications.clear();
         List<Notification> list = dao.getAll();
@@ -81,10 +92,6 @@ public class NotifController implements Initializable {
                 }
             }
         });
-    }
-
-    @FXML
-    public void sendEmail() {
     }
 
     @Override
@@ -110,9 +117,11 @@ public class NotifController implements Initializable {
                 checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
                         if (checkBox.isSelected()) {
+                            sendEmailList.add(notification);
                             deleteList.add(notification);
                             deleteNotif.setDisable(false);
                         } else {
+                            sendEmailList.remove(notification);
                             deleteList.remove(notification);
                             if (deleteList.size() == 0) {
                                 deleteNotif.setDisable(true);
