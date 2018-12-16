@@ -66,10 +66,10 @@ public class ShowBikeController implements Initializable {
         price.setText(String.valueOf(format.format(bicycle.getPrice() / 100)));
         difference.setText(String.valueOf(format.format(bicycle.getDiff() / 100)));
         year.setText(String.valueOf(bicycle.getModelYear()));
+    }
 
-        /*if (String.valueOf(archivedBicycle.getArchivedAt()) != null) {
-            archivedAt.setVisible(true);
-            archivedAt.setText(String.valueOf(archivedBicycle.getArchivedAt()));
-        }*/
+    public void setArchivedBicycle(ArchivedBicycle bicycle) {
+        archivedAt.setVisible(true);
+        archivedAt.setText(String.valueOf(archivedBicycle.getArchivedAt()));
     }
 }

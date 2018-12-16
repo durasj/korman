@@ -9,9 +9,11 @@ import javafx.fxml.FXML;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.beans.property.SimpleObjectProperty;
@@ -64,11 +66,28 @@ public class NotifController implements Initializable {
     @FXML
     public void sendEmail() {
         BicycleChecking checking = new BicycleChecking();
-        
-        //NEDOKONCENE
+
+        Map<Integer, List<Notification>> groups =
+            new HashMap<Integer, List<Notification>>();
+
         for (Notification notif : sendEmailList) {
-            checking.sendEmail(sendEmailList, notif.getAgent().getEmail());
+            if (notif.getAgent().getEmail() == null ||
+                notif.getAgent().getEmail().equals("")
+            ) {
+                continue;
+            }
+
+            Integer agentId = notif.getAgent().getId();
+            if (!groups.containsKey(agentId)) {
+                groups.put(agentId, new ArrayList<Notification>());
+            }
+            groups.get(agentId).add(notif);
         }
+
+        for (List<Notification> grouped : groups.values()) {
+            checking.sendEmail(grouped, grouped.get(1).getAgent().getEmail());
+        }
+
         sendEmailList.clear();
         loadList();
     }

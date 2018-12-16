@@ -250,6 +250,9 @@ public class BikeController implements Initializable {
                     .getController();
 
             controller.setBicycle(selectedBicycle);
+            if (archived) {
+                controller.setArchivedBicycle((ArchivedBicycle) selectedBicycle);
+            }
         }
     }
 
@@ -257,12 +260,11 @@ public class BikeController implements Initializable {
         System.out.println("test");
     }
 
-    public void afterInitialize() {
+    public Runnable afterInitialize() {
         Stage stage = (Stage) bikeTablePagin.getScene().getWindow();
         height = stage.getHeight();
 
-        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-
+        ChangeListener listener = (obs, oldVal, newVal) -> {
             double oldValue = ((Number) oldVal).doubleValue();
             double newValue = ((Number) newVal).doubleValue();
             System.out.println("archivovane " + archived);
@@ -277,8 +279,16 @@ public class BikeController implements Initializable {
                 loadList(archived);
                 System.out.println("-" + archived);
             }
-        });
+        };
+
+        stage.heightProperty().addListener(listener);
         loadList(archived);
+
+        Runnable onDestroy = () -> {
+            stage.heightProperty().removeListener(listener);
+        };
+
+        return onDestroy;
     }
 
     private <T extends Bicycle> List<T> filterBikes(List<T> bicycles, String search) {
