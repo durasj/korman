@@ -264,13 +264,10 @@ public class NotifController implements Initializable {
                 height = newValue;
                 rows = (int) height / 70;
                 loadList();
-                System.out.println("Tu Som");
-
             } else if ((height - newValue) > 80) {
                 height = newValue;
                 rows = (int) height / 100;
                 loadList();
-
             }
         });
         loadList();

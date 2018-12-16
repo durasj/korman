@@ -64,7 +64,10 @@ public class SqliteLogDao implements LogDao {
 
             Map<String, Object> values = new HashMap<>();
             values.put("content", log.getContent());
-            values.put("createdAt", (int) ((new Date()).getTime() / 1000));
+            values.put(
+                "createdAt",
+                (int) ((log.getCreatedAt() != null ? log.getCreatedAt() : new Date()).getTime() / 1000)
+            );
 
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();
             log.setId((int) id);

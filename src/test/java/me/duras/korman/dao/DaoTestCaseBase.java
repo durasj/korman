@@ -18,13 +18,16 @@ public class DaoTestCaseBase extends TestCase {
 
     @BeforeAll
     public void setupDb() {
-        String baseDir = System.getProperties().get("basedir").toString();
+        String baseDir = DaoTestCaseBase.class.getResource("").getPath().toString()
+            .replace("target/classes/me/duras/korman/dao/", "")
+            .replace("target/test-classes/me/duras/korman/dao/", "");
         String target = baseDir + File.separator + "target" + File.separator + Database.DB_FILE_NAME;
         String initial = baseDir + File.separator + "db" + File.separator + "initial.sqlite";
         try {
             Database.copyInitial((new File(initial).toPath()), (new File(target).toPath()));
         } catch (IOException e) {
             e.printStackTrace(System.err);
+            System.err.println(baseDir);
             throw new RuntimeException("Unnable to setup test DB");
         }
         db = new Database();

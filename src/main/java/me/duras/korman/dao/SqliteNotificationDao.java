@@ -58,7 +58,7 @@ public class SqliteNotificationDao implements NotificationDao {
     @Override
     public Notification getById(int id) {
         String sql = "SELECT " + SqliteNotificationDao.columns
-                + " FROM notification n";
+                + " FROM notification n WHERE id = ?";
         Object[] args = new Object[] { id };
         return jdbcTemplate.queryForObject(sql, args, this.mapper);
     }
@@ -75,7 +75,12 @@ public class SqliteNotificationDao implements NotificationDao {
             Map<String, Object> values = new HashMap<>();
             values.put("agent", notification.getAgent().getId());
             values.put("bicycle", notification.getBicycle().getId());
-            values.put("createdAt", (int) Math.round((new Date()).getTime() / 1000));
+            values.put(
+                "createdAt",
+                (int) (
+                    (notification.getCreatedAt() != null ? notification.getCreatedAt() : new Date()
+                ).getTime() / 1000)
+            );
             values.put("emailSent", notification.getEmailSent() ? 1 : 0);
 
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();

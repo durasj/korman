@@ -256,10 +256,6 @@ public class BikeController implements Initializable {
         }
     }
 
-    public void onSearch(ActionEvent event) {
-        System.out.println("test");
-    }
-
     public Runnable afterInitialize() {
         Stage stage = (Stage) bikeTablePagin.getScene().getWindow();
         height = stage.getHeight();
@@ -267,17 +263,14 @@ public class BikeController implements Initializable {
         ChangeListener listener = (obs, oldVal, newVal) -> {
             double oldValue = ((Number) oldVal).doubleValue();
             double newValue = ((Number) newVal).doubleValue();
-            System.out.println("archivovane " + archived);
             if ((newValue - height) > 100) {
                 height = newValue;
                 rows = (int) height / 70;
                 loadList(archived);
-                System.out.println("+ " + archived);
             } else if ((height - newValue) > 80) {
                 height = newValue;
                 rows = (int) height / 100;
                 loadList(archived);
-                System.out.println("-" + archived);
             }
         };
 

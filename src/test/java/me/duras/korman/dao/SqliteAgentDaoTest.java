@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import me.duras.korman.DaoFactory;
 import me.duras.korman.models.Agent;
 import me.duras.korman.models.BicycleCategory;
 
-@DisplayName("SqliteAgentDao")
 public class SqliteAgentDaoTest extends DaoTestCaseBase {
     private AgentDao dao;
 

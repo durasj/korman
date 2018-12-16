@@ -62,6 +62,10 @@ public class App extends Application implements Initializable {
     @Override
     public void stop() throws Exception {
         this.db.close();
+        BicycleChecking.stopTimer();
+        if (MenuController.onDestroy != null) { 
+            MenuController.onDestroy.run();
+        }
 
         super.stop();
     }

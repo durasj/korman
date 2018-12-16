@@ -87,8 +87,11 @@ public class SqliteBicycleDao implements BicycleDao {
             values.put("modelYear", bicycle.getModelYear());
             values.put("url", bicycle.getUrl());
             values.put("photoUrl", bicycle.getPhotoUrl());
-            values.put("createdAt", bicycle.getCreatedAt());
-            values.put("importedAt", (int) Math.round((new Date()).getTime() / 1000));
+            values.put("createdAt", (int) (bicycle.getCreatedAt().getTime() / 1000));
+            values.put(
+                "importedAt",
+                (int) ((bicycle.getImportedAt() != null ? bicycle.getImportedAt() : new Date()).getTime() / 1000)
+            );
 
             int id = simpleJdbcInsert.executeAndReturnKey(values).intValue();
             bicycle.setId((int) id);
@@ -124,8 +127,11 @@ public class SqliteBicycleDao implements BicycleDao {
                 values.put("modelYear", bicycle.getModelYear());
                 values.put("url", bicycle.getUrl());
                 values.put("photoUrl", bicycle.getPhotoUrl());
-                values.put("createdAt", bicycle.getCreatedAt());
-                values.put("importedAt", (int) Math.round((new Date()).getTime() / 1000));
+                values.put("createdAt", (int) (bicycle.getCreatedAt().getTime() / 1000));
+                values.put(
+                    "importedAt",
+                    (int) ((bicycle.getImportedAt() != null ? bicycle.getImportedAt() : new Date()).getTime() / 1000)
+                );
                 rows[i] = values;
             } else {
                 throw new RuntimeException("Updating is not supported for bicycles");

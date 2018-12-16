@@ -64,7 +64,7 @@ public class Database {
                 connection = dataSource.getConnection();
                 jdbcTemplate = new JdbcTemplate(dataSource);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
 
         return this.connection;
@@ -83,7 +83,7 @@ public class Database {
                 connection.close();
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.err.println(ex.getMessage());
         }
     }
 }
