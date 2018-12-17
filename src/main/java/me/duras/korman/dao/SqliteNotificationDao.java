@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import me.duras.korman.DaoFactory;
@@ -126,5 +128,14 @@ public class SqliteNotificationDao implements NotificationDao {
     public int delete(int notificationId) {
         String sql = "DELETE FROM notification WHERE id = ?";
         return jdbcTemplate.update(sql, notificationId);
+    }
+
+    @Override
+    public int deleteManyByBicycleId(List<Integer> bicycleIds) {
+        String sql = "DELETE FROM notification WHERE bicycle IN (:bicycleIds)";
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("bicycleIds", bicycleIds, Types.INTEGER);
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        return namedParameterJdbcTemplate.update(sql, parameters);
     }
 }

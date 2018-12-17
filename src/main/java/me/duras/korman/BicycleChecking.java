@@ -157,8 +157,13 @@ public class BicycleChecking {
                         .filter((b) -> !remoteSet.contains(b.getExternalId()))
                         .map((b) -> ArchivedBicycle.fromBicycle(b))
                         .collect(Collectors.toList());
+                    List<Integer> deletedBicycleIds = currentList.stream()
+                        .filter((b) -> !remoteSet.contains(b.getExternalId()))
+                        .map((b) -> b.getId())
+                        .collect(Collectors.toList());
 
                     archivedDao.saveMany(archivedBicycles);
+                    notificationDao.deleteManyByBicycleId(deletedBicycleIds);
                     dao.deleteManyByExternalId(
                         archivedBicycles.stream()
                             .map((b) -> b.getExternalId())

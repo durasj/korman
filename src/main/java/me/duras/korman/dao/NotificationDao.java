@@ -19,4 +19,6 @@ public interface NotificationDao {
     int delete(Notification notification);
 
     int delete(int notificationId);
+
+    int deleteManyByBicycleId(List<Integer> bicycleIds);
 }
